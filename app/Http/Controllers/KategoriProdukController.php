@@ -12,7 +12,8 @@ class KategoriProdukController extends Controller
      */
     public function index()
     {
-        //
+        $kategoris = KategoriProduk::paginate(10);
+        return view('kategori_produk.index', compact('kategoris'));
     }
 
     /**
@@ -20,7 +21,7 @@ class KategoriProdukController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori_produk.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class KategoriProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:45|unique:kategori_produk'
+        ]);
+
+        KategoriProduk::create($request->only(['nama']));
+
+        return redirect()->route('kategori_produk.index')
+                         ->with('success', 'Kategori produk berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +52,7 @@ class KategoriProdukController extends Controller
      */
     public function edit(KategoriProduk $kategoriProduk)
     {
-        //
+        return view('kategori_produk.edit', compact('kategoriProduk'));
     }
 
     /**
@@ -52,7 +60,14 @@ class KategoriProdukController extends Controller
      */
     public function update(Request $request, KategoriProduk $kategoriProduk)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:45|unique:kategori_produk,nama,' . $kategoriProduk->id
+        ]);
+
+        $kategoriProduk->update($request->only(['nama']));
+
+        return redirect()->route('kategori_produk.index')
+                         ->with('success', 'Kategori produk berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +75,9 @@ class KategoriProdukController extends Controller
      */
     public function destroy(KategoriProduk $kategoriProduk)
     {
-        //
+       $kategoriProduk->delete();
+
+        return redirect()->route('kategori_produk.index')
+                         ->with('success', 'Kategori produk berhasil dihapus.');
     }
 }

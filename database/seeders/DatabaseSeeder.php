@@ -17,5 +17,9 @@ class DatabaseSeeder extends Seeder
             'no_telepon' => '081234567890',
             'role' => 'admin'
         ]);
+
+         $this->call([
+            KategoriPengeluaranSeeder::class,
+        ]);
     }
 }

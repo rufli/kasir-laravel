@@ -30,7 +30,7 @@ class KategoriProdukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:45|unique:kategori_produk'
+            'nama' => 'required|string|max:45|unique:kategori_produks'
         ]);
 
         KategoriProduk::create($request->only(['nama']));
@@ -61,7 +61,7 @@ class KategoriProdukController extends Controller
     public function update(Request $request, KategoriProduk $kategoriProduk)
     {
         $request->validate([
-            'nama' => 'required|string|max:45|unique:kategori_produk,nama,' . $kategoriProduk->id
+            'nama' => 'required|string|max:45|unique:kategori_produks,nama,' . $kategoriProduk->id
         ]);
 
         $kategoriProduk->update($request->only(['nama']));

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'username' => 'admin',
             'password' => Hash::make('123456'),
+            'nama' => 'Administrator',
             'alamat' => 'Banyuwangi',
             'no_telepon' => '081234567890',
             'role' => 'admin'

@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\KategoriPengeluaranController;
 use App\Http\Controllers\Api\PengeluaranController;
 use App\Http\Controllers\Api\SignupController;
+use App\Http\Controllers\Api\KategoriProdukController;
+use App\Http\Controllers\Api\ProdukController;
 
 // Login (tanpa perlu login)
 Route::post('/login', [AuthController::class, 'authenticate']);
@@ -17,7 +19,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // API untuk admin dan pegawai
     Route::apiResource('/kategori-pengeluaran', KategoriPengeluaranController::class);
     Route::apiResource('pengeluaran', PengeluaranController::class);
-
+    Route::apiResource('kategori-produk', KategoriProdukController::class);
+    Route::apiResource('produk', ProdukController::class);
     Route::get('/pegawai', [SignupController::class, 'daftarPegawai'])->name('daftarPegawai');
     Route::get('/pegawai/print', [SignupController::class, 'print'])->name('printPegawai');
     Route::get('/pegawai/tambah', [SignupController::class, 'index'])->name('tambahPegawai');

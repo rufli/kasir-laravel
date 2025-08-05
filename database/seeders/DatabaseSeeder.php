@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KategoriProduk;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
          $this->call([
             KategoriPengeluaranSeeder::class,
+            KategoriProdukSeeder::class,
         ]);
     }
 }

@@ -25,7 +25,7 @@
     <header class="main-header">
         <div class="container header-content">
             <div class="app-logo">
-                <!-- Ikon keranjang belanja SVG -->
+                <!-- logo-->
                  <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40" >
             </div>
 

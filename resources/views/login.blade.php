@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POSKasir</title>
-    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     {{-- Bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -58,7 +57,10 @@
     <div class="container d-flex flex-column justify-content-center py-5 px-4 min-vh-100">
         <div class="mx-auto" style="max-width: 400px;">
             <div class="text-center">
-                <img src="{{ asset('storage/logo-poskasir.png') }}" alt="POSKasir Logo" height="75" class="mb-3">
+               <div class="app-logo">
+                <!-- logo-->
+                 <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40" >
+            </div>
                 <h2 class="fw-bold">Sign in to your account</h2>
             </div>
 

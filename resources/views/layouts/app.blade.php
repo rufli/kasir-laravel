@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pengeluaran.index') }}" class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pengeluaran</span>
                         </a>
@@ -90,18 +90,17 @@
                 </ul>
             </nav>
 
-            <!-- Tombol Logout
+            <!-- Tombol Logout -->
             <div class="sidebar-footer">
-                {{--
+
                 <form action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
                     <button type="submit" class="logout-button">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </button>
-                    --}}
                 </form>
-            </div> -->
+            </div>
         </aside>
 
         <!-- Area Konten Utama -->

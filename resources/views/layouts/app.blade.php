@@ -11,25 +11,20 @@
     <!-- CSS Global -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <!-- CSS khusus halaman (jika ada) -->
-    @stack('styles')
-
-    <!-- Font Awesome (opsional) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Script Head (jika diperlukan) -->
+    <!-- CSS Halaman Khusus -->
+    @stack('styles')
     @stack('head-scripts')
 </head>
 <body>
-    <!-- Header (Navbar Atas) -->
+    <!-- Header -->
     <header class="main-header">
         <div class="container header-content">
             <div class="app-logo">
-                <!-- Ikon keranjang belanja SVG -->
-                 <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40" >
+                <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40">
             </div>
-
-            <!-- User Profile (opsional) -->
             <div class="user-profile">
                 <span class="username">Admin</span>
                 <div class="avatar">
@@ -39,7 +34,7 @@
         </div>
     </header>
 
-    <!-- Konten Utama dan Sidebar -->
+    <!-- Wrapper -->
     <div class="main-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -51,36 +46,55 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('produk.index') }}" class="sidebar-link {{ request()->routeIs('produk.*') ? 'active' : '' }}">
                             <i class="fas fa-box-open"></i>
                             <span>Produk</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('kategori_produk.index') }}" class="sidebar-link {{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
+
+                    <li class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
+                        <a href="#" class="sidebar-link js-submenu-toggle">
                             <i class="fas fa-tags"></i>
-                            <span>Kategori Produk</span>
+                            <span>Kategori</span>
+                            <i class="fas fa-chevron-down submenu-toggle-icon"></i>
                         </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{{ route('kategori_produk.index') }}" class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
+                                    Kategori Produk
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('kategori_pengeluaran.index') }}" class="{{ request()->routeIs('kategori_pengeluaran.*') ? 'active' : '' }}">
+                                    Kategori Pengeluaran
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pengeluaran.index') }}" class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pengeluaran</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="#" class="sidebar-link">
                             <i class="fas fa-history"></i>
                             <span>Riwayat Transaksi</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="#" class="sidebar-link">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Laporan Keuangan</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('pegawai.index') }}"
                             class="sidebar-link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
@@ -91,9 +105,8 @@
                 </ul>
             </nav>
 
-            <!-- Tombol Logout -->
+            <!-- Logout -->
             <div class="sidebar-footer">
-
                 <form action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
                     <button type="submit" class="logout-button">
@@ -104,29 +117,29 @@
             </div>
         </aside>
 
-        <!-- Area Konten Utama -->
+        <!-- Main Content -->
         <main class="content-area">
             <div class="container">
-                <!-- Breadcrumb (opsional) -->
+                <!-- Breadcrumb -->
                 <div class="breadcrumb">
                     @yield('breadcrumb')
                 </div>
 
-                <!-- Bagian untuk menampilkan pesan sukses/error/validasi -->
+                <!-- Flash Messages -->
                 @if (session('success'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success">
                         <i class="fas fa-check-circle"></i>
-                        <span>{{ session('success') }}</span>
+                        {{ session('success') }}
                     </div>
                 @endif
                 @if (session('error'))
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger">
                         <i class="fas fa-exclamation-circle"></i>
-                        <span>{{ session('error') }}</span>
+                        {{ session('error') }}
                     </div>
                 @endif
                 @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger">
                         <i class="fas fa-exclamation-triangle"></i>
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -136,7 +149,7 @@
                     </div>
                 @endif
 
-                <!-- Konten spesifik halaman akan disuntikkan di sini -->
+                <!-- Page Content -->
                 @yield('content')
             </div>
         </main>
@@ -150,10 +163,23 @@
         </div>
     </footer>
 
-    <!-- Script Global -->
+    <!-- JS Global -->
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <!-- Script khusus halaman -->
+    <!-- Toggle Submenu Sidebar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.js-submenu-toggle').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parent = this.closest('.has-submenu');
+                    parent.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+
+    <!-- JS Halaman Khusus -->
     @stack('scripts')
 </body>
 

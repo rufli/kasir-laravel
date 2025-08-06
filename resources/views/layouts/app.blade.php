@@ -90,18 +90,17 @@
                 </ul>
             </nav>
 
-            <!-- Tombol Logout
+            <!-- Tombol Logout -->
             <div class="sidebar-footer">
-                {{--
+
                 <form action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
                     <button type="submit" class="logout-button">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </button>
-                    --}}
                 </form>
-            </div> -->
+            </div>
         </aside>
 
         <!-- Area Konten Utama -->

@@ -82,7 +82,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pegawai.index') }}"
+                            class="sidebar-link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
                             <i class="fas fa-users"></i>
                             <span>Manajemen Pegawai</span>
                         </a>
@@ -155,4 +156,5 @@
     <!-- Script khusus halaman -->
     @stack('scripts')
 </body>
+
 </html>

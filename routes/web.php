@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriProdukController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SignupController;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -18,4 +19,13 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::resource('produk', ProdukController::class);
+
+    Route::prefix('pegawai')->name('pegawai.')->group(function () {
+        Route::get('/', [SignupController::class, 'index'])->name('index');
+        Route::get('/create', [SignupController::class, 'create'])->name('create');
+        Route::post('/', [SignupController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [SignupController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [SignupController::class, 'update'])->name('update');
+        Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
+    });
 });

@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pengeluaran.index') }}" class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pengeluaran</span>
                         </a>

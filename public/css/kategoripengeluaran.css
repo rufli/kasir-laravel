@@ -300,3 +300,30 @@
         margin-bottom: 0.5rem;
     }
 }
+
+.table {
+    width: 100%;
+    table-layout: fixed; /* Gunakan lebar tetap agar sejajar */
+}
+
+.table th, .table td {
+    text-align: center;        /* Biar rapi di tengah semua */
+    vertical-align: middle;    /* Untuk icon tombol tetap di tengah */
+    padding: 12px 8px;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 10%;                /* Kolom No */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 60%;                /* Nama Kategori */
+    text-align: left;          /* Bisa kiri supaya teks lebih alami */
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 30%;                /* Aksi */
+}

@@ -10,10 +10,10 @@ use App\Http\Controllers\PengeluaranController;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
-    
+
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
 

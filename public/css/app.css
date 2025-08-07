@@ -230,3 +230,45 @@ body {
         transform: translateX(0);
     }
 }
+
+/* Untuk dropdown submenu sidebar */
+.nav-item.has-submenu > a {
+    display: flex;
+    justify-content: flex-start; /* Menyelaraskan semua item ke kiri */
+    align-items: center;
+    cursor: pointer;
+    gap: 10px; /* Jarak antar ikon dan teks */
+}
+
+.submenu-toggle-icon {
+    margin-left: auto; /* Supaya chevron tetap ke kanan */
+    transition: transform 0.2s ease;
+}
+
+
+.nav-item.has-submenu .submenu {
+    display: none;
+    padding-left: 1.5rem;
+    margin-top: 0.3rem;
+    list-style: none;
+}
+
+.nav-item.has-submenu.open .submenu {
+    display: block;
+}
+
+.nav-item.has-submenu .submenu li a {
+    display: block;
+    padding: 6px 12px;
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-item.has-submenu .submenu li a:hover,
+.nav-item.has-submenu .submenu li a.active {
+    background-color: #28a745;
+    color: #fff;
+}

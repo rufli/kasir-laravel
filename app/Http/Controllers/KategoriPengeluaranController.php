@@ -8,58 +8,68 @@ use Illuminate\Http\Request;
 class KategoriPengeluaranController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan daftar kategori.
      */
     public function index()
     {
-        //
+        $kategori = KategoriPengeluaran::orderBy('nama')->get();
+        return view('kategori_pengeluaran.index', compact('kategori'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Tampilkan form tambah kategori.
      */
     public function create()
     {
-        //
+        return view('kategori_pengeluaran.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Simpan kategori baru.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:45|unique:kategori_pengeluaran,nama',
+        ]);
+
+        KategoriPengeluaran::create($validated);
+
+        return redirect()->route('kategori_pengeluaran.index')
+            ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * Tampilkan form edit kategori.
      */
-    public function show(KategoriPengeluaran $kategoriPengeluaran)
+    public function edit(KategoriPengeluaran $kategori_pengeluaran)
     {
-        //
+        return view('kategori_pengeluaran.edit', compact('kategori_pengeluaran'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Perbarui kategori.
      */
-    public function edit(KategoriPengeluaran $kategoriPengeluaran)
+    public function update(Request $request, KategoriPengeluaran $kategori_pengeluaran)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:45|unique:kategori_pengeluaran,nama,' . $kategori_pengeluaran->id,
+        ]);
+
+        $kategori_pengeluaran->update($validated);
+
+        return redirect()->route('kategori_pengeluaran.index')
+            ->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Hapus kategori.
      */
-    public function update(Request $request, KategoriPengeluaran $kategoriPengeluaran)
+    public function destroy(KategoriPengeluaran $kategori_pengeluaran)
     {
-        //
-    }
+        $kategori_pengeluaran->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(KategoriPengeluaran $kategoriPengeluaran)
-    {
-        //
+        return redirect()->route('kategori_pengeluaran.index')
+            ->with('success', 'Kategori berhasil dihapus.');
     }
 }

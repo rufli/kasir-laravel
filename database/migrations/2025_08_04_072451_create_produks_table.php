@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+            $table->id();
             $table->date("tanggal");
             $table->string("nama", 45);
             $table->decimal("harga", 10, 2);
             $table->integer("stok");
-
+            $table->string("gambar")->nullable(); // Kolom untuk menyimpan nama file gambar
             $table->foreignId('kategori_produk_id')->constrained('kategori_produks')->onDelete('cascade');
             // foreignId adalah shortcut untuk unsignedBigInteger,
             // constrained('kategori_produks') otomatis membuat foreign key ke tabel kategori_produks

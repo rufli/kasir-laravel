@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class ProdukController extends Controller
@@ -17,15 +18,22 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        // Mengambil semua produk dari database, dengan relasi kategoriProduk
-        $produks = Produk::with('kategoriProduk')->get();
+        try {
+            // Mengambil semua produk dengan pagination (sama seperti web)
+            $produks = Produk::with('kategoriProduk')->latest()->paginate(10);
 
-        // Mengembalikan respons JSON dengan data produk
-        return response()->json([
-            'success' => true,
-            'message' => 'Daftar Produk',
-            'data' => $produks
-        ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Daftar Produk',
+                'data' => $produks
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Gagal mengambil daftar produk: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data produk'
+            ], 500);
+        }
     }
 
     /**
@@ -36,47 +44,45 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input dari request
         $validator = Validator::make($request->all(), [
-            'tanggal' => 'required|date',
-            'nama' => 'required|string|max:45', // Aturan 'unique' dihapus di sini
-            'harga' => 'required|numeric|min:0',
-            'stok' => 'required|integer|min:0',
-            'kategori_produk_id' => 'required|integer|exists:kategori_produks,id', // Perbaikan: Mengubah 'kategori_produk' menjadi 'kategori_produks'
+            'tanggal'            => 'required|date',
+            'nama'               => 'required|string|max:45',
+            'harga'              => 'required|numeric|min:0|max:99999999.99', // Sama dengan web
+            'stok'               => 'required|integer|min:0',
+            'gambar'             => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_produk_id' => 'required|exists:kategori_produks,id', // Konsisten dengan web
         ]);
 
-        // Jika validasi gagal
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validasi Gagal!',
                 'errors' => $validator->errors()
-            ], 400); // Bad Request
+            ], 422); // 422 lebih tepat untuk validation error
         }
 
         try {
-            // Membuat produk baru
-            $produk = Produk::create([
-                'tanggal' => $request->tanggal,
-                'nama' => $request->nama,
-                'harga' => $request->harga,
-                'stok' => $request->stok,
-                'kategori_produk_id' => $request->kategori_produk_id,
-            ]);
+            $validated = $validator->validated();
 
-            // Mengembalikan respons JSON sukses
+            // Handle upload gambar - SAMA DENGAN WEB CONTROLLER
+            if ($request->hasFile('gambar')) {
+                $validated['gambar'] = $request->file('gambar')->store('produk', 'public');
+            }
+
+            $produk = Produk::create($validated);
+            $produk->load('kategoriProduk'); // Load relasi untuk response
+
             return response()->json([
                 'success' => true,
                 'message' => 'Produk berhasil ditambahkan!',
                 'data' => $produk
-            ], 201); // Created
+            ], 201);
         } catch (\Exception $e) {
-            // Menangkap error jika terjadi masalah saat menyimpan
-            Log::error('Gagal menambahkan produk: ' . $e->getMessage()); // Catat error
+            Log::error('Gagal menambahkan produk: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal menambahkan produk. Silakan coba lagi.' // Pesan umum untuk klien
-            ], 500); // Internal Server Error
+                'message' => 'Gagal menambahkan produk. Silakan coba lagi.'
+            ], 500);
         }
     }
 
@@ -88,23 +94,28 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        // Mencari produk berdasarkan ID, dengan relasi kategoriProduk
-        $produk = Produk::with('kategoriProduk')->find($id);
+        try {
+            $produk = Produk::with('kategoriProduk')->find($id);
 
-        // Jika produk tidak ditemukan
-        if (!$produk) {
+            if (!$produk) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Produk tidak ditemukan!'
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Produk',
+                'data' => $produk
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Gagal mengambil detail produk: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Produk tidak ditemukan!'
-            ], 404); // Not Found
+                'message' => 'Gagal mengambil detail produk'
+            ], 500);
         }
-
-        // Mengembalikan respons JSON dengan data produk
-        return response()->json([
-            'success' => true,
-            'message' => 'Detail Produk',
-            'data' => $produk
-        ], 200);
     }
 
     /**
@@ -116,52 +127,59 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Mencari produk berdasarkan ID
         $produk = Produk::find($id);
 
-        // Jika produk tidak ditemukan
         if (!$produk) {
             return response()->json([
                 'success' => false,
                 'message' => 'Produk tidak ditemukan!'
-            ], 404); // Not Found
+            ], 404);
         }
 
-        // Validasi input dari request
         $validator = Validator::make($request->all(), [
-            'tanggal' => 'sometimes|required|date',
-            'nama' => 'sometimes|required|string|max:45', // Aturan 'unique' dihapus di sini
-            'harga' => 'sometimes|required|numeric|min:0',
-            'stok' => 'sometimes|required|integer|min:0',
-            'kategori_produk_id' => 'sometimes|required|integer|exists:kategori_produks,id', // Perbaikan: Mengubah 'kategori_produk' menjadi 'kategori_produks'
+            'tanggal'            => 'required|date',
+            'nama'               => 'required|string|max:45',
+            'harga'              => 'required|numeric|min:0|max:99999999.99', // Sama dengan web
+            'stok'               => 'required|integer|min:0',
+            'gambar'             => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_produk_id' => 'required|exists:kategori_produks,id',
         ]);
 
-        // Jika validasi gagal
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validasi Gagal!',
                 'errors' => $validator->errors()
-            ], 400); // Bad Request
+            ], 422);
         }
 
         try {
-            // Memperbarui data produk
-            $produk->update($request->all());
+            $validated = $validator->validated();
 
-            // Mengembalikan respons JSON sukses
+            // Handle upload gambar - SAMA DENGAN WEB CONTROLLER
+            if ($request->hasFile('gambar')) {
+                // Hapus gambar lama
+                if ($produk->gambar) {
+                    Storage::disk('public')->delete($produk->gambar);
+                }
+                // Simpan gambar baru
+                $validated['gambar'] = $request->file('gambar')->store('produk', 'public');
+            }
+
+            $produk->update($validated);
+            $produk->load('kategoriProduk'); // Load relasi untuk response
+
             return response()->json([
                 'success' => true,
                 'message' => 'Produk berhasil diperbarui!',
                 'data' => $produk
-            ], 200); // OK
+            ], 200);
         } catch (\Exception $e) {
-            // Menangkap error jika terjadi masalah saat memperbarui
-            Log::error('Gagal memperbarui produk: ' . $e->getMessage()); // Catat error
+            Log::error('Gagal memperbarui produk: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal memperbarui produk. Silakan coba lagi.' // Pesan umum untuk klien
-            ], 500); // Internal Server Error
+                'message' => 'Gagal memperbarui produk. Silakan coba lagi.'
+            ], 500);
         }
     }
 
@@ -173,33 +191,33 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        // Mencari produk berdasarkan ID
         $produk = Produk::find($id);
 
-        // Jika produk tidak ditemukan
         if (!$produk) {
             return response()->json([
                 'success' => false,
                 'message' => 'Produk tidak ditemukan!'
-            ], 404); // Not Found
+            ], 404);
         }
 
         try {
-            // Menghapus produk (ini akan melakukan soft delete jika model Produk menggunakan SoftDeletes)
+            // Hapus gambar - SAMA DENGAN WEB CONTROLLER
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+
             $produk->delete();
 
-            // Mengembalikan respons JSON sukses
             return response()->json([
                 'success' => true,
                 'message' => 'Produk berhasil dihapus!'
-            ], 200); // OK
+            ], 200);
         } catch (\Exception $e) {
-            // Menangkap error jika terjadi masalah saat menghapus
-            Log::error('Gagal menghapus produk: ' . $e->getMessage()); // Catat error
+            Log::error('Gagal menghapus produk: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal menghapus produk. Silakan coba lagi.' // Pesan umum untuk klien
-            ], 500); // Internal Server Error
+                'message' => 'Gagal menghapus produk. Silakan coba lagi.'
+            ], 500);
         }
     }
 }

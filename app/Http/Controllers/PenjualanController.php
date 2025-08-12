@@ -114,7 +114,7 @@ class PenjualanController extends Controller
     public function checkout(Request $request)
     {
         $request->validate([
-            'metode_pembayaran' => 'required|in:tunai,transfer',
+            'metode_pembayaran' => 'required|in:tunai,transfer,qris',
             'jumlah_dibayar'    => 'required|numeric|min:0'
         ]);
 
@@ -142,9 +142,16 @@ class PenjualanController extends Controller
                 $totalHarga += $subtotal;
             }
 
-            // Hitung kembalian
-            $jumlahDibayar   = $request->jumlah_dibayar;
-            $jumlahKembalian = max(0, $jumlahDibayar - $totalHarga);
+            $jumlahDibayar = $request->jumlah_dibayar;
+
+            // Validasi jumlah dibayar harus >= total harga
+            if ($jumlahDibayar < $totalHarga) {
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['jumlah_dibayar' => 'Jumlah uang yang dibayar kurang dari total harga.']);
+            }
+
+            $jumlahKembalian = $jumlahDibayar - $totalHarga;
 
             $transaksi = TransaksiPenjualan::create([
                 'tanggal'           => Carbon::now()->toDateString(),
@@ -174,7 +181,6 @@ class PenjualanController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan transaksi.');
         }
     }
-
 
     // 7. Menampilkan detail transaksi (struk)
     public function detailTransaksi($id)

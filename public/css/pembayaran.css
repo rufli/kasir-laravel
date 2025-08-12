@@ -1,0 +1,130 @@
+.checkout-container {
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.checkout-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group select,
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    margin-right: 2px;
+}
+
+.form-group select:focus,
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+}
+.text-danger {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #dc3545; /* warna merah untuk error */
+    font-weight: 500;
+}
+
+.checkout-total {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px 0;
+    text-align: center;
+    color: #222;
+    background-color: #e9f5ec;
+    padding: 15px 0;
+    border-radius: 12px;
+    box-shadow: inset 0 0 8px rgba(76, 175, 80, 0.1);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #4caf50;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.btn-back:hover {
+    color: #388e3c;
+    text-decoration: underline;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 480px) {
+    .checkout-card {
+        padding: 25px 20px;
+    }
+
+    .checkout-title {
+        font-size: 22px;
+    }
+
+    .btn-submit {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+
+    .checkout-total {
+        font-size: 18px;
+        padding: 12px 0;
+    }
+}

@@ -33,13 +33,14 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     });
     Route::resource('pengeluaran', PengeluaranController::class);
     Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);
+
+    Route::get('/penjualan', [PenjualanController::class, 'daftarProduk'])->name('penjualan.daftar_produk');
+    Route::post('/penjualan/tambah', [PenjualanController::class, 'tambahKeKeranjang'])->name('penjualan.tambah');
+    Route::get('/penjualan/keranjang', [PenjualanController::class, 'keranjang'])->name('penjualan.keranjang');
+    Route::get('/penjualan/checkout', [PenjualanController::class, 'checkoutPage'])->name('penjualan.checkout.page');
+    Route::post('/penjualan/checkout', [PenjualanController::class, 'checkout'])->name('penjualan.checkout');
+    Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
+    Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
+    Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');
 });
 // routes/web.php
-Route::get('/penjualan', [PenjualanController::class, 'daftarProduk'])->name('penjualan.daftar_produk');
-Route::post('/penjualan/tambah', [PenjualanController::class, 'tambahKeKeranjang'])->name('penjualan.tambah');
-Route::get('/penjualan/keranjang', [PenjualanController::class, 'keranjang'])->name('penjualan.keranjang');
-Route::get('/penjualan/checkout', [PenjualanController::class, 'checkoutPage'])->name('penjualan.checkout.page');
-Route::post('/penjualan/checkout', [PenjualanController::class, 'checkout'])->name('penjualan.checkout');
-Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
-Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
-Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');

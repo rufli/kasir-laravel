@@ -7,6 +7,7 @@
     <title>POSKasir</title>
     {{-- Bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     {{-- Custom CSS --}}
     <style>
@@ -57,10 +58,10 @@
     <div class="container d-flex flex-column justify-content-center py-5 px-4 min-vh-100">
         <div class="mx-auto" style="max-width: 400px;">
             <div class="text-center">
-               <div class="app-logo">
-                <!-- logo-->
-                 <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40" >
-            </div>
+                <div class="app-logo">
+                    <!-- logo-->
+                    <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40">
+                </div>
                 <h2 class="fw-bold">Sign in to your account</h2>
             </div>
 
@@ -94,9 +95,17 @@
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input id="password" name="password" type="password" required class="input-style"
-                            placeholder="••••••••">
+                        <div class="position-relative">
+                            <input id="password" name="password" type="password" required class="input-style pe-5"
+                                placeholder="••••••••">
+
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3 toggle-password"
+                                onclick="togglePassword()" style="cursor: pointer;">
+                                <i class="bi bi-eye"></i>
+                            </span>
+                        </div>
                     </div>
+
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="form-check">
@@ -121,5 +130,19 @@
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.innerHTML = '<i class="bi bi-eye-slash"></i>'; // ikon mata tertutup
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.innerHTML = '<i class="bi bi-eye"></i>'; // ikon mata terbuka
+        }
+    }
+</script>
 
 </html>

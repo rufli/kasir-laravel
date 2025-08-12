@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('alamat', 60)->nullable();
             $table->string('no_telepon', 20)->unique()->nullable();
             $table->enum('role', ['admin', 'pegawai']);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

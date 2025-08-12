@@ -10,11 +10,23 @@ use Illuminate\Support\Facades\Storage;
 class ProdukController extends Controller
 {
     /* ---------- INDEX ---------- */
-    public function index()
-    {
-        $produks = Produk::with('kategoriProduk')->latest()->paginate(10);
-        return view('produk.index', compact('produks'));
+  public function index(Request $request)
+{
+    $query = Produk::with('kategoriProduk')->latest();
+
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $query->where(function ($q) use ($search) {
+            $q->where('nama', 'like', "%{$search}%");
+        });
     }
+
+    $produks = $query->paginate(10)->withQueryString();
+
+    return view('produk.index', compact('produks'));
+}
+
+
 
     /* ---------- CREATE ---------- */
     public function create()

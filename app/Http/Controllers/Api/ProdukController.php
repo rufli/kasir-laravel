@@ -13,14 +13,23 @@ class ProdukController extends Controller
 {
     /**
      * Menampilkan daftar semua produk.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request  )
     {
-        try {
-            // Mengambil semua produk dengan pagination (sama seperti web)
-            $produks = Produk::with('kategoriProduk')->latest()->paginate(10);
+       try {
+            $query = Produk::with('kategoriProduk')->latest();
+
+            // Tambahkan filter pencarian jika ada parameter search
+            if ($request->filled('search')) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama', 'like', "%{$search}%");
+                });
+            }
+
+            $produks = $query->paginate(10);
 
             return response()->json([
                 'success' => true,
@@ -31,10 +40,13 @@ class ProdukController extends Controller
             Log::error('Gagal mengambil daftar produk: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal mengambil data produk'
+                'message' => 'Gagal mengambil data produk',
+                'error' => $e->getMessage()
             ], 500);
         }
     }
+
+
 
     /**
      * Menyimpan produk baru ke database.

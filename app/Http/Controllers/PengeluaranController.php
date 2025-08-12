@@ -10,11 +10,20 @@ use Illuminate\Support\Facades\Auth;
 class PengeluaranController extends Controller
 {
     // Tampilkan semua pengeluaran
-    public function index()
-    {
-        $pengeluaran = Pengeluaran::with('kategori')->latest()->get(); // Hilangkan Auth::id() jika tanpa login
-        return view('pengeluaran.index', compact('pengeluaran'));
+    public function index(Request $request)
+{
+    $query = Pengeluaran::with('kategori');
+
+    if ($request->has('search') && $request->search !== null) {
+        $search = $request->search;
+        $query->where('nama', 'like', '%' . $search . '%');
     }
+
+    $pengeluaran = $query->latest()->get();
+
+    return view('pengeluaran.index', compact('pengeluaran'));
+}
+
 
     // Tampilkan form tambah pengeluaran
     public function create()

@@ -3,7 +3,7 @@
 @section('title', 'Edit Pegawai')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/pegawai.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pegawai/edit.css') }}">
 @endpush
 
 @section('content')

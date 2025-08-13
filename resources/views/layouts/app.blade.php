@@ -41,20 +41,23 @@
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.index') }}"
+                            class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('produk.index') }}" class="sidebar-link {{ request()->routeIs('produk.*') ? 'active' : '' }}">
+                        <a href="{{ route('produk.index') }}"
+                            class="sidebar-link {{ request()->routeIs('produk.*') ? 'active' : '' }}">
                             <i class="fas fa-box-open"></i>
                             <span>Produk</span>
                         </a>
                     </li>
 
-                    <li class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
+                    <li
+                        class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
                         <a href="#" class="sidebar-link js-submenu-toggle">
                             <i class="fas fa-tags"></i>
                             <span>Kategori</span>
@@ -62,12 +65,14 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="{{ route('kategori_produk.index') }}" class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
+                                <a href="{{ route('kategori_produk.index') }}"
+                                    class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
                                     Kategori Produk
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('kategori_pengeluaran.index') }}" class="{{ request()->routeIs('kategori_pengeluaran.*') ? 'active' : '' }}">
+                                <a href="{{ route('kategori_pengeluaran.index') }}"
+                                    class="{{ request()->routeIs('kategori_pengeluaran.*') ? 'active' : '' }}">
                                     Kategori Pengeluaran
                                 </a>
                             </li>
@@ -75,14 +80,25 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('pengeluaran.index') }}" class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
+                        <a href="{{ route('pengeluaran.index') }}"
+                            class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pengeluaran</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('penjualan.daftar_produk') }}"
+                            class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Transaksi Penjualan</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{ route('penjualan.riwayat') }}"
+                            class="sidebar-link {{ request()->routeIs('penjualan.riwayat*') ? 'active' : '' }}">
                             <i class="fas fa-history"></i>
                             <span>Riwayat Transaksi</span>
                         </a>
@@ -164,13 +180,13 @@
     </footer>
 
     <!-- JS Global -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @vite('resources/js/app.js')
 
     <!-- Toggle Submenu Sidebar -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.js-submenu-toggle').forEach(function (el) {
-                el.addEventListener('click', function (e) {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.js-submenu-toggle').forEach(function(el) {
+                el.addEventListener('click', function(e) {
                     e.preventDefault();
                     const parent = this.closest('.has-submenu');
                     parent.classList.toggle('open');

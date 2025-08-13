@@ -9,26 +9,13 @@
         <div class="col-md-6">
             <h2>Daftar Produk</h2>
         </div>
-        <div class="col-md-6 text-end">
-            <a href="{{ route('produk.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Produk
-            </a>
-        </div>
+            <div class="col-md-6 text-end">
+                <a href="{{ route('produk.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Produk
+                </a>
+            </div>
     </div>
-
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    </div>
 
     <div class="card">
         <div class="card-body">

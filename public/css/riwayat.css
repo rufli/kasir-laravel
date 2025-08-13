@@ -1,0 +1,240 @@
+/* ==== Riwayat Transaksi CSS ==== */
+.riwayat-container {
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 24px;
+    overflow: hidden;
+}
+
+.riwayat-header {
+    background-color: #0e7f49;
+    color: #ffffff;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.riwayat-header h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.riwayat-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 250px;
+}
+
+.search-input-wrapper input[type="text"],
+.search-input-wrapper input[type="date"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px 14px 8px 40px; /* padding kiri untuk icon */
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.search-input-wrapper input[type="text"]:focus,
+.search-input-wrapper input[type="date"]:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
+}
+
+.search-input-wrapper .search-btn {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+}
+
+.btn-detail {
+    background-color: #0e7f49;
+    color: white;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-detail:hover {
+    background-color: #0c6c3c;
+}
+
+.riwayat-table {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+}
+
+.riwayat-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 768px;
+}
+
+.riwayat-table thead {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.riwayat-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.riwayat-table tbody tr:hover {
+    background-color: #e5e7eb;
+}
+
+.riwayat-table th,
+.riwayat-table td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.btn-action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
+    margin: 0;
+}
+/* Tambahan untuk form filter tanggal di .riwayat-actions */
+.riwayat-actions form#filterTanggalForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+}
+
+/* Label filter tanggal */
+.riwayat-actions form#filterTanggalForm label {
+    color: #fff;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Input date filter */
+.riwayat-actions form#filterTanggalForm input[type="date"] {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: #333;
+    min-width: 150px;
+    background-color: #fff;
+}
+
+/* Fokus input date */
+.riwayat-actions form#filterTanggalForm input[type="date"]:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 5px rgba(14, 127, 73, 0.5);
+}
+
+/* Responsive: pada layar kecil (mobile) */
+@media (max-width: 576px) {
+    .riwayat-actions form#filterTanggalForm {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .riwayat-actions form#filterTanggalForm label,
+    .riwayat-actions form#filterTanggalForm input[type="date"] {
+        width: 100%;
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    .riwayat-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-input-wrapper {
+        width: 100%;
+    }
+
+    .riwayat-table table,
+    .riwayat-table thead,
+    .riwayat-table tbody,
+    .riwayat-table th,
+    .riwayat-table td,
+    .riwayat-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .riwayat-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .riwayat-table tbody tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .riwayat-table tbody td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+
+    .riwayat-table tbody td::before {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 600;
+        content: attr(data-label);
+        color: #0e7f49;
+    }
+
+    .btn-action-group {
+        justify-content: flex-start;
+    }
+}

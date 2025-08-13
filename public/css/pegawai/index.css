@@ -1,0 +1,178 @@
+/* ==== Pegawai Index CSS - Modern Look ==== */
+
+.pegawai-container {
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 24px;
+    overflow: hidden;
+}
+
+.pegawai-header {
+    background-color: #0e7f49;
+    color: #ffffff;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pegawai-header h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pegawai-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 250px;
+}
+
+.search-input-wrapper input[type="text"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px 14px 8px 40px; /* padding kiri diberi ruang untuk icon */
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.search-input-wrapper input[type="text"]:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
+}
+
+.search-input-wrapper .search-btn {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+}
+
+
+.btn-tambah {
+    background-color: #ffffff;
+    color: #0e7f49;
+    border: 2px solid #0e7f49;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-tambah:hover {
+    background-color: #0e7f49;
+    color: #ffffff;
+}
+
+.pegawai-table {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+}
+
+.pegawai-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 768px;
+}
+
+.pegawai-table thead {
+    background-color: #f3f4f6; /* abu terang */
+    color: #111827; /* abu gelap hampir hitam, jelas dibaca */
+}
+
+.pegawai-table tbody tr:nth-child(even) {
+    background-color: #fafafa; /* selang-seling baris */
+}
+
+.pegawai-table tbody tr:hover {
+    background-color: #e5e7eb; /* abu hover */
+}
+
+.pegawai-table th,
+.pegawai-table td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb; /* garis pemisah halus */
+}
+
+
+.btn-edit {
+    background-color: #facc15;
+    color: #000;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+    margin-right: 6px;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-edit:hover {
+    background-color: #eab308;
+    color: #000;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    border: none;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+/* Alert styling */
+.card-body .btn-success {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.card-body .btn-success:hover {
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+
+.btn-action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
+    margin: 0;
+}
+

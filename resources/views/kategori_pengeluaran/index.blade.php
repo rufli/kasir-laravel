@@ -13,12 +13,7 @@
                 <i class="fas fa-plus"></i> Tambah Kategori
             </a>
         </div>
-        <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+       
 
             <table class="table table-striped">
                 <thead>

@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
         Route::put('/{id}', [SignupController::class, 'update'])->name('update');
         Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
     });
+    Route::get('/dashboard/data', [DashboardController::class, 'data']);
+
     Route::resource('pengeluaran', PengeluaranController::class);
     Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);
 });

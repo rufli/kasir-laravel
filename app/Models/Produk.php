@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
-   use HasFactory;
-   protected $table = 'produks';
-   protected $casts = [
-    'tanggal' => 'date',   // atau 'datetime' jika butuh jam
-];
-   protected $fillable = [
-    'tanggal',
-    'nama',
-    'harga',
-    'stok',
-    'gambar', // Kolom untuk menyimpan nama file gambar
-    'kategori_produk_id',
-   ];
+    use HasFactory;
+    protected $table = 'produks';
+    protected $casts = [
+        'tanggal' => 'date',   // atau 'datetime' jika butuh jam
+    ];
+    protected $fillable = [
+        'tanggal',
+        'nama',
+        'harga',
+        'stok',
+        'gambar', // Kolom untuk menyimpan nama file gambar
+        'kategori_produk_id',
+    ];
 
-   // Definisikan relasi dengan KategoriProduk
-   public function kategoriProduk()
+    // Definisikan relasi dengan KategoriProduk
+    public function kategoriProduk()
     {
         return $this->belongsTo(KategoriProduk::class, 'kategori_produk_id');
     }
@@ -33,5 +33,8 @@ class Produk extends Model
         }
         return null; // atau return URL gambar default
     }
-
+    public function transaksiPenjualan()
+    {
+        return $this->hasMany(TransaksiPenjualan::class, 'produk_id');
+    }
 }

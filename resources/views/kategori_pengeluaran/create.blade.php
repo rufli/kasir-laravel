@@ -2,26 +2,35 @@
 
 @section('title', 'Tambah Kategori Pengeluaran')
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/pengeluaran.css') }}">
-@endpush
+<link rel="stylesheet" href="{{ asset('css/kategori_pengeluaran/create.css') }}">
 
 @section('content')
-<h2 class="form-title">Tambah Kategori Pengeluaran</h2>
-<div class="pengeluaran-form-container">
-
-    <form action="{{ route('kategori_pengeluaran.store') }}" method="POST" class="pengeluaran-form">
-        @csrf
-
-        <div class="form-group">
-            <label for="nama">Nama</label>
-            <input type="text" name="nama" id="nama" value="{{ old('nama') }}" required>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5>Tambah Kategori Pengeluaran</h5>
         </div>
-
-        <div class="form-actions">
-            <a href="{{ route('pengeluaran.create') }}" class="btn-cancel">Batal</a>
-            <button type="submit" class="btn-submit">Simpan</button>
+        <div class="card-body">
+            <form action="{{ route('kategori_pengeluaran.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="nama">Nama Kategori</label>
+                    <input type="text" 
+                           class="form-control @error('nama') is-invalid @enderror"
+                           id="nama" 
+                           name="nama" 
+                           value="{{ old('nama') }}" 
+                           required>
+                    @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-secondary mt-3" style="text-decoration: none;">Batal</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

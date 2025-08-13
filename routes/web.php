@@ -9,31 +9,30 @@ use App\Http\Controllers\SignupController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KategoriPengeluaranController;
 use App\Http\Controllers\PenjualanController;
+
 use App\Http\Controllers\LaporanKeuanganController;
+
+use App\Http\Controllers\ProfileController;
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
 
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'profile'])->name('profileedit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
+    Route::post('/profile/password/change', [ProfileController::class, 'gantiPassword'])->name('profile.password.change');
+
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::resource('produk', ProdukController::class);
-
-    Route::prefix('pegawai')->name('pegawai.')->group(function () {
-        Route::get('/', [SignupController::class, 'index'])->name('index');
-        Route::get('/create', [SignupController::class, 'create'])->name('create');
-        Route::post('/', [SignupController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [SignupController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [SignupController::class, 'update'])->name('update');
-        Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
-    });
-    Route::resource('pengeluaran', PengeluaranController::class);
-    Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);
 
     Route::get('/penjualan', [PenjualanController::class, 'daftarProduk'])->name('penjualan.daftar_produk');
     Route::post('/penjualan/tambah', [PenjualanController::class, 'tambahKeKeranjang'])->name('penjualan.tambah');
@@ -51,4 +50,20 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
 
 });
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::prefix('pegawai')->name('pegawai.')->group(function () {
+        Route::get('/', [SignupController::class, 'index'])->name('index');
+        Route::get('/create', [SignupController::class, 'create'])->name('create');
+        Route::post('/', [SignupController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [SignupController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [SignupController::class, 'update'])->name('update');
+        Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
+    });
+    Route::get('/dashboard/data', [DashboardController::class, 'data']);
+
+    Route::resource('pengeluaran', PengeluaranController::class);
+    Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);
+});
+
 // routes/web.php

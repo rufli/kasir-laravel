@@ -2,7 +2,7 @@
 @section('title', 'Pilih Produk')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/penjualan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/transaksi/penjualan.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 @endpush
 

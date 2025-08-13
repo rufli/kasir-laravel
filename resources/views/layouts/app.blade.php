@@ -27,9 +27,11 @@
             </div>
             <div class="user-profile">
                 <span class="username">Admin</span>
-                <div class="avatar">
-                    <i class="fas fa-user-circle"></i>
-                </div>
+                <a href="{{ route('profile') }}" class="username-link" style="text-decoration: none; color: inherit;">
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </header>
@@ -40,6 +42,7 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
+                    {{-- Menu untuk semua role --}}
                     <li class="nav-item">
                         <a href="{{ route('dashboard.index') }}"
                             class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
@@ -55,38 +58,34 @@
                             <span>Produk</span>
                         </a>
                     </li>
+                    {{-- Kategori hanya admin --}}
+                    @if (Auth::user()->role == 'admin')
+                        <li
+                            class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
+                            <a href="#" class="sidebar-link js-submenu-toggle">
+                                <i class="fas fa-tags"></i>
+                                <span>Kategori</span>
+                                <i class="fas fa-chevron-down submenu-toggle-icon"></i>
+                            </a>
+                            <ul class="submenu">
 
-                    <li
-                        class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
-                        <a href="#" class="sidebar-link js-submenu-toggle">
-                            <i class="fas fa-tags"></i>
-                            <span>Kategori</span>
-                            <i class="fas fa-chevron-down submenu-toggle-icon"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="{{ route('kategori_produk.index') }}"
-                                    class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
-                                    Kategori Produk
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('kategori_pengeluaran.index') }}"
-                                    class="{{ request()->routeIs('kategori_pengeluaran.*') ? 'active' : '' }}">
-                                    Kategori Pengeluaran
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                <li>
+                                    <a href="{{ route('kategori_produk.index') }}"
+                                        class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
+                                        Kategori Produk
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('kategori_pengeluaran.index') }}"
+                                        class="{{ request()->routeIs('kategori_pengeluaran.*') ? 'active' : '' }}">
+                                        Kategori Pengeluaran
+                                    </a>
+                                </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('pengeluaran.index') }}"
-                            class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span>Pengeluaran</span>
-                        </a>
-                    </li>
-
+                            </ul>
+                        </li>
+                    @endif
+                    {{-- Transaksi Penjualan & Riwayat untuk semua --}}
                     <li class="nav-item">
                         <a href="{{ route('penjualan.daftar_produk') }}"
                             class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
@@ -94,7 +93,6 @@
                             <span>Transaksi Penjualan</span>
                         </a>
                     </li>
-
 
                     <li class="nav-item">
                         <a href="{{ route('penjualan.riwayat') }}"
@@ -104,21 +102,33 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Laporan Keuangan</span>
-                        </a>
-                    </li>
+                    {{-- Menu khusus admin --}}
+                    @if (Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a href="{{ route('pengeluaran.index') }}"
+                                class="sidebar-link {{ request()->routeIs('pengeluaran.*') ? 'active' : '' }}">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('pegawai.index') }}"
-                            class="sidebar-link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
-                            <i class="fas fa-users"></i>
-                            <span>Manajemen Pegawai</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                <span>Laporan Keuangan</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('pegawai.index') }}"
+                                class="sidebar-link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
+                                <i class="fas fa-users"></i>
+                                <span>Manajemen Pegawai</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
+
             </nav>
 
             <!-- Logout -->
@@ -178,9 +188,6 @@
             <span class="version">v1.0.0</span>
         </div>
     </footer>
-
-    <!-- JS Global -->
-    @vite('resources/js/app.js')
 
     <!-- Toggle Submenu Sidebar -->
     <script>

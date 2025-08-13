@@ -1,0 +1,151 @@
+/* container dan main-body sudah bagus, tinggal beberapa hal saja */
+
+.container {
+    max-width: 900px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #555;
+}
+
+.main-body {
+    padding: 20px; /* tambah padding biar lega */
+    background-color: #fff; /* ubah ke putih agar kontras dengan latar container */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* tambahkan shadow lembut */
+}
+
+.gutters-sm {
+    display: flex;
+    gap: 20px;
+}
+
+.gutters-sm > .col-md-4,
+.gutters-sm > .col-md-8 {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 70px 100px 70px 100px; /* tambah padding kiri kanan */
+    box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+}
+
+.gutters-sm > .col-md-4 {
+    flex: 0 0 30%;
+    text-align: center;
+}
+
+.gutters-sm > .col-md-8 {
+    flex: 1;
+}
+
+/* Card styling */
+.card {
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+}
+
+.card-body {
+    padding: 0;
+
+}
+
+/* Bikin garis horizontal full width dan lebih tegas */
+.card-body hr {
+    text-align: left;
+    border: none;
+    border-top: 1.5px solid #ddd;
+    margin: 10px 0;
+    width: 100%; /* full lebar kolom */
+}
+
+/* Atur jarak antar baris data */
+.card-body .row.mb-2 {
+    align-items: center;
+    min-height: 45px; /* biar lebih tinggi */
+}
+
+
+/* Profile Image */
+.rounded-circle {
+    border-radius: 50% !important;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto 15px auto;
+    border: 3px solid #4e6af1; /* tambahkan border warna biru untuk fokus */
+}
+
+/* Text styles */
+.text-secondary {
+    color: #6c757d !important; /* buat lebih gelap sedikit */
+    font-size: 14px;
+}
+
+h4 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+h6 {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 4px;
+    color: #6c757d;
+}
+
+/* Margin bottom */
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+/* Form label */
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+/* Button */
+button.btn-info, a.btn-info {
+    background-color: #4e6af1;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+button.btn-info:hover, a.btn-info:hover {
+    background-color: #3b52c6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gutters-sm {
+        flex-direction: column;
+    }
+
+    .gutters-sm > .col-md-4,
+    .gutters-sm > .col-md-8 {
+        flex: 1 1 100%;
+    }
+
+    .gutters-sm > .col-md-4 {
+        margin-bottom: 20px;
+    }
+}

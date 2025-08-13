@@ -3,7 +3,7 @@
 @section('title', 'Checkout')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/pembayaran.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/transaksi/pembayaran.css') }}">
 @endpush
 
 @section('content')

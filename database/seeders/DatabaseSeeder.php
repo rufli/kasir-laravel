@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         User::create([
             'username' => 'admin',
             'password' => Hash::make('123456'),
+            'nama_usaha' => 'Usaha Kasir',
+            'alamat_usaha' => 'Jl. Raya No. 1, Banyuwangi',
             'nama' => 'Administrator',
             'alamat' => 'Banyuwangi',
             'no_telepon' => '081234567890',

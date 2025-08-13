@@ -2,7 +2,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/produk.css') }}">
+<link rel="stylesheet" href="{{ asset('css/produk/edit.css') }}">
 <div class="container">
     <h2>Edit Produk</h2>
 

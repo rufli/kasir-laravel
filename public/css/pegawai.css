@@ -9,8 +9,8 @@
 }
 
 .pegawai-header {
-    background-color: #0e7f49;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #111827;
     padding: 20px 28px;
     display: flex;
     justify-content: space-between;
@@ -70,8 +70,8 @@
 
 
 .btn-tambah {
-    background-color: #ffffff;
-    color: #0e7f49;
+    background-color: #0e7f49;
+    color: #ffffff;
     border: 2px solid #0e7f49;
     padding: 8px 16px;
     font-size: 14px;
@@ -82,7 +82,7 @@
 }
 
 .btn-tambah:hover {
-    background-color: #0e7f49;
+    background-color: #034525;
     color: #ffffff;
 }
 

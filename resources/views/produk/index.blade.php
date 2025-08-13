@@ -3,7 +3,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/produk.css') }}">
+<link rel="stylesheet" href="{{ asset('css/produk/index.css') }}">
 <div class="container">
     <div class="row justify-content-between mb-4">
         <div class="col-md-6">

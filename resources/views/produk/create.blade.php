@@ -2,7 +2,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/produk.css') }}">
+<link rel="stylesheet" href="{{ asset('css/produk/create.css') }}">
 
 <div class="container">
     <h2>Tambah Produk Baru</h2>

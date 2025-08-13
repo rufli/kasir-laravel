@@ -1,28 +1,39 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kategori Pengeluaran')
-
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/pengeluaran.css') }}">
+<link rel="stylesheet" href="{{ asset('css/kategori_pengeluaran/edit.css') }}">
 @endpush
 
+@section('title', 'Edit Kategori Pengeluaran')
+
 @section('content')
-<h2 class="form-title">Edit Kategori Pengeluaran</h2>
-<div class="pengeluaran-form-container">
-
-    <form action="{{ route('kategori_pengeluaran.update', $kategori_pengeluaran->id) }}" method="POST" class="pengeluaran-form">
-        @csrf
-        @method('PUT')
-
-        <div class="form-group">
-            <label for="nama">Nama</label>
-            <input type="text" name="nama" id="nama" value="{{ old('nama', $kategori_pengeluaran->nama) }}" required>
+<div class="edit-kategori-pengeluaran">
+    <div class="card">
+        <div class="card-header">
+            <h5>Edit Kategori Pengeluaran</h5>
         </div>
 
-        <div class="form-actions">
-            <a href="{{ route('kategori_pengeluaran.index') }}" class="btn-cancel">Batal</a>
-            <button type="submit" class="btn-submit">Perbarui</button>
+        <div class="card-body">
+            <form action="{{ route('kategori_pengeluaran.update', $kategori_pengeluaran->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" name="nama" id="nama"
+                           value="{{ old('nama', $kategori_pengeluaran->nama) }}"
+                           class="form-control @error('nama') is-invalid @enderror" required>
+                    @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Update</button>
+                    <button type="button" class="btn-secondary" onclick="window.location='{{ route('kategori_pengeluaran.index') }}'">Batal</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

@@ -1,0 +1,140 @@
+/* =========================
+   Scope khusus halaman kategori_edit (produk & pengeluaran)
+========================= */
+
+/* Container */
+.kategori-edit,
+.edit-kategori-pengeluaran {
+    padding: 20px;
+    max-width: 1200px; /* PERLEBAR dari 800px */
+    margin: 0 auto;
+}
+
+/* Card */
+.kategori-edit .card,
+.edit-kategori-pengeluaran .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    overflow: hidden;
+}
+.kategori-edit .card-header,
+.edit-kategori-pengeluaran .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 1.25rem;
+}
+.kategori-edit .card-header h5,
+.edit-kategori-pengeluaran .card-header h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.kategori-edit .card-body,
+.edit-kategori-pengeluaran .card-body {
+    background-color: #f9fafb;
+    padding: 1.25rem;
+}
+
+/* Form */
+.kategori-edit .form-group,
+.edit-kategori-pengeluaran .form-group {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.kategori-edit .form-label,
+.edit-kategori-pengeluaran .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+.kategori-edit .form-control,
+.edit-kategori-pengeluaran .form-control {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.kategori-edit .form-control:focus,
+.edit-kategori-pengeluaran .form-control:focus {
+    border-color: #4f46e5;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Actions */
+.kategori-edit .form-actions,
+.edit-kategori-pengeluaran .form-actions {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Tombol Update hijau */
+.kategori-edit .btn-primary,
+.edit-kategori-pengeluaran .btn-primary {
+    background-color: #16a34a;
+    border: 1px solid #16a34a;
+    font-weight: 700;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+.kategori-edit .btn-primary:hover,
+.edit-kategori-pengeluaran .btn-primary:hover {
+    background-color: #15803d;
+    border-color: #15803d;
+}
+
+/* Tombol Batal abu-abu (btn-secondary) */
+.kategori-edit .btn-secondary,
+.edit-kategori-pengeluaran .btn-secondary {
+    background-color: #fa0000; /* abu-abu terang */
+    border: 1px solid #d1d5db;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.kategori-edit .btn-secondary:hover,
+.edit-kategori-pengeluaran .btn-secondary:hover {
+    background-color: #fa0000; /* lebih gelap saat hover */
+    border-color: #fa0000;
+    color: #ffffff;
+}
+
+/* Link Batal lama (jika tetap ada) */
+.kategori-edit .btn-link,
+.edit-kategori-pengeluaran .btn-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.95rem;
+    color: #4f46e5;
+    cursor: pointer;
+    text-decoration: none;
+}
+.kategori-edit .btn-link:hover,
+.edit-kategori-pengeluaran .btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Validasi error */
+.kategori-edit .form-control.is-invalid,
+.edit-kategori-pengeluaran .form-control.is-invalid {
+    border-color: #dc2626;
+}

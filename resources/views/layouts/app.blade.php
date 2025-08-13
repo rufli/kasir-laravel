@@ -105,7 +105,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{route('laporan.keuangan')}}"
+                         class="sidebar-link {{ request()->routeIs('laporan.keuangan') ? 'active' : '' }}">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Laporan Keuangan</span>
                         </a>

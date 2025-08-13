@@ -9,6 +9,7 @@ use App\Http\Controllers\SignupController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KategoriPengeluaranController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LaporanKeuanganController;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -42,5 +43,12 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
     Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
     Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');
+
+    Route::prefix('laporan')->group(function () {
+    Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan.keuangan');
+    Route::get('/harian', [LaporanKeuanganController::class, 'harian'])->name('laporan.harian');
+    });
+
+
 });
 // routes/web.php

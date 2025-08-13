@@ -1,5 +1,3 @@
-/* ==== Pegawai Index CSS - Modern Look ==== */
-
 .pegawai-container {
     background-color: #f9fafb;
     border-radius: 12px;
@@ -9,8 +7,8 @@
 }
 
 .pegawai-header {
-    background-color: #0e7f49;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 20px 28px;
     display: flex;
     justify-content: space-between;
@@ -41,7 +39,7 @@
 .search-input-wrapper input[type="text"] {
     width: 100%;
     border: 1px solid #ccc;
-    padding: 8px 14px 8px 40px; /* padding kiri diberi ruang untuk icon */
+    padding: 8px 14px 8px 40px;
     border-radius: 20px;
     outline: none;
     font-size: 14px;
@@ -68,10 +66,9 @@
     font-size: 16px;
 }
 
-
 .btn-tambah {
-    background-color: #ffffff;
-    color: #0e7f49;
+    background-color: #0e7f49;
+    color: #ffffff;
     border: 2px solid #0e7f49;
     padding: 8px 16px;
     font-size: 14px;
@@ -82,7 +79,7 @@
 }
 
 .btn-tambah:hover {
-    background-color: #0e7f49;
+    background-color: #034525;
     color: #ffffff;
 }
 
@@ -99,16 +96,16 @@
 }
 
 .pegawai-table thead {
-    background-color: #f3f4f6; /* abu terang */
-    color: #111827; /* abu gelap hampir hitam, jelas dibaca */
+    background-color: #f3f4f6;
+    color: #111827;
 }
 
 .pegawai-table tbody tr:nth-child(even) {
-    background-color: #fafafa; /* selang-seling baris */
+    background-color: #fafafa;
 }
 
 .pegawai-table tbody tr:hover {
-    background-color: #e5e7eb; /* abu hover */
+    background-color: #e5e7eb;
 }
 
 .pegawai-table th,
@@ -116,9 +113,8 @@
     padding: 14px 12px;
     text-align: center;
     font-size: 14px;
-    border-bottom: 1px solid #e5e7eb; /* garis pemisah halus */
+    border-bottom: 1px solid #e5e7eb;
 }
-
 
 .btn-edit {
     background-color: #facc15;
@@ -153,18 +149,6 @@
     background-color: #dc2626;
 }
 
-/* Alert styling */
-.card-body .btn-success {
-    background-color: #198754;
-    border-color: #198754;
-}
-
-.card-body .btn-success:hover {
-    background-color: #157347;
-    border-color: #146c43;
-}
-
-
 .btn-action-group {
     display: flex;
     justify-content: center;
@@ -175,4 +159,3 @@
 .btn-action-group form {
     margin: 0;
 }
-

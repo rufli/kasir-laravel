@@ -1,0 +1,109 @@
+/* =========================
+   CONTAINER & CARD
+========================= */
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 1.25rem;
+}
+
+.card-header h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-body {
+    background-color: #f9fafb;
+    padding: 1.25rem;
+}
+
+/* =========================
+   FORM & INPUT
+========================= */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus {
+    border-color: #4f46e5;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================
+   FORM ACTIONS (TOMBOL)
+========================= */
+.form-actions {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Base button untuk samakan ukuran */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Tombol Update (Hijau) */
+.btn-primary {
+    background-color: #16a34a;
+    border: 1px solid #16a34a;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #15803d;
+    border-color: #15803d;
+}
+
+/* Tombol Batal (Abu) */
+.btn-secondary {
+    background-color: #fa0000;
+    border: 1px solid #d1d5db;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #fa0000;
+    border-color: #fa0000;
+}

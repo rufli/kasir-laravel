@@ -3,7 +3,7 @@
 @section('title', 'Kategori Produk')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/kategoriproduk.css') }}">
+<link rel="stylesheet" href="{{ asset('css/kategori_produk/index.css') }}">
 
 <div class="container">
     <div class="card">

@@ -4,7 +4,7 @@
 .container {
    padding: 20px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: -5px auto 0 auto;
 }
 
 .card {
@@ -29,7 +29,7 @@ h2 {
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
     color: #333;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 h4 {
@@ -143,10 +143,11 @@ h5 {
     margin-bottom: 2rem;
 }
 
-/* Stat Cards - Compact Version */
+/* Stat Cards */
 .stat-card {
     border-radius: 8px;
     padding: 1rem;
+    background: white;
     color: black;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -170,20 +171,20 @@ h5 {
     font-weight: 600;
 }
 
-/* Specific Card Colors */
+/* Warna Border Top */
 .stat-card.sales {
-    background: white;
+    border-top: 4px solid #3b82f6; /* Biru */
 }
 
 .stat-card.expenses {
-    background: white;
+    border-top: 4px solid #f59e0b; /* Kuning */
 }
 
 .stat-card.balance {
-    background:white;
+    border-top: 4px solid #10b981; /* Hijau  */
 }
 
-/* Responsive Adjustments */
+/* Responsive */
 @media (max-width: 768px) {
     .stats-grid {
         grid-template-columns: 1fr;
@@ -264,6 +265,7 @@ h5 {
     border: none;
     cursor: pointer;
     margin-left: auto;
+    float: right;
 }
 
 .btn-print:hover {

@@ -102,6 +102,15 @@
                         </a>
                     </li>
 
+
+                    <li class="nav-item">
+                        <a href="{{route('laporan.keuangan')}}"
+                         class="sidebar-link {{ request()->routeIs('laporan.keuangan') ? 'active' : '' }}">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Laporan Keuangan</span>
+                        </a>
+                    </li>
+
                     {{-- Menu khusus admin --}}
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
@@ -111,6 +120,7 @@
                                 <span>Pengeluaran</span>
                             </a>
                         </li>
+
 
                         <li class="nav-item">
                             <a href="#" class="sidebar-link">

@@ -1,0 +1,279 @@
+/* resources/css/laporankeuangan.css */
+
+/* Base Styles */
+.container {
+   padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+    padding: 1.25rem 1.5rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Typography */
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+h5 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Form Elements */
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+}
+
+.btn-primary {
+    background-color: #0e7f49;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #12b466;
+
+    transform: translateY(-1px);
+}
+
+/* Summary Cards */
+.card.text-white {
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.card.text-white .card-body {
+    padding: 1.25rem;
+}
+
+.card.bg-success {
+    background-color: #1cc88a !important;
+}
+
+.card.bg-danger {
+    background-color: #e74a3b !important;
+}
+
+.card.bg-info {
+    background-color: #36b9cc !important;
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.table thead th {
+    border-bottom: 2px solid #eaeaea;
+    font-weight: 600;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card-header .row > div {
+        margin-bottom: 1rem;
+    }
+
+    .card-header .row > div:last-child {
+        margin-bottom: 0;
+    }
+
+    .d-flex.align-items-end {
+        align-items: flex-start !important;
+    }
+}
+
+
+/* ... (kode CSS sebelumnya tetap sama) ... */
+
+/* Stats Grid Container */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Stat Cards - Compact Version */
+.stat-card {
+    border-radius: 8px;
+    padding: 1rem;
+    color: black;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-card h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.stat-card h4 {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Specific Card Colors */
+.stat-card.sales {
+    background: white;
+}
+
+.stat-card.expenses {
+    background: white;
+}
+
+.stat-card.balance {
+    background:white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 0.8rem;
+    }
+}
+
+
+/* resources/css/laporankeuangan.css */
+
+/* Form Filter Styles */
+.filter-form {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.filter-group input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.filter-button {
+    flex: 0 0 auto;
+    background-color: #0e7f49;
+    border-radius: 4px;
+    margin-bottom: 1px; /* Untuk alignment dengan input */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .filter-button {
+        align-self: flex-start;
+        margin-top: 0.5rem;
+    }
+}
+/* Print Button Styles */
+.btn-print {
+    background-color: #0e7f49;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.btn-print:hover {
+    background-color: #12b466;
+    transform: translateY(-1px);
+}
+
+/* Print-specific hiding */
+@media print {
+    .card-header, .stats-grid, .no-print {
+        display: none !important;
+    }
+}

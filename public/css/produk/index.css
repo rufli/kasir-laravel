@@ -10,7 +10,7 @@
 h2 {
     color: #333;
     margin-bottom: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* =========================
@@ -69,13 +69,14 @@ h2 {
 
 .btn-primary {
     color: #fff;
-    background-color: #4f46e5;
-    border-color: #4f46e5;
+    background-color: #38ac3c;
+    border-color: #38ac3c;
+    text-decoration: none !important;
 }
+
 .btn-primary:hover {
-    color: #fff;
-    background-color: #4338ca;
-    border-color: #4338ca;
+    background-color: #2f8e32;
+    border-color: #2f8e32;
 }
 
 .btn-warning {

@@ -89,12 +89,14 @@
     border-radius: 4px;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-decoration: none !important;
 }
 
 .btn-primary {
     color: #fff;
     background-color: #38ac3c;
     border-color: #38ac3c;
+    text-decoration: none !important;
 }
 
 .btn-primary:hover {

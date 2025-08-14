@@ -3,56 +3,79 @@
 @section('title', 'Edit Pengeluaran')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/pengeluaran/edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pengeluaran/create.css') }}">
 @endpush
 
 @section('content')
-<h2 class="form-title">Edit Pengeluaran</h2>
-<div class="pengeluaran-form-container">
+    <div class="container">
+        <h2>Edit Pengeluaran</h2>
 
-    <form action="{{ route('pengeluaran.update', $pengeluaran->id) }}" method="POST" class="pengeluaran-form">
-        @csrf
-        @method('PUT')
-
-        <div class="form-group">
-            <label for="tanggal">Tanggal</label>
-            <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $pengeluaran->tanggal) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="nama">Nama</label>
-            <input type="text" name="nama" id="nama" value="{{ old('nama', $pengeluaran->nama) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="kategori_pengeluaran_id">Kategori</label>
-            <div class="kategori-header">
-                <small><a href="{{ route('kategori_pengeluaran.index') }}">Tambah Kategori +</a></small>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <select name="kategori_pengeluaran_id" id="kategori_pengeluaran_id" required>
-                <option value="">-- Pilih Kategori --</option>
-                @foreach ($kategori as $item)
-                    <option value="{{ $item->id }}" {{ old('kategori_pengeluaran_id', $pengeluaran->kategori_pengeluaran_id) == $item->id ? 'selected' : '' }}>
-                        {{ $item->nama }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        @endif
 
-        <div class="form-group">
-            <label for="jumlah">Jumlah</label>
-            <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah', $pengeluaran->jumlah) }}" required>
-        </div>
+        <form action="{{ route('pengeluaran.update', $pengeluaran->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <!-- Tanggal -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="tanggal">Tanggal</label>
+                    <input type="date" name="tanggal" id="tanggal" class="form-control"
+                        value="{{ old('tanggal', $pengeluaran->tanggal) }}" required>
+                </div>
 
-        <div class="form-group">
-            <label for="catatan">Catatan</label>
-            <textarea name="catatan" id="catatan" rows="3">{{ old('catatan', $pengeluaran->catatan) }}</textarea>
-        </div>
+                <!-- Nama -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="nama">Nama</label>
+                    <input type="text" name="nama" id="nama" class="form-control"
+                        value="{{ old('nama', $pengeluaran->nama) }}" required>
+                </div>
 
-        <div class="form-actions">
-            <a href="{{ route('pengeluaran.index') }}" class="btn-cancel">Batal</a>
-            <button type="submit" class="btn-submit">Perbarui</button>
-        </div>
-    </form>
-</div>
+                <!-- Kategori -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="kategori_pengeluaran_id">Kategori</label>
+                    <small>
+                        <a href="{{ route('kategori_pengeluaran.create') }}" class="btn-tambah-kategori">
+                            Tambah Kategori +
+                        </a>
+                    </small>
+                    <select name="kategori_pengeluaran_id" id="kategori_pengeluaran_id" class="form-select custom-select"
+                        required>
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach ($kategori as $item)
+                            <option value="{{ $item->id }}"
+                                {{ old('kategori_pengeluaran_id', $pengeluaran->kategori_pengeluaran_id) == $item->id ? 'selected' : '' }}>
+                                {{ $item->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Jumlah -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="jumlah">Jumlah</label>
+                    <input type="number" name="jumlah" id="jumlah" class="form-control"
+                        value="{{ old('jumlah', $pengeluaran->jumlah) }}" required>
+                </div>
+
+                <!-- Catatan -->
+                <div class="col-md-12 mb-3">
+                    <label class="form-label" for="catatan">Catatan</label>
+                    <textarea name="catatan" id="catatan" class="form-control" rows="3">{{ old('catatan', $pengeluaran->catatan) }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Perbarui</button>
+                <a href="{{ route('pengeluaran.index') }}" class="btn btn-secondary">Batal</a>
+            </div>
+        </form>
+    </div>
 @endsection

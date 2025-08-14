@@ -19,10 +19,10 @@
     gap: 12px;
 }
 
-.pegawai-header h5 {
+.pegawai-header h1 {
     margin: 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .pegawai-actions {

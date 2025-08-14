@@ -160,14 +160,14 @@ h2 {
 
 .btn-primary {
     color: #fff;
-    background-color: #4f46e5;
-    border-color: #4f46e5;
+    background-color: #16a34a; /* Hijau utama */
+    border-color: #16a34a;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #4338ca;
-    border-color: #4338ca;
+    background-color: #15803d; /* Hijau lebih gelap */
+    border-color: #15803d;
 }
 
 .btn-secondary {
@@ -187,3 +187,18 @@ h2 {
     display: flex;
     gap: 12px;
 }
+
+.btn-tambah-kategori {
+    color: #16a34a; /* Hijau utama */
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 1px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-tambah-kategori:hover {
+    color: #15803d; /* Hijau lebih gelap saat hover */
+    border-bottom-color: #15803d;
+}
+

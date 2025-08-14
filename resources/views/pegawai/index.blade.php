@@ -10,7 +10,7 @@
 @section('content')
 <div class="pegawai-container">
     <div class="pegawai-header">
-        <h5>Daftar Pegawai</h5>
+        <h1>Daftar Pegawai</h1>
         <div class="pegawai-actions">
             <form action="{{ route('pegawai.index') }}" method="GET" class="search-form">
                 <div class="search-input-wrapper">

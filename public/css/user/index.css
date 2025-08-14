@@ -1,151 +1,106 @@
-/* container dan main-body sudah bagus, tinggal beberapa hal saja */
-
-.container {
-    max-width: 900px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #555;
+.profile-card {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.main-body {
-    padding: 20px; /* tambah padding biar lega */
-    background-color: #fff; /* ubah ke putih agar kontras dengan latar container */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* tambahkan shadow lembut */
+.profile-title {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center; /* Biar judul di tengah */
 }
 
-.gutters-sm {
-    display: flex;
-    gap: 20px;
-}
-
-.gutters-sm > .col-md-4,
-.gutters-sm > .col-md-8 {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 70px 100px 70px 100px; /* tambah padding kiri kanan */
-    box-shadow: 0 0 10px rgb(0 0 0 / 5%);
-}
-
-.gutters-sm > .col-md-4 {
-    flex: 0 0 30%;
+.profile-header {
     text-align: center;
+    margin-bottom: 2rem;
+    position: relative; /* Untuk posisi teks di tengah foto */
 }
 
-.gutters-sm > .col-md-8 {
-    flex: 1;
-}
-
-/* Card styling */
-.card {
-    border-radius: 10px;
-    box-shadow: none;
-    border: none;
-}
-
-.card-body {
-    padding: 0;
-
-}
-
-/* Bikin garis horizontal full width dan lebih tegas */
-.card-body hr {
-    text-align: left;
-    border: none;
-    border-top: 1.5px solid #ddd;
-    margin: 10px 0;
-    width: 100%; /* full lebar kolom */
-}
-
-/* Atur jarak antar baris data */
-.card-body .row.mb-2 {
-    align-items: center;
-    min-height: 45px; /* biar lebih tinggi */
-}
-
-
-/* Profile Image */
-.rounded-circle {
-    border-radius: 50% !important;
-    object-fit: cover;
+.profile-img {
     width: 150px;
     height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
     display: block;
-    margin: 0 auto 15px auto;
-    border: 3px solid #4e6af1; /* tambahkan border warna biru untuk fokus */
+    margin: 0 auto 1rem;
 }
 
-/* Text styles */
-.text-secondary {
-    color: #6c757d !important; /* buat lebih gelap sedikit */
+.profile-img-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
     font-size: 14px;
+    color: #666;
+    pointer-events: none;
+    text-align: center;
 }
 
-h4 {
-    font-weight: 700;
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #333;
+.profile-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-h6 {
-    font-weight: 600;
-    font-size: 14px;
-    margin-top: 4px;
-    color: #6c757d;
-}
-
-/* Margin bottom */
-.mb-3 {
-    margin-bottom: 1rem !important;
-}
-
-/* Form label */
-.form-group label {
-    display: block;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
-    font-size: 15px;
-}
-
-/* Button */
-button.btn-info, a.btn-info {
-    background-color: #4e6af1;
+.btn-change {
+    background-color: #1f2937;
+    color: #fff;
     border: none;
-    padding: 10px 25px;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-weight: 600;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+}
+
+.btn-delete {
+    background-color: #f3f4f6;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.profile-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.profile-form label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.profile-form input,
+.profile-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+}
+
+.profile-form textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+/* Tombol Edit Profile */
+.btn-edit {
     display: inline-block;
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
     text-decoration: none;
     text-align: center;
-    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
 }
 
-button.btn-info:hover, a.btn-info:hover {
-    background-color: #3b52c6;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .gutters-sm {
-        flex-direction: column;
-    }
-
-    .gutters-sm > .col-md-4,
-    .gutters-sm > .col-md-8 {
-        flex: 1 1 100%;
-    }
-
-    .gutters-sm > .col-md-4 {
-        margin-bottom: 20px;
-    }
+.btn-edit:hover {
+    background-color: #0b5ed7;
 }

@@ -29,7 +29,15 @@
                 <span class="username">{{ Auth::user()->nama }}</span>
                 <a href="{{ route('profile') }}" class="username-link" style="text-decoration: none; color: inherit;">
                     <div class="avatar">
-                        <i class="fas fa-user-circle"></i>
+                        <div class="avatar">
+                            @if (Auth::user()->img_profile && Storage::disk('public')->exists(Auth::user()->img_profile))
+                                <img src="{{ asset('storage/' . Auth::user()->img_profile) }}" alt="Avatar"
+                                    class="avatar-img">
+                            @else
+                                <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Avatar"
+                                    class="avatar-img">
+                            @endif
+                        </div>
                     </div>
                 </a>
             </div>

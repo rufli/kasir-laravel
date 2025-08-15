@@ -45,32 +45,44 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        $request->validate([
+        // Validasi umum tanpa password
+        $rules = [
             'username' => 'required|string|min:2|max:45|unique:users,username,' . $user->id,
             'nama' => 'required|string|min:2|max:60',
             'no_telepon' => 'required|string|min:7|max:13',
             'img_profile' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
-            'password' => 'nullable|string|min:8|confirmed',
-            // validasi tambahan sesuai role
+            // Role spesifik
             'nama_usaha' => $user->role === 'admin' ? 'nullable|string|min:2|max:100' : '',
             'alamat_usaha' => $user->role === 'admin' ? 'nullable|string|min:2|max:255' : '',
             'alamat' => $user->role === 'pegawai' ? 'required|string|min:2|max:255' : '',
-        ]);
+        ];
 
-        // upload foto
+        $request->validate($rules);
+
+        // Validasi password hanya jika diisi
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => 'string|min:8|confirmed',
+            ]);
+            $user->password = Hash::make($request->password);
+        }
+
+        // Upload foto profil
         if ($request->hasFile('img_profile') && $request->file('img_profile')->isValid()) {
+            // Hapus file lama jika ada
             if ($user->img_profile && Storage::exists('public/' . $user->img_profile)) {
                 Storage::delete('public/' . $user->img_profile);
             }
+            // Simpan foto baru
             $user->img_profile = $request->file('img_profile')->store('images', 'public');
         }
 
-        // update field umum
+        // Update field umum
         $user->username = $request->username;
         $user->nama = $request->nama;
         $user->no_telepon = $request->no_telepon;
 
-        // update sesuai role
+        // Update role spesifik
         if ($user->role === 'admin') {
             $user->nama_usaha = $request->nama_usaha;
             $user->alamat_usaha = $request->alamat_usaha;
@@ -78,11 +90,6 @@ class ProfileController extends Controller
 
         if ($user->role === 'pegawai') {
             $user->alamat = $request->alamat;
-        }
-
-        // update password jika ada
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
         }
 
         $user->save();

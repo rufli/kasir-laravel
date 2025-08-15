@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_usaha', 100)->nullable();
             $table->string('alamat_usaha', 150)->nullable();
             $table->string('alamat', 60)->nullable();
+            $table->string('img_profile', 255)->nullable();
             $table->string('no_telepon', 20)->unique()->nullable();
             $table->enum('role', ['admin', 'pegawai']);
             $table->boolean('is_active')->default(true); // Kolom baru untuk status aktif/non-aktif

@@ -7,23 +7,12 @@
     overflow: hidden;
 }
 
-.pegawai-header {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 20px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    flex-wrap: wrap;
-    gap: 12px;
-}
 
-.pegawai-header h5 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
+h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+
 }
 
 .pegawai-actions {
@@ -32,7 +21,61 @@
     gap: 12px;
 }
 
-.search-input-wrapper {
+
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #38ac3c;
+    border-color: #38ac3c;
+    text-decoration: none !important;
+}
+
+.btn-primary:hover {
+    background-color: #2f8e32;
+    border-color: #2f8e32;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+/* Ikon Font Awesome */
+.fas {
+    margin-right: 0.375rem;
+}
+
+/* =========================
+   ALERT STYLES
+========================= */
+.alert {
+
     position: relative;
     width: 250px;
 }

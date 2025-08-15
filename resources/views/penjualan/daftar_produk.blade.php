@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 @section('content')
     <div class="container">
 
-        <h1 class="page-title">Pilih Produk</h1>
+        <h2 class="page-title">Pilih Produk</h2>
 
         {{-- Gabungkan form search + filter agar parameter GET konsisten --}}
         <form action="{{ route('penjualan.daftar_produk') }}" method="GET" class="search-section" style="gap:10px;">

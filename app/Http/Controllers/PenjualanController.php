@@ -7,6 +7,7 @@ use App\Models\Produk;
 use App\Models\TransaksiPenjualan;
 use App\Models\DetailTransaksiPenjualan;
 use App\Models\KategoriProduk;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -140,7 +141,7 @@ class PenjualanController extends Controller
                 // Kurangi stok produk
                 $produk->stok -= $jumlah;
                 $produk->save();
-                
+
                 $subtotal = $produk->harga * $jumlah;
 
                 $produkData[] = [
@@ -195,26 +196,47 @@ class PenjualanController extends Controller
     // 7. Menampilkan detail transaksi (struk)
     public function detailTransaksi($id)
     {
-        $transaksi = TransaksiPenjualan::with(['detailTransaksi.produks', 'user'])
-            ->where('id', $id)
-            ->where('users_id', Auth::id())
-            ->firstOrFail();
+        $query = TransaksiPenjualan::with(['detailTransaksi.produks', 'user'])
+            ->where('id', $id);
 
-        return view('penjualan.detail', compact('transaksi'));
+        if (auth()->user()->role !== 'admin') {
+            // Pegawai hanya boleh melihat transaksi sendiri
+            $query->where('users_id', Auth::id());
+        }
+
+        $transaksi = $query->firstOrFail();
+
+        // Ambil data toko (user dengan role admin)
+        $toko = User::where('role', 'admin')->first();
+
+        return view('penjualan.detail', compact('transaksi', 'toko'));
     }
+
 
     // 8. Riwayat transaksi
     public function riwayatTransaksi(Request $request)
     {
-        $query = TransaksiPenjualan::with('detailTransaksi.produks')
-            ->where('users_id', Auth::id());
+        $query = TransaksiPenjualan::with(['detailTransaksi.produks', 'user']);
 
-        if ($request->has('tanggal') && $request->tanggal != null) {
+        if (auth()->user()->role === 'admin') {
+            // Filter user jika ada
+            if ($request->filled('user_id')) {
+                $query->where('users_id', $request->user_id);
+            }
+            $users = User::where('role', 'pegawai')->get();
+        } else {
+            // Pegawai hanya lihat transaksi sendiri
+            $query->where('users_id', auth()->id());
+            $users = collect();
+        }
+
+        // Filter tanggal
+        if ($request->filled('tanggal')) {
             $query->whereDate('tanggal', $request->tanggal);
         }
 
         $riwayat = $query->orderBy('tanggal', 'desc')->get();
 
-        return view('penjualan.riwayat', compact('riwayat'));
+        return view('penjualan.riwayat', compact('riwayat', 'users'));
     }
 }

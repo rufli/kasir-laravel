@@ -85,7 +85,7 @@
                             </ul>
                         </li>
                     @endif
-                    {{-- Transaksi Penjualan & Riwayat untuk semua --}}
+                    @if (Auth::user()->role == 'pegawai')
                     <li class="nav-item">
                         <a href="{{ route('penjualan.daftar_produk') }}"
                             class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
@@ -93,7 +93,7 @@
                             <span>Transaksi Penjualan</span>
                         </a>
                     </li>
-
+                    @endif
                     <li class="nav-item">
                         <a href="{{ route('penjualan.riwayat') }}"
                             class="sidebar-link {{ request()->routeIs('penjualan.riwayat*') ? 'active' : '' }}">

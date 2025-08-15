@@ -8,8 +8,8 @@
 }
 
 .riwayat-header {
-    background-color: #0e7f49;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 20px 28px;
     display: flex;
     justify-content: space-between;
@@ -41,7 +41,7 @@
 .search-input-wrapper input[type="date"] {
     width: 100%;
     border: 1px solid #ccc;
-    padding: 8px 14px 8px 40px; /* padding kiri untuk icon */
+    padding: 8px 14px 8px 40px; /* padding kiri diberi ruang untuk icon */
     border-radius: 20px;
     outline: none;
     font-size: 14px;
@@ -130,43 +130,45 @@
 .btn-action-group form {
     margin: 0;
 }
-/* Tambahan untuk form filter tanggal di .riwayat-actions */
+/* Container form filter tanggal */
 .riwayat-actions form#filterTanggalForm {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
-    background: transparent;
 }
 
-/* Label filter tanggal */
+/* Label */
 .riwayat-actions form#filterTanggalForm label {
-    color: #fff;
-    font-weight: 600;
+    color: #000;
+    font-weight: 400;
     margin: 0;
     white-space: nowrap;
 }
 
-/* Input date filter */
+/* Input date dengan border abu dan efek fokus hijau */
 .riwayat-actions form#filterTanggalForm input[type="date"] {
-    border: 1px solid #ccc;
-    padding: 6px 12px;
+    width: 100%;
+    border: 5px solid #ccc; /* abu default */
+    padding: 8px 14px;
     border-radius: 20px;
-    font-size: 14px;
     outline: none;
-    cursor: pointer;
+    font-size: 14px;
+    background-color: #5c5a5a21;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     color: #333;
-    min-width: 150px;
-    background-color: #fff;
+    min-width: 180px;
+    cursor: pointer;
 }
 
-/* Fokus input date */
+/* Hover & Fokus → border hijau + shadow */
+.riwayat-actions form#filterTanggalForm input[type="date"]:hover,
 .riwayat-actions form#filterTanggalForm input[type="date"]:focus {
-    border-color: #0e7f49;
-    box-shadow: 0 0 5px rgba(14, 127, 73, 0.5);
+    border-color: #0e7f49; /* hijau */
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
 }
 
-/* Responsive: pada layar kecil (mobile) */
+/* Responsive */
 @media (max-width: 576px) {
     .riwayat-actions form#filterTanggalForm {
         flex-direction: column;

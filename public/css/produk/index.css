@@ -1,5 +1,5 @@
-/* Menggunakan ulang CSS dari halaman pegawai */
-.pegawai-container {
+/* ===== Container Utama ===== */
+.produk-container {
     background-color: #f9fafb;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -7,75 +7,34 @@
     overflow: hidden;
 }
 
-
-h2 {
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-
+/* ===== Header ===== */
+.produk-header {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
-.pegawai-actions {
+.produk-header h2 {
+    margin: 0;
+    color: #111827;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.produk-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-
-.btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #38ac3c;
-    border-color: #38ac3c;
-    text-decoration: none !important;
-}
-
-.btn-primary:hover {
-    background-color: #2f8e32;
-    border-color: #2f8e32;
-}
-
-.btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-.btn-warning:hover {
-    color: #212529;
-    background-color: #e0a800;
-    border-color: #e0a800;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-.btn-danger:hover {
-    color: #fff;
-    background-color: #c82333;
-    border-color: #c82333;
-}
-
-.btn-sm {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.8rem;
-}
-
-/* Ikon Font Awesome */
-.fas {
-    margin-right: 0.375rem;
-}
-
-/* =========================
-   ALERT STYLES
-========================= */
-.alert {
-
+.search-input-wrapper {
     position: relative;
     width: 250px;
 }
@@ -83,7 +42,7 @@ h2 {
 .search-input-wrapper input[type="text"] {
     width: 100%;
     border: 1px solid #ccc;
-    padding: 8px 14px 8px 40px;
+    padding: 8px 14px 8px 40px; /* padding kiri diberi ruang untuk icon */
     border-radius: 20px;
     outline: none;
     font-size: 14px;
@@ -102,49 +61,66 @@ h2 {
     left: 12px;
     transform: translateY(-50%);
     border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+}
+
+/* ===== Tombol Tambah ===== */
+.btn-tambah {
+    background-color: #16a34a;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .btn-tambah:hover {
     background-color: #15803d;
-    color: #fff;
 }
 
-.pegawai-table {
+/* ===== Tabel ===== */
+.produk-table {
     width: 100%;
     overflow-x: auto;
     background-color: #ffffff;
 }
 
-.pegawai-table table {
+.produk-table table {
     width: 100%;
     border-collapse: collapse;
     min-width: 768px;
 }
 
-.pegawai-table thead {
+.produk-table thead {
     background-color: #f3f4f6;
     color: #111827;
 }
 
-.pegawai-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-.pegawai-table tbody tr:hover {
-    background-color: #e5e7eb;
-}
-
-.pegawai-table th,
-.pegawai-table td {
+.produk-table th,
+.produk-table td {
     padding: 14px 12px;
     text-align: center;
     font-size: 14px;
     border-bottom: 1px solid #e5e7eb;
 }
 
+.produk-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.produk-table tbody tr:hover {
+    background-color: #e5e7eb;
+}
+
+/* ===== Tombol Aksi ===== */
 .btn-edit {
     background-color: #facc15;
     color: #000;
@@ -160,12 +136,11 @@ h2 {
 
 .btn-edit:hover {
     background-color: #eab308;
-    color: #000;
 }
 
 .btn-delete {
     background-color: #ef4444;
-    color: white;
+    color: #fff;
     padding: 6px 14px;
     font-size: 13px;
     border-radius: 8px;
@@ -181,10 +156,5 @@ h2 {
 .btn-action-group {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 8px;
-}
-
-.btn-action-group form {
-    margin: 0;
 }

@@ -1,252 +1,147 @@
-/* =========================
-   GLOBAL STYLES
-========================= */
-.container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Menggunakan ulang CSS dari halaman pegawai */
+.pegawai-container {
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 24px;
+    overflow: hidden;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 1.5rem;
+.pegawai-header {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pegawai-header h5 {
+    margin: 0;
+    font-size: 18px;
     font-weight: 600;
 }
 
-/* =========================
-   GRID & UTILITIES
-========================= */
-.row {
+.pegawai-actions {
     display: flex;
-    flex-wrap: wrap;
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
-}
-
-.col-md-6 {
-    flex: 0 0 auto;
-    width: 100%;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-}
-@media (min-width: 768px) {
-    .col-md-6 {
-        width: 50%;
-    }
-}
-
-.text-end {
-    text-align: right !important;
-}
-
-.mb-4 {
-    margin-bottom: 1.5rem !important;
-}
-
-/* =========================
-   BUTTON STYLES
-========================= */
-.btn {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.5;
-    border-radius: 0.375rem;
-    border: 1px solid transparent;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
-    vertical-align: middle;
+    gap: 12px;
 }
 
-.btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #4f46e5;
-    border-color: #4f46e5;
-}
-.btn-primary:hover {
-    color: #fff;
-    background-color: #4338ca;
-    border-color: #4338ca;
-}
-
-.btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-.btn-warning:hover {
-    color: #212529;
-    background-color: #e0a800;
-    border-color: #e0a800;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-.btn-danger:hover {
-    color: #fff;
-    background-color: #c82333;
-    border-color: #c82333;
-}
-
-.btn-sm {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.8rem;
-}
-
-/* Ikon Font Awesome */
-.fas {
-    margin-right: 0.375rem;
-}
-
-/* =========================
-   ALERT STYLES
-========================= */
-.alert {
+.search-input-wrapper {
     position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.375rem;
+    width: 250px;
 }
 
-.alert-success {
-    color: #0f5132;
-    background-color: #d1eddf;
-    border-color: #badbcc;
+.search-input-wrapper input[type="text"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px 14px 8px 40px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+    transition: 0.3s;
 }
 
-.alert-danger {
-    color: #842029;
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
+.search-input-wrapper input[type="text"]:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
 }
 
-.alert-dismissible .btn-close {
+.search-input-wrapper .search-btn {
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.9375rem 1.25rem;
-    background: transparent;
-    border: 0;
-    font-size: 1.25rem;
-    opacity: 0.5;
-}
-.alert-dismissible .btn-close:hover {
-    opacity: 0.75;
-}
-
-/* =========================
-   CARD STYLES
-========================= */
-.card {
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.card-body {
-    padding: 20px;
+.btn-tambah:hover {
+    background-color: #15803d;
+    color: #fff;
 }
 
-/* =========================
-   TABLE STYLES
-========================= */
-.table-responsive {
+.pegawai-table {
+    width: 100%;
     overflow-x: auto;
-    border-radius: 6px;
+    background-color: #ffffff;
 }
 
-.table {
+.pegawai-table table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
+    min-width: 768px;
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
-    vertical-align: middle;
-    border-top: 1px solid #dee2e6;
-    text-align: left;
+.pegawai-table thead {
+    background-color: #f3f4f6;
+    color: #111827;
 }
 
-.table thead th {
-    border-bottom: 2px solid #dee2e6;
-    background-color: #f8f9fa;
-    color: #495057;
-    font-weight: 600;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.pegawai-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.02);
+.pegawai-table tbody tr:hover {
+    background-color: #e5e7eb;
 }
 
-.table-hover tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.05);
-    transition: background-color 0.15s ease-in-out;
+.pegawai-table th,
+.pegawai-table td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-/* =========================
-   IMAGE STYLES
-========================= */
-.rounded {
-    border-radius: 0.375rem !important;
+.btn-edit {
+    background-color: #facc15;
+    color: #000;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+    margin-right: 6px;
+    border: none;
+    font-weight: 500;
 }
 
-/* =========================
-   PAGINATION STYLES
-========================= */
-.d-flex {
-    display: flex !important;
+.btn-edit:hover {
+    background-color: #eab308;
+    color: #000;
 }
 
-.justify-content-center {
-    justify-content: center !important;
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    border: none;
+    transition: 0.2s;
+    font-weight: 500;
 }
 
-.mt-4 {
-    margin-top: 1.5rem !important;
+.btn-delete:hover {
+    background-color: #dc2626;
 }
 
-.pagination {
+.btn-action-group {
     display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
     margin: 0;
-}
-
-.page-item.active .page-link {
-    color: #fff;
-    background-color: #4f46e5;
-    border-color: #4f46e5;
-}
-
-.page-link {
-    display: block;
-    color: #4f46e5;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    padding: 0.5rem 0.75rem;
-    margin-left: -1px;
-}
-.page-link:hover {
-    color: #4338ca;
-    background-color: #f8f9fa;
 }

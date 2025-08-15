@@ -89,17 +89,18 @@
     border-radius: 4px;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #38ac3c;
-    border-color: #38ac3c;
+    background-color: #16a34a;
+    border-color: #16a34a;
 }
 
 .btn-primary:hover {
-    background-color: #2f8e32;
-    border-color: #2f8e32;
+    background-color: #15803d;
+    border-color: #fff;
 }
 
 .btn-sm {

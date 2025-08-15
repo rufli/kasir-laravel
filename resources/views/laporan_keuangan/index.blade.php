@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/laporankeuangan.css') }}">
+<link rel="stylesheet" href="{{ asset('css/laporan_keuangan/index.css') }}">
 <div class="container">
     <h2>Laporan Keuangan</h2>
 
     <div class="card mb-4">
+        <div>
         <a href="#" onclick="printDataOnly()" class="btn-print">
-                <i class="fas fa-print"></i> Cetak Laporan
-            </a>
+                        <i class="fas fa-print"></i> Cetak Laporan
+                    </a>
+        </div>
+
         <div class="card-header">
             <form method="GET" class="filter-form">
                 <div class="filter-group">

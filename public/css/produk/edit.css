@@ -152,24 +152,24 @@ h2 {
 
 .btn-primary {
     color: #fff;
-    background-color: #4f46e5;
-    border-color: #4f46e5;
+    background-color: #16a34a;
+    border-color: #16a34a;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #4338ca;
-    border-color: #4338ca;
+    background-color: #15803d;
+    border-color: #15803d;
 }
 
 .btn-secondary {
-    color: #6c757d;
-    background-color: #f8f9fa;
+    color: #fff;
+    background-color: red;
     border-color: #f8f9fa;
 }
 
 .btn-secondary:hover {
-    color: #5a6169;
-    background-color: #e9ecef;
-    border-color: #e9ecef;
+    color: #fff;
+    background-color: #b11111;
+    border-color: #b11111;
 }

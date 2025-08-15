@@ -20,7 +20,7 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ route('pegawai.create') }}" class="btn-tambah">Tambah +</a>
+            <a href="{{ route('pegawai.create') }}" class="btn-tambah">Tambah </a>
         </div>
     </div>
 

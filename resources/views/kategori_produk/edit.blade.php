@@ -19,10 +19,10 @@
 
                 <div class="form-group">
                     <label for="nama">Nama Kategori</label>
-                    <input type="text" 
+                    <input type="text"
                            class="form-control @error('nama') is-invalid @enderror"
                            id="nama" name="nama"
-                           value="{{ old('nama', $kategoriProduk->nama) }}" 
+                           value="{{ old('nama', $kategoriProduk->nama) }}"
                            required>
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">Update</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
                     <button type="button" class="btn-secondary" onclick="window.location='{{ route('kategori_produk.index') }}'">Batal</button>
                 </div>
             </form>

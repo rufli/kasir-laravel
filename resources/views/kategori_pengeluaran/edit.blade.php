@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">Update</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
                     <button type="button" class="btn-secondary" onclick="window.location='{{ route('kategori_pengeluaran.index') }}'">Batal</button>
                 </div>
             </form>

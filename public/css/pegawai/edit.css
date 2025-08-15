@@ -1,28 +1,57 @@
+/* ===== Tambah & Edit Pegawai Form Styling ===== */
 
-/* ===== Edit Pegawai Form Styling ===== */
-
-.edit-pegawai-form-container {
+/* =========================
+   FORM CONTAINER & TITLE
+========================= */
+.pegawai-form-container {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     padding: 28px;
-    max-width: 600px;
+    max-width: 900px; /* Lebar yang sudah kita sepakati */
     margin: 30px auto;
     border: 1px solid #e0e0e0;
 }
 
-.edit-pegawai-title {
+.form-title {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 24px;
     color: #333333;
 }
 
-.edit-pegawai-form .edit-form-group {
+/* =========================
+   FORM GRID & SPACING
+========================= */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+}
+
+.col-md-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+.pegawai-form .form-group {
     margin-bottom: 18px;
 }
 
-.edit-pegawai-form label {
+/* =========================
+   FORM CONTROLS
+========================= */
+.pegawai-form label {
     font-weight: 600;
     font-size: 14px;
     color: #333;
@@ -30,9 +59,9 @@
     display: block;
 }
 
-.edit-pegawai-form input,
-.edit-pegawai-form select,
-.edit-pegawai-form textarea {
+.pegawai-form input,
+.pegawai-form select,
+.pegawai-form textarea {
     width: 100%;
     padding: 10px 14px;
     border: 1px solid #cfd8dc;
@@ -42,70 +71,51 @@
     transition: border 0.2s;
 }
 
-.edit-pegawai-form input:focus,
-.edit-pegawai-form select:focus,
-.edit-pegawai-form textarea:focus {
+.pegawai-form input:focus,
+.pegawai-form select:focus,
+.pegawai-form textarea:focus {
     outline: none;
     border-color: #4a90e2;
     background-color: #fff;
 }
 
-.edit-form-actions {
+/* ... CSS lainnya untuk tombol dan feedback validasi ... */
+.form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: 24px;
 }
 
-/* ===== Form Note (shared) ===== */
-
-.form-note {
-    display: block;
-    font-size: 13px;
-    color: #d32f2f;
-    margin-top: 4px;
-}
-
-/* ===== Button Styling (shared) ===== */
-
 .btn-submit {
-    background-color: #2e7d32;
-    color: #ffffff;
-    padding: 10px 22px;
+    color: #fff;
+    background-color: #16a34a;
+    border-color: #16a34a;
+    padding: 10px 20px;
     border-radius: 6px;
-    border: none;
     font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
 }
 
 .btn-submit:hover {
-    background-color: #1b5e20;
+    background-color: #0c6c3c;
 }
 
 .btn-cancel {
-    background-color: #c62828;
-    color: #ffffff;
-    padding: 10px 22px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 14px;
-    transition: background-color 0.2s ease-in-out;
-    display: inline-block;
-    text-align: center;
+    transition: background-color 0.2s;
 }
 
 .btn-cancel:hover {
-    background-color: #b71c1c;
+    background-color: #e50914;
 }
 
-
-.form-note {
-    display: block;
-    font-size: 13px;
-    color: #d32f2f;
-    margin-top: 4px;
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
 }
-

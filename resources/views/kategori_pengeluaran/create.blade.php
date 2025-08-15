@@ -15,11 +15,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="nama">Nama Kategori</label>
-                    <input type="text" 
+                    <input type="text"
                            class="form-control @error('nama') is-invalid @enderror"
-                           id="nama" 
-                           name="nama" 
-                           value="{{ old('nama') }}" 
+                           id="nama"
+                           name="nama"
+                           value="{{ old('nama') }}"
                            required>
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-secondary mt-3" style="text-decoration: none;">Batal</a>
+                    <a href="{{ route('kategori_pengeluaran.index') }}" class="btn btn-secondary mt-3" style="text-decoration: none;">Batal</a>
                 </div>
             </form>
         </div>

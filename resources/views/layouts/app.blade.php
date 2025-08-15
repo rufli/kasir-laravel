@@ -122,12 +122,12 @@
                         </li>
 
 
-                        <li class="nav-item">
+                        {{--<li class="nav-item">
                             <a href="#" class="sidebar-link">
                                 <i class="fas fa-file-invoice-dollar"></i>
                                 <span>Laporan Keuangan</span>
                             </a>
-                        </li>
+                        </li>--}}
 
                         <li class="nav-item">
                             <a href="{{ route('pegawai.index') }}"

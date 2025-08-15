@@ -56,7 +56,7 @@
 }
 
 .form-control:focus {
-    border-color: #4f46e5;
+    border-color: #0e7f49;
     outline: none;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
@@ -85,20 +85,20 @@
 
 /* Tombol Update (Hijau) */
 .btn-primary {
-    background-color: #16a34a;
-    border: 1px solid #16a34a;
+    background-color: #0e7f49;
+    border: 1px solid #0e7f49;
     color: white;
     font-weight: bold;
 }
 
 .btn-primary:hover {
-    background-color: #15803d;
-    border-color: #15803d;
+    background-color: #034525;
+    border-color: #034525;
 }
 
 /* Tombol Batal (Abu) */
 .btn-secondary {
-    background-color: #fa0000;
+    background-color: #dc2626;
     border: 1px solid #d1d5db;
     color: #ffffff;
 }

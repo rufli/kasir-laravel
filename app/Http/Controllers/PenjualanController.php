@@ -131,6 +131,16 @@ class PenjualanController extends Controller
 
             foreach ($keranjang as $produkId => $jumlah) {
                 $produk = Produk::findOrFail($produkId);
+
+                // Validasi stok
+                if ($produk->stok < $jumlah) {
+                    DB::rollback();
+                    return redirect()->back()->with('error', 'Stok tidak cukup untuk produk: ' . $produk->nama);
+                }
+                // Kurangi stok produk
+                $produk->stok -= $jumlah;
+                $produk->save();
+                
                 $subtotal = $produk->harga * $jumlah;
 
                 $produkData[] = [

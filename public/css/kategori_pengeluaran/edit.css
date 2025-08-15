@@ -94,7 +94,7 @@
 .kategori-edit .btn-primary:hover,
 .edit-kategori-pengeluaran .btn-primary:hover {
     background-color: #15803d;
-    border-color: #15803d;
+    border-color: #fff;
 }
 
 /* Tombol Batal abu-abu (btn-secondary) */

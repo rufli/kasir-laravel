@@ -38,7 +38,7 @@
             <!-- Kategori -->
             <div class="col-md-6 mb-3">
                 <label class="form-label" for="kategori_pengeluaran_id">Kategori</label>
-                <small><a href="{{ route('kategori_pengeluaran.index') }}">Tambah Kategori +</a></small>
+               
                 <select name="kategori_pengeluaran_id" id="kategori_pengeluaran_id" class="form-select custom-select">
                     <option value="">-- Pilih Kategori --</option>
                     @foreach ($kategori as $item)

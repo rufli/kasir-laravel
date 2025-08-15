@@ -10,7 +10,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Daftar Kategori Produk</h5>
             <a href="{{ route('kategori_produk.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Kategori
+                 Tambah Kategori
             </a>
         </div>
 

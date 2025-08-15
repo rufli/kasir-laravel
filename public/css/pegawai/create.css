@@ -1,11 +1,20 @@
-/* ===== Tambah Pegawai Form Styling ===== */
+/* ===== Tambah Pegawai Form Styling (Versi Gabungan) ===== */
 
-.pegawai-form-container {
+/* =========================
+   FORM CONTAINER & TITLE
+========================= */
+.container { /* Digunakan untuk form produk, bisa dipakai di pegawai juga */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pegawai-form-container { /* Styling spesifik untuk container pegawai */
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     padding: 28px;
-    max-width: 600px;
+    max-width: 800px; /* Diperlebar agar layout 2 kolom terlihat baik */
     margin: 30px auto;
     border: 1px solid #e0e0e0;
 }
@@ -17,10 +26,42 @@
     color: #333333;
 }
 
+/* =========================
+   FORM GRID & SPACING (Diambil dari CSS produk)
+========================= */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+}
+
+.col-md-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+/* =========================
+   FORM CONTROLS
+========================= */
 .pegawai-form .form-group {
     margin-bottom: 18px;
 }
 
+.form-label,
 .pegawai-form label {
     font-weight: 600;
     font-size: 14px;
@@ -29,6 +70,7 @@
     display: block;
 }
 
+.form-control,
 .pegawai-form input,
 .pegawai-form select,
 .pegawai-form textarea {
@@ -41,6 +83,7 @@
     transition: border 0.2s;
 }
 
+.form-control:focus,
 .pegawai-form input:focus,
 .pegawai-form select:focus,
 .pegawai-form textarea:focus {
@@ -49,24 +92,45 @@
     background-color: #fff;
 }
 
-.kategori-header {
-    margin-bottom: 6px;
-}
-
-.kategori-header small a {
-    color: #4a90e2;
-    font-weight: 500;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.kategori-header small a:hover {
-    text-decoration: underline;
-}
-
+/* =========================
+   BUTTONS
+========================= */
 .form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: 24px;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: #16a34a;
+    border-color: #16a34a;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-submit:hover {
+    background-color: #0c6c3c;
+}
+
+.btn-cancel {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #e50914;
+}
+
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
 }

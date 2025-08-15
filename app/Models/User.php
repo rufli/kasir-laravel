@@ -25,6 +25,7 @@ class User extends Authenticatable
         'alamat',
         'no_telepon',
         'role',
+        'is_active',
     ];
 
     /**
@@ -42,5 +43,15 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
+    /**
+     * Relasi ke model TransaksiPenjualan.
+     */
+    public function transaksiPenjualans()
+    {
+        return $this->hasMany(TransaksiPenjualan::class, 'users_id');
+    }
 }

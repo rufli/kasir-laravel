@@ -33,6 +33,7 @@
                     <th>Username</th>
                     <th>No. Telepon</th>
                     <th>Alamat</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -45,10 +46,18 @@
                         <td>{{ $pegawai->no_telepon }}</td>
                         <td>{{ $pegawai->alamat }}</td>
                         <td>
+                            @if($pegawai->is_active)
+                                <span class="status-active">Aktif</span>
+                            @else
+                                <span class="status-non-aktif">Non-aktif</span>
+                            @endif
+                        </td>
+                        <td>
                             <div class="btn-action-group">
                                 <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn-edit" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                            @if ($pegawai->transaksi_penjualans_count == 0)
                                 <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST"
                                     onsubmit="return confirm('Hapus pegawai ini?')">
                                     @csrf
@@ -57,16 +66,51 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
+                            @endif
+
+                                <form action="{{ route('pegawai.toggle-status', $pegawai->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn-toggle-status" title="{{ $pegawai->is_active ? 'Non-aktifkan' : 'Aktifkan' }}">
+                                        @if($pegawai->is_active)
+                                            <i class="fas fa-toggle-on"></i>
+                                        @else
+                                            <i class="fas fa-toggle-off"></i>
+                                        @endif
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">Belum ada data pegawai.</td>
+                        <td colspan="7" class="text-center">Belum ada data pegawai.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 </div>
+
+<style>
+.status-active {
+    color: green;
+    font-weight: bold;
+}
+.status-non-aktif {
+    color: red;
+    font-weight: bold;
+}
+.btn-toggle-status {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+.btn-toggle-status .fa-toggle-on {
+    color: #4CAF50;
+}
+.btn-toggle-status .fa-toggle-off {
+    color: #f44336;
+}
+</style>
 @endsection

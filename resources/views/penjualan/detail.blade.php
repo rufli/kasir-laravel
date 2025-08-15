@@ -71,9 +71,7 @@
             Rp. {{ number_format($transaksi->jumlah_kembalian, 0, ',', '.') }}
         </div>
 
-        <a href="{{ route('penjualan.struk', $transaksi->id) }}" target="_blank" class="btn-print">
-            Cetak Struk
-        </a>
+        <a href="#" onclick="window.print()" class="btn-print">Cetak Struk</a>
 
 
     </div>

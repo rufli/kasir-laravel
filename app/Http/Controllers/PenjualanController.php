@@ -196,13 +196,19 @@ class PenjualanController extends Controller
     // 7. Menampilkan detail transaksi (struk)
     public function detailTransaksi($id)
     {
-        $transaksi = TransaksiPenjualan::with(['detailTransaksi.produks', 'user'])
-            ->where('id', $id)
-            ->where('users_id', Auth::id())
-            ->firstOrFail();
+        $query = TransaksiPenjualan::with(['detailTransaksi.produks', 'user'])
+            ->where('id', $id);
+
+        if (auth()->user()->role !== 'admin') {
+            // Pegawai hanya boleh melihat transaksi sendiri
+            $query->where('users_id', Auth::id());
+        }
+
+        $transaksi = $query->firstOrFail();
 
         return view('penjualan.detail', compact('transaksi'));
     }
+
 
     // 8. Riwayat transaksi
     public function riwayatTransaksi(Request $request)

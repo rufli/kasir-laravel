@@ -206,7 +206,10 @@ class PenjualanController extends Controller
 
         $transaksi = $query->firstOrFail();
 
-        return view('penjualan.detail', compact('transaksi'));
+        // Ambil data toko (user dengan role admin)
+        $toko = User::where('role', 'admin')->first();
+
+        return view('penjualan.detail', compact('transaksi', 'toko'));
     }
 
 

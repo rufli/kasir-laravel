@@ -36,36 +36,37 @@
                     <th>Aksi</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($daftarPegawai as $pegawai)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $pegawai->nama }}</td>
-                        <td>{{ $pegawai->username }}</td>
-                        <td>{{ $pegawai->no_telepon }}</td>
-                        <td>{{ $pegawai->alamat }}</td>
-                        <td>
-                            <div class="btn-action-group">
-                                <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn-edit" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST"
-                                    onsubmit="return confirm('Hapus pegawai ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-delete" title="Hapus">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="text-center">Belum ada data pegawai.</td>
-                    </tr>
-                @endforelse
-            </tbody>
+           <tbody>
+            @forelse ($daftarPegawai as $pegawai)
+                <tr>
+                    <td data-label="No">{{ $loop->iteration }}</td>
+                    <td data-label="Nama">{{ $pegawai->nama }}</td>
+                    <td data-label="Username">{{ $pegawai->username }}</td>
+                    <td data-label="No. Telepon">{{ $pegawai->no_telepon }}</td>
+                    <td data-label="Alamat">{{ $pegawai->alamat }}</td>
+                    <td data-label="Aksi">
+                        <div class="btn-action-group">
+                            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn-edit" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST"
+                                onsubmit="return confirm('Hapus pegawai ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete" title="Hapus">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Belum ada data pegawai.</td>
+                </tr>
+            @endforelse
+        </tbody>
+
         </table>
     </div>
 </div>

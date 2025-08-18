@@ -1,4 +1,6 @@
-/* dashboard.css */
+/* =====================
+   DASHBOARD LAYOUT
+===================== */
 .dashboard-container {
     padding: 20px;
     max-width: 1200px;
@@ -17,6 +19,9 @@
     margin-bottom: 24px;
 }
 
+/* =====================
+   CARD GRID
+===================== */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -77,6 +82,9 @@
     color: #f59e0b;
 }
 
+/* =====================
+   SALES SECTION
+===================== */
 .sales-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -98,6 +106,9 @@
     color: #333;
 }
 
+/* =====================
+   BESTSELLER SECTION
+===================== */
 .bestseller-section {
     background: white;
     border-radius: 8px;
@@ -112,13 +123,85 @@
     color: #333;
 }
 
-/* Responsive adjustments */
+/* =====================
+   CHART SECTION
+===================== */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.chart-section canvas {
+    width: 100% !important;
+    max-height: 400px;
+}
+
+/* =====================
+   FILTER DROPDOWN
+===================== */
+.dashboard-filter {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    appearance: none; /* Hilangkan style default browser */
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    padding-right: 30px; /* Ruang untuk icon panah */
+}
+
+.dashboard-filter:hover {
+    border-color: #3b82f6;
+}
+
+.dashboard-filter:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
 @media (max-width: 768px) {
-    .sales-section {
-        grid-template-columns: 1fr;
+    .dashboard-container {
+        padding: 10px;
     }
 
     .card-grid {
         grid-template-columns: 1fr;
+    }
+
+    .sales-section {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .info-card {
+        padding: 15px;
+    }
+
+    .dashboard-title {
+        font-size: 20px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-value {
+        font-size: 22px;
+    }
+
+    .chart-section canvas {
+        max-height: 250px;
     }
 }

@@ -39,46 +39,46 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($produks as $key => $produk)
-                <tr>
-                    <td>{{ $produks->firstItem() + $key }}</td>
-                    <td>
-                        @if($produk->gambar)
-                            <img src="{{ Storage::url($produk->gambar) }}"
-                                 alt="{{ $produk->nama }}"
-                                 class="rounded"
-                                 style="width:60px; height:60px; object-fit:cover;">
-                        @else
-                            <span class="text-muted">Belum ada gambar</span>
-                        @endif
-                    </td>
-                    <td>{{ $produk->tanggal->format('d/m/Y') }}</td>
-                    <td>{{ $produk->nama }}</td>
-                    <td>Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
-                    <td>{{ $produk->stok }}</td>
-                    <td>{{ $produk->kategoriProduk->nama ?? '-' }}</td>
-                    <td>
-                        <div class="btn-action-group">
-                            <a href="{{ route('produk.edit', $produk) }}" class="btn-edit" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('produk.destroy', $produk) }}" method="POST"
-                                  onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-delete" title="Hapus">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="text-center">Tidak ada data produk</td>
-                </tr>
-                @endforelse
-            </tbody>
+            @forelse($produks as $key => $produk)
+            <tr>
+                <td data-label="No">{{ $produks->firstItem() + $key }}</td>
+                <td data-label="Gambar">
+                    @if($produk->gambar)
+                        <img src="{{ Storage::url($produk->gambar) }}"
+                            alt="{{ $produk->nama }}"
+                            class="rounded"
+                            style="width:60px; height:60px; object-fit:cover;">
+                    @else
+                        <span class="text-muted">Belum ada gambar</span>
+                    @endif
+                </td>
+                <td data-label="Tanggal">{{ $produk->tanggal->format('d/m/Y') }}</td>
+                <td data-label="Nama Produk">{{ $produk->nama }}</td>
+                <td data-label="Harga">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
+                <td data-label="Stok">{{ $produk->stok }}</td>
+                <td data-label="Kategori">{{ $produk->kategoriProduk->nama ?? '-' }}</td>
+                <td data-label="Aksi">
+                    <div class="btn-action-group">
+                        <a href="{{ route('produk.edit', $produk) }}" class="btn-edit" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form action="{{ route('produk.destroy', $produk) }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-delete" title="Hapus">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="8" class="text-center">Tidak ada data produk</td>
+            </tr>
+            @endforelse
+        </tbody>
         </table>
     </div>
 

@@ -1,12 +1,17 @@
-/* ==== Pengeluaran Index CSS ==== */
+/* ==============================
+   PENGELUARAN INDEX (RESPONSIVE)
+============================== */
 .pengeluaran-container {
+    width: 100%;
     background-color: #f9fafb;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-top: 24px;
     overflow: hidden;
+    padding: 0;
 }
 
+/* Header */
 .pengeluaran-header {
     background-color: #ffffff;
     color: #000000;
@@ -30,22 +35,25 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
+/* Search input wrapper */
 .search-input-wrapper {
     position: relative;
     width: 250px;
+    flex-shrink: 0;
 }
 
 .search-input-wrapper input[type="text"] {
     width: 100%;
     border: 1px solid #ccc;
-    padding: 8px 14px 8px 40px; /* padding kiri diberi ruang untuk icon */
+    padding: 8px 14px 8px 40px;
     border-radius: 20px;
     outline: none;
     font-size: 14px;
     background-color: #fff;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .search-input-wrapper input[type="text"]:focus {
@@ -60,13 +68,12 @@
     transform: translateY(-50%);
     border: none;
     background: none;
-    padding: 0;
-    margin: 0;
     cursor: pointer;
     color: #888;
     font-size: 16px;
 }
 
+/* Tombol Tambah */
 .btn-tambah {
     background-color: #16a34a;
     color: #ffffff;
@@ -77,36 +84,30 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .btn-tambah:hover {
     background-color: #15803d;
-    color: #ffffff;
+    border-color: #15803d;
 }
 
+/* Table */
 .pengeluaran-table {
     width: 100%;
-    overflow-x: auto;
     background-color: #ffffff;
+    overflow-x: auto;
 }
 
 .pengeluaran-table table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 768px;
+    min-width: auto;
 }
 
 .pengeluaran-table thead {
     background-color: #f3f4f6;
     color: #111827;
-}
-
-.pengeluaran-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-.pengeluaran-table tbody tr:hover {
-    background-color: #e5e7eb;
 }
 
 .pengeluaran-table th,
@@ -117,6 +118,26 @@
     border-bottom: 1px solid #e5e7eb;
 }
 
+.pengeluaran-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.pengeluaran-table tbody tr:hover {
+    background-color: #e5e7eb;
+}
+
+/* Tombol action */
+.btn-action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
+    margin: 0;
+}
+
 .btn-edit {
     background-color: #facc15;
     color: #000;
@@ -124,10 +145,9 @@
     font-size: 13px;
     border-radius: 8px;
     text-decoration: none;
-    transition: 0.2s;
-    margin-right: 6px;
-    border: none;
+    transition: 0.2s ease;
     font-weight: 500;
+    border: none;
 }
 
 .btn-edit:hover {
@@ -142,7 +162,7 @@
     font-size: 13px;
     border-radius: 8px;
     border: none;
-    transition: 0.2s;
+    transition: 0.2s ease;
     font-weight: 500;
 }
 
@@ -150,23 +170,96 @@
     background-color: #dc2626;
 }
 
-.card-body .btn-success {
-    background-color: #198754;
-    border-color: #198754;
-}
+/* ==============================
+   RESPONSIVE MOBILE
+============================== */
+@media (max-width: 768px) {
+    .pengeluaran-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.card-body .btn-success:hover {
-    background-color: #157347;
-    border-color: #146c43;
-}
+    .pengeluaran-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
 
-.btn-action-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
+    .search-input-wrapper {
+        width: 100%;
+    }
 
-.btn-action-group form {
-    margin: 0;
+    .btn-tambah {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Table → block style mobile */
+    .pengeluaran-table table,
+    .pengeluaran-table thead,
+    .pengeluaran-table tbody,
+    .pengeluaran-table th,
+    .pengeluaran-table td,
+    .pengeluaran-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .pengeluaran-table thead {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .pengeluaran-table tbody tr {
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9fafb;
+        padding: 8px;
+    }
+
+    .pengeluaran-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+        word-break: break-word;
+        position: relative;
+        text-align: left;
+        padding-left: 50%;
+    }
+
+    .pengeluaran-table tbody td:last-child {
+        border-bottom: none;
+    }
+
+    .pengeluaran-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #0e7f49;
+        position: absolute;
+        left: 12px;
+        top: 14px;
+        width: 45%;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .btn-action-group {
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        flex: 1;
+        justify-content: center;
+        min-width: 0;
+    }
 }

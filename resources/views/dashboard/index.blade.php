@@ -26,14 +26,14 @@
     </div>
 
     <div class="chart-section mt-4">
-        <h3>Penjualan, Pengeluaran & Laba Bersih</h3>
-
-        <!-- Filter periode -->
-        <select id="periodeFilter" class="form-select w-auto mb-3">
-            <option value="7" selected>7 Hari Terakhir</option>
-            <option value="30">30 Hari Terakhir</option>
-            <option value="365">1 Tahun Terakhir</option>
-        </select>
+        <div class="chart-header">
+            <h3>Penjualan, Pengeluaran & Laba Bersih</h3>
+            <select id="periodeFilter" class="dashboard-filter">
+                <option value="7" selected>7 Hari Terakhir</option>
+                <option value="30">30 Hari Terakhir</option>
+                <option value="365">1 Tahun Terakhir</option>
+            </select>
+        </div>
 
         <div style="width:100%; max-width:900px;">
             <canvas id="dailyChart" style="width:100%; max-height:300px;"></canvas>
@@ -122,7 +122,6 @@ function renderChart(labels, dataPenjualan, dataPengeluaran, dataLaba) {
     dailyChart = new Chart(document.getElementById('dailyChart'), config);
 }
 
-// Inisialisasi chart awal
 const initialLabels = @json(array_map(fn($h) => \Carbon\Carbon::parse($h['tanggal'])->format('d-m'), $hariTerakhir));
 const initialPenjualan = @json(array_map(fn($h) => $h['penjualan'], $hariTerakhir));
 const initialPengeluaran = @json(array_map(fn($h) => $h['pengeluaran'], $hariTerakhir));
@@ -130,7 +129,6 @@ const initialLaba = initialPenjualan.map((v,i) => v - initialPengeluaran[i]);
 
 renderChart(initialLabels, initialPenjualan, initialPengeluaran, initialLaba);
 
-// Event filter periode
 document.getElementById('periodeFilter').addEventListener('change', function() {
     const periode = this.value;
     axios.get('/dashboard/data?periode=' + periode)
@@ -139,7 +137,6 @@ document.getElementById('periodeFilter').addEventListener('change', function() {
             const penjualan = res.data.penjualan;
             const pengeluaran = res.data.pengeluaran;
             const laba = penjualan.map((v,i) => v - pengeluaran[i]);
-
             renderChart(labels, penjualan, pengeluaran, laba);
         });
 });

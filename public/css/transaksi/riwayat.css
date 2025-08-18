@@ -240,3 +240,273 @@
         justify-content: flex-start;
     }
 }
+/* ==============================
+   RIWAYAT TRANSAKSI (RESPONSIVE)
+============================== */
+.riwayat-container {
+    width: 100%;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 24px;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Header */
+.riwayat-header {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.riwayat-header h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.riwayat-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Form filter (tanggal & user select) */
+.riwayat-actions form#filterTanggalForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.riwayat-actions form#filterTanggalForm label {
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.riwayat-actions form#filterTanggalForm select,
+.riwayat-actions form#filterTanggalForm input[type="date"] {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 180px;
+}
+
+.riwayat-actions form#filterTanggalForm select:focus,
+.riwayat-actions form#filterTanggalForm input[type="date"]:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
+}
+
+/* Search input wrapper */
+.search-input-wrapper {
+    position: relative;
+    width: 250px;
+}
+
+.search-input-wrapper input[type="text"],
+.search-input-wrapper input[type="date"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px 14px 8px 40px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.search-input-wrapper input:focus {
+    border-color: #0e7f49;
+    box-shadow: 0 0 0 2px rgba(14, 127, 73, 0.2);
+}
+
+.search-input-wrapper .search-btn {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+}
+
+/* Table */
+.riwayat-table {
+    width: 100%;
+    background-color: #ffffff;
+    overflow-x: auto;
+}
+
+.riwayat-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: auto;
+}
+
+.riwayat-table thead {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.riwayat-table th,
+.riwayat-table td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.riwayat-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.riwayat-table tbody tr:hover {
+    background-color: #e5e7eb;
+}
+
+/* Tombol action */
+.btn-action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
+    margin: 0;
+}
+
+.btn-detail {
+    background-color: #0e7f49;
+    color: white;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-detail:hover {
+    background-color: #0c6c3c;
+}
+
+/* ==============================
+   RESPONSIVE MOBILE
+============================== */
+@media (max-width: 768px) {
+    .riwayat-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .riwayat-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input-wrapper {
+        width: 100%;
+    }
+
+    /* Table → block style mobile */
+    .riwayat-table table,
+    .riwayat-table thead,
+    .riwayat-table tbody,
+    .riwayat-table th,
+    .riwayat-table td,
+    .riwayat-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .riwayat-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .riwayat-table tbody tr {
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9fafb;
+        padding: 8px;
+    }
+
+    .riwayat-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+        word-break: break-word;
+        position: relative;
+        text-align: left;
+        padding-left: 60%;
+    }
+
+    .riwayat-table tbody td:last-child {
+        border-bottom: none;
+    }
+
+    .riwayat-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #0e7f49;
+        position: absolute;
+        left: 12px;
+        top: 14px;
+        width: 40%;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .btn-action-group {
+        flex-direction: column;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+
+    .btn-detail {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .riwayat-actions form#filterTanggalForm {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .riwayat-actions form#filterTanggalForm label,
+    .riwayat-actions form#filterTanggalForm select,
+    .riwayat-actions form#filterTanggalForm input[type="date"] {
+        width: 100%;
+        min-width: auto;
+    }
+}

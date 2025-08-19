@@ -22,9 +22,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
-
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'profile'])->name('profileedit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -52,6 +49,9 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
+    
     Route::prefix('pegawai')->name('pegawai.')->group(function () {
         Route::get('/', [SignupController::class, 'index'])->name('index');
         Route::get('/create', [SignupController::class, 'create'])->name('create');

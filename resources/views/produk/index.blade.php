@@ -25,6 +25,7 @@
                 @endif
             </div>
         </div>
+
         <div class="produk-table">
             <table>
                 <thead>
@@ -36,7 +37,7 @@
                         <th>Harga</th>
                         <th>Stok</th>
                         <th>Kategori</th>
-                        @if (auth()->user()->role === 'admin')
+                        @if (Auth::user()->role === 'admin')
                             <th>Aksi</th>
                         @endif
                     </tr>
@@ -44,22 +45,24 @@
                 <tbody>
                     @forelse($produks as $key => $produk)
                         <tr>
-                            <td>{{ $produks->firstItem() + $key }}</td>
-                            <td>
+                            <td data-label="No">{{ $produks->firstItem() + $key }}</td>
+                            <td data-label="Gambar">
                                 @if ($produk->gambar)
-                                    <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="rounded"
-                                        style="width:60px; height:60px; object-fit:cover;">
+                                    <img src="{{ Storage::url($produk->gambar) }}" 
+                                         alt="{{ $produk->nama }}" 
+                                         class="rounded"
+                                         style="width:60px; height:60px; object-fit:cover;">
                                 @else
                                     <span class="text-muted">Belum ada gambar</span>
                                 @endif
                             </td>
-                            <td>{{ $produk->tanggal->format('d/m/Y') }}</td>
-                            <td>{{ $produk->nama }}</td>
-                            <td>Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
-                            <td>{{ $produk->stok }}</td>
-                            <td>{{ $produk->kategoriProduk->nama ?? '-' }}</td>
-                            <td>
-                                @if (Auth::user()->role == 'admin')
+                            <td data-label="Tanggal">{{ $produk->tanggal->format('d/m/Y') }}</td>
+                            <td data-label="Nama Produk">{{ $produk->nama }}</td>
+                            <td data-label="Harga">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
+                            <td data-label="Stok">{{ $produk->stok }}</td>
+                            <td data-label="Kategori">{{ $produk->kategoriProduk->nama ?? '-' }}</td>
+                            @if (Auth::user()->role == 'admin')
+                                <td data-label="Aksi">
                                     <div class="btn-action-group">
                                         <a href="{{ route('produk.edit', $produk) }}" class="btn-edit" title="Edit">
                                             <i class="fas fa-edit"></i>
@@ -73,12 +76,14 @@
                                             </button>
                                         </form>
                                     </div>
-                                @endif
-                            </td>
+                                </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center">Tidak ada data produk</td>
+                            <td colspan="{{ Auth::user()->role === 'admin' ? 8 : 7 }}" class="text-center">
+                                Tidak ada data produk
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

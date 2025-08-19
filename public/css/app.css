@@ -43,7 +43,6 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    background: #fff; /* bisa diganti warna */
     border-bottom: 1px solid #ddd;
     padding: 10px 20px;
 }
@@ -61,6 +60,10 @@ body {
     font-size: 1.25rem;
     color: var(--primary-color);
     margin-left: -140px;
+}
+
+.app-logo img {
+    height: 40px; /* Ukuran logo tetap 40px */
 }
 
 .icon-cart {
@@ -86,10 +89,9 @@ body {
 .avatar-img {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* membuat bulat */
-    object-fit: cover;      /* menjaga proporsi gambar */
-    border: 2px solid #ccc; /* garis tepi abu-abu */
-    display: block;     /* hilangkan inline spacing */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
 }
 
 /* Main Wrapper */
@@ -247,7 +249,7 @@ body {
     .sidebar {
         transform: translateX(-100%);
         z-index: 1001;
-        width: 220px; /* sedikit lebih kecil biar muat di hp */
+        width: 220px;
     }
 
     .content-area {
@@ -268,12 +270,8 @@ body {
         justify-content: space-between;
     }
 
-    .app-logo img {
-        height: 32px;
-    }
-
     .username {
-        display: none; /* sembunyikan teks user biar hemat space */
+        display: none;
     }
 }
 
@@ -287,6 +285,11 @@ body {
     }
 
     .avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .avatar-img {
         width: 28px;
         height: 28px;
     }
@@ -315,27 +318,41 @@ body {
     }
 }
 
-
 /* Untuk dropdown submenu sidebar */
 .nav-item.has-submenu > a {
     display: flex;
-    justify-content: flex-start; /* Menyelaraskan semua item ke kiri */
+    justify-content: flex-start;
     align-items: center;
     cursor: pointer;
-    gap: 10px; /* Jarak antar ikon dan teks */
+    gap: 10px;
 }
 
 .submenu-toggle-icon {
-    margin-left: auto; /* Supaya chevron tetap ke kanan */
+    margin-left: auto;
     transition: transform 0.2s ease;
 }
 
+/* Untuk dropdown submenu sidebar - Responsive */
+.nav-item.has-submenu > a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.submenu-toggle-icon {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    font-size: 0.9em; /* Ukuran ikon lebih kecil dari teks */
+}
 
 .nav-item.has-submenu .submenu {
     display: none;
     padding-left: 1.5rem;
     margin-top: 0.3rem;
     list-style: none;
+    background-color: #f8fafc;
 }
 
 .nav-item.has-submenu.open .submenu {
@@ -344,15 +361,77 @@ body {
 
 .nav-item.has-submenu .submenu li a {
     display: block;
-    padding: 6px 12px;
+    padding: 8px 15px 8px 35px;
     color: #444;
     text-decoration: none;
-    font-size: 16px; /* Samakan dengan menu utama */
-    font-weight: 400; /* Sama dengan default menu utama */
+    font-size: 0.95em; /* Ukuran font submenu */
+    font-weight: 400;
     border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s;
+    position: relative;
 }
 
+.nav-item.has-submenu .submenu li a:hover,
+.nav-item.has-submenu .submenu li a.active {
+    background-color: #e0f2fe;
+    color: var(--primary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .nav-item.has-submenu > a {
+        font-size: 14px; /* Ukuran sama dengan menu utama */
+    }
+    
+    .nav-item.has-submenu .submenu li a {
+        font-size: 13px; /* Sedikit lebih kecil dari menu utama */
+        padding: 6px 15px 6px 30px;
+    }
+    
+    .submenu-toggle-icon {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-item.has-submenu > a {
+        font-size: 13px;
+    }
+    
+    .nav-item.has-submenu .submenu li a {
+        font-size: 12px;
+        padding-left: 25px;
+    }
+    
+    .submenu {
+        padding-left: 1rem;
+    }
+}
+
+/* Konsistensi ukuran font untuk semua elemen responsive */
+@media (max-width: 768px) {
+    .sidebar-link {
+        font-size: 14px;
+    }
+    
+    .sidebar-link i {
+        font-size: 13px;
+    }
+    
+    .logout-button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar-link {
+        font-size: 13px;
+    }
+    
+    .logout-button {
+        font-size: 13px;
+    }
+}
 
 .nav-item.has-submenu .submenu li a:hover,
 .nav-item.has-submenu .submenu li a.active {

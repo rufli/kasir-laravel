@@ -50,7 +50,7 @@
                         <th>Tanggal</th>
 
                         @if (auth()->user()->role === 'admin')
-                            <th>Pengguna</th>
+                            <th>Pegawai</th>
                         @endif
 
                         <th>Id Transaksi</th>

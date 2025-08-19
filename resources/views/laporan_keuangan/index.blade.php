@@ -49,22 +49,22 @@
             <div class="printable-area">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>Riwayat Penjualan</h4>
+                        <h4>Detail Penjualan</h4>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Tanggal</th>
-                                        <th>Total</th>
                                         <th>Metode</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($penjualan as $item)
                                     <tr>
                                         <td>{{ $item->tanggal }}</td>
-                                        <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
                                         <td>{{ ucfirst($item->metode_pembayaran) }}</td>
+                                        <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -72,15 +72,15 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h4>Riwayat Pengeluaran</h4>
+                        <h4>Detail Pengeluaran</h4>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Tanggal</th>
                                         <th>Nama</th>
-                                        <th>Jumlah</th>
                                         <th>Kategori</th>
+                                        <th>Jumlah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -88,8 +88,8 @@
                                     <tr>
                                         <td>{{ $item->tanggal }}</td>
                                         <td>{{ $item->nama }}</td>
-                                        <td>Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
                                         <td>{{ $item->kategori->nama ?? '-' }}</td>
+                                        <td>Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -117,16 +117,12 @@ function printDataOnly() {
         <html>
         <head>
             <title>Laporan Keuangan {{ $startDate }} hingga {{ $endDate }}</title>
+            <link rel="stylesheet" href="{{ asset('css/laporan_keuangan/index.css') }}">
             <style>
                 body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
                 .print-header { text-align: center; margin-bottom: 20px; }
                 .print-header h2 { margin-bottom: 5px; }
                 .print-header p { color: #666; }
-                table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-                th { background-color: #f8f9fa; padding: 8px; text-align: left; border-bottom: 2px solid #ddd; }
-                td { padding: 8px; border-bottom: 1px solid #eee; }
-                .table-container { margin-bottom: 30px; }
-                .table-title { margin-bottom: 10px; color: #444; }
                 .stats-grid { display: flex; justify-content: space-between; margin-bottom: 30px; }
                 .stat-card { flex: 1; padding: 15px; border-radius: 5px; margin: 0 10px; text-align: center; }
                 .stat-card.sales { background-color: #e6f7ff; border: 1px solid #91d5ff; }
@@ -136,7 +132,7 @@ function printDataOnly() {
                 .stat-card h5 { margin-bottom: 5px; color: #666; }
                 @page { size: auto; margin: 10mm; }
                 @media print {
-                    .no-print { display: none !important; }
+                    .no-print, .btn-print { display: none !important; }
                     body { margin: 0; padding: 0; }
                 }
             </style>

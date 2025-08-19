@@ -39,13 +39,25 @@ class LoginController extends Controller
         // Cek apakah Remember Me dicentang
         $remember = $request->has('remember');
 
-        // Proses login dengan remember me
+        // Proses login
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+
+            // Ambil role user
+            $user = Auth::user();
+
+            // Redirect berdasarkan role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/dashboard');
+            } elseif ($user->role === 'pegawai') {
+                return redirect()->intended('/produk');
+            } else {
+                // Default kalau role tidak dikenali
+                return redirect()->intended('/');
+            }
         }
 
-        // Jika login gagal, berikan pesan error
+        // Jika login gagal
         return back()->with('errorLogin', 'Username atau password salah atau akun tidak aktif')->withInput();
     }
 

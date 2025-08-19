@@ -51,15 +51,6 @@
                                 <a href="{{ route('pengeluaran.edit', $item->id) }}" class="btn-edit" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-
-                                <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST"
-                                    onsubmit="return confirm('Hapus pengeluaran ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-delete" title="Hapus">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
                             </div>
                         </td>
                     </tr>

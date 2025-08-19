@@ -4,55 +4,79 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/user/index.css') }}">
+<style>
+    .profile-detail {
+        padding: 6px 0;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 12px;
+        font-size: 15px;
+    }
+
+    .profile-label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 2px;
+        color: #555;
+    }
+</style>
 @endpush
 
 @section('content')
-<div class="profile-card">
-    <h3 class="profile-title">Profile {{ ucfirst($user->role) }}</h3>
+<div class="profile-wrapper">
 
-    <div class="profile-header">
-        @if ($user->img_profile && file_exists(storage_path('app/public/' . $user->img_profile)))
-            <img src="{{ asset('storage/' . $user->img_profile) }}" alt="Profile Picture" class="profile-img">
-        @else
-            <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Profile" class="profile-img">
-        @endif
+    <!-- Box Kiri -->
+    <div class="profile-box left">
+        <div class="profile-header">
+            @if ($user->img_profile && file_exists(storage_path('app/public/' . $user->img_profile)))
+                <img src="{{ asset('storage/' . $user->img_profile) }}" alt="Profile Picture" class="profile-img">
+            @else
+                <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Profile" class="profile-img">
+            @endif
+
+            <!-- Tambahan Nama & Role -->
+            <div class="profile-info">
+                <h4 class="profile-name">{{ $user->nama }}</h4>
+                <p class="profile-role">{{ ucfirst($user->role) }}</p>
+            </div>
+        </div>
     </div>
 
-    <form class="profile-form">
-        <div class="form-group">
-            <label>Nama</label>
-            <input type="text" value="{{ $user->nama }}" readonly>
-        </div>
+    <!-- Box Kanan -->
+    <div class="profile-box right">
+        <h3 class="profile-title">Informasi {{ ucfirst($user->role) }}</h3>
+        <div class="profile-form">
 
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" value="{{ $user->username }}" readonly>
-        </div>
-
-        @if ($user->role === 'admin')
-            <div class="form-group">
-                <label>Nama Usaha</label>
-                <input type="text" value="{{ $user->nama_usaha ?? '-' }}" readonly>
+            <div class="profile-detail">
+                <span class="profile-label">Username</span>
+                <span>{{ $user->username }}</span>
             </div>
-            <div class="form-group">
-                <label>Alamat Usaha</label>
-                <textarea readonly class="alamat-textarea">{{ $user->alamat_usaha ?? '-' }}</textarea>
-            </div>
-        @elseif ($user->role === 'pegawai')
-            <div class="form-group">
-                <label>Alamat</label>
-                <textarea readonly class="alamat-textarea">{{ $user->alamat ?? '-' }}</textarea>
-            </div>
-        @endif
 
-        <div class="form-group">
-            <label>No Telepon</label>
-            <input type="text" value="{{ $user->no_telepon ?? '-' }}" readonly>
+            @if ($user->role === 'admin')
+                <div class="profile-detail">
+                    <span class="profile-label">Nama Usaha</span>
+                    <span>{{ $user->nama_usaha ?? '-' }}</span>
+                </div>
+                <div class="profile-detail">
+                    <span class="profile-label">Alamat Usaha</span>
+                    <span>{{ $user->alamat_usaha ?? '-' }}</span>
+                </div>
+            @elseif ($user->role === 'pegawai')
+                <div class="profile-detail">
+                    <span class="profile-label">Alamat</span>
+                    <span>{{ $user->alamat ?? '-' }}</span>
+                </div>
+            @endif
+
+            <div class="profile-detail">
+                <span class="profile-label">No Telepon</span>
+                <span>{{ $user->no_telepon ?? '-' }}</span>
+            </div>
+
+            <button type="button" onclick="window.location='{{ route('profileedit') }}'" class="btn-edit">
+                Edit Profile
+            </button>
         </div>
+    </div>
 
-        <button type="button" onclick="window.location='{{ route('profileedit') }}'" class="btn-edit">
-            Edit Profile
-        </button>
-    </form>
 </div>
 @endsection

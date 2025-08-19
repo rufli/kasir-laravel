@@ -14,8 +14,7 @@
     <div class="profile-card">
         <h2 class="profile-title">Edit Profile</h2>
 
-        {{-- Form --}}
-        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form" autocomplete="off">
             @csrf
             @method('PUT')
 
@@ -90,21 +89,22 @@
                 <input type="text" name="no_telepon" id="no_telepon" value="{{ old('no_telepon', $user->no_telepon) }}" required>
             </div>
 
-            {{-- Ganti Password --}}
+            {{-- Toggle Ganti Password --}}
             <div class="form-group">
                 <button type="button" id="togglePasswordForm" class="btn-secondary" style="width: 100%;">
                     <i class="bi bi-key"></i> Ganti Password
                 </button>
             </div>
 
+            {{-- Field Password (tersembunyi) --}}
             <div id="passwordFields" style="display: none;">
                 <div class="form-group">
                     <label for="password">Password Baru</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" value="" autocomplete="new-password">
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">Konfirmasi Password Baru</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation">
+                    <input type="password" name="password_confirmation" id="password_confirmation" value="" autocomplete="new-password">
                 </div>
                 <small class="text-muted">Kosongkan jika tidak ingin mengganti password.</small>
             </div>
@@ -124,7 +124,14 @@
 <script>
     document.getElementById('togglePasswordForm').addEventListener('click', function() {
         const passwordFields = document.getElementById('passwordFields');
-        passwordFields.style.display = (passwordFields.style.display === 'none') ? 'block' : 'none';
+        const isHidden = passwordFields.style.display === 'none';
+        passwordFields.style.display = isHidden ? 'block' : 'none';
+
+        if (isHidden) {
+            // Kosongkan field password saat ditampilkan
+            document.getElementById('password').value = '';
+            document.getElementById('password_confirmation').value = '';
+        }
     });
 </script>
 @endpush

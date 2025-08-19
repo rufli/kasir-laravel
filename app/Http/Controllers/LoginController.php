@@ -29,16 +29,24 @@ class LoginController extends Controller
                 ->withInput();
         }
 
+        // Siapkan kredensial dengan tambahan pengecekan status aktif
+        $credentials = [
+            'username' => $request->username,
+            'password' => $request->password,
+            'is_active' => true, // HANYA izinkan login jika akun aktif
+        ];
+
         // Cek apakah Remember Me dicentang
         $remember = $request->has('remember');
 
         // Proses login dengan remember me
-        if (Auth::attempt($request->only('username', 'password'), $remember)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
 
-        return back()->with('errorLogin', 'Username atau password salah')->withInput();
+        // Jika login gagal, berikan pesan error
+        return back()->with('errorLogin', 'Username atau password salah atau akun tidak aktif')->withInput();
     }
 
     // Logout

@@ -59,6 +59,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
         Route::get('/{id}/edit', [SignupController::class, 'edit'])->name('edit');
         Route::put('/{id}', [SignupController::class, 'update'])->name('update');
         Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/toggle-status', [SignupController::class, 'toggleStatus'])->name('toggle-status');
     });
     Route::get('/dashboard/data', [DashboardController::class, 'data']);
 

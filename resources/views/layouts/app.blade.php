@@ -26,10 +26,18 @@
                 <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40">
             </div>
             <div class="user-profile">
-                <span class="username">Admin</span>
+                <span class="username">{{ Auth::user()->nama }}</span>
                 <a href="{{ route('profile') }}" class="username-link" style="text-decoration: none; color: inherit;">
                     <div class="avatar">
-                        <i class="fas fa-user-circle"></i>
+                        <div class="avatar">
+                            @if (Auth::user()->img_profile && Storage::disk('public')->exists(Auth::user()->img_profile))
+                                <img src="{{ asset('storage/' . Auth::user()->img_profile) }}" alt="Avatar"
+                                    class="avatar-img">
+                            @else
+                                <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Avatar"
+                                    class="avatar-img">
+                            @endif
+                        </div>
                     </div>
                 </a>
             </div>
@@ -86,13 +94,13 @@
                         </li>
                     @endif
                     @if (Auth::user()->role == 'pegawai')
-                    <li class="nav-item">
-                        <a href="{{ route('penjualan.daftar_produk') }}"
-                            class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Transaksi Penjualan</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{{ route('penjualan.daftar_produk') }}"
+                                class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Transaksi Penjualan</span>
+                            </a>
+                        </li>
                     @endif
                     <li class="nav-item">
                         <a href="{{ route('penjualan.riwayat') }}"

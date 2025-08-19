@@ -49,7 +49,8 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    {{-- Menu untuk semua role --}}
+
+                    @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('dashboard.index') }}"
                             class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
@@ -57,6 +58,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="nav-item">
                         <a href="{{ route('produk.index') }}"

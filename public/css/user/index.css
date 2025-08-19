@@ -20,8 +20,8 @@
 }
 
 .profile-img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ddd;
@@ -103,4 +103,99 @@
 
 .btn-edit:hover {
     background-color: #0b5ed7;
+}
+
+/* === Layout 2 Kolom === */
+.profile-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* kiri 1 bagian, kanan 2 bagian */
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Kolom kiri */
+.profile-column.left {
+    text-align: center;
+    border-right: 1px solid #e5e7eb; /* garis pemisah */
+    padding-right: 1rem;
+}
+
+/* Kolom kanan */
+.profile-column.right {
+    padding-left: 1rem;
+}
+
+/* Responsive biar rapi di HP */
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr; /* jadi 1 kolom */
+    }
+
+    .profile-column.left {
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-column.right {
+        padding-left: 0;
+    }
+}
+/* Wrapper untuk 2 kotak */
+.profile-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 3fr; /* kiri lebih kecil, kanan lebih besar */
+    gap: 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+/* Box Kiri & Kanan */
+.profile-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+}
+
+.profile-box.left {
+    display: flex;
+    justify-content: center;   /* supaya horizontal center */
+    align-items: center;       /* supaya vertical center */
+    flex-direction: column;    /* biar konten (gambar + teks) tetap kebawah */
+    padding: 20px;
+}
+
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    margin-bottom: 15px;
+}
+/* Info di bawah foto */
+.profile-info {
+    margin-top: 1rem;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.profile-role {
+    font-size: 0.95rem;
+    color: #6b7280; /* abu-abu */
+}
+
+
+/* Responsive: jadi satu kolom di HP */
+@media (max-width: 768px) {
+    .profile-wrapper {
+        grid-template-columns: 1fr;
+    }
 }

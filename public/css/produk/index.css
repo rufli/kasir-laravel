@@ -1,93 +1,10 @@
 /* ==============================
-   FORM (Desktop & Mobile Sama)
-============================== */
-.form-container {
-    max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.kategori-form label {
-    font-weight: 500;
-    margin-bottom: 8px;
-    display: block;
-    color: #555;
-}
-
-.kategori-form input[type="text"],
-.kategori-form textarea,
-.kategori-form select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    transition: border-color 0.2s ease-in-out;
-}
-
-.kategori-form input:focus,
-.kategori-form textarea:focus,
-.kategori-form select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-simpan {
-    background: #4CAF50;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-batal {
-    background: #f44336;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* ==============================
-   INFO BOX
-============================== */
-.info-box {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    background: #fafafa;
-    font-size: 14px;
-    color: #333;
-}
-
-.info-box p {
-    margin: 5px 0;
-}
-
-.info-box strong {
-    display: inline-block;
-    width: 80px;
-}
-
-/* ==============================
    PRODUK (Desktop)
 ============================== */
 .produk-container {
     width: 100%;
-    padding: 0; /* hapus padding internal */
-    background-color: #ffffff; /* warna putih menutupi seluruh area */
+    padding: 0;
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-top: 24px;
@@ -98,7 +15,6 @@
     width: 100%;
     border-collapse: collapse;
 }
-
 
 .produk-header {
     background-color: #ffffff;
@@ -177,15 +93,9 @@
     background-color: #15803d;
 }
 
-.produk-table {
-    width: 100%;
-    background-color: #ffffff;
-}
-
 .produk-table table {
     width: 100%;
     border-collapse: collapse;
-    min-width: auto;
 }
 
 .produk-table thead {
@@ -246,6 +156,16 @@
     background-color: #dc2626;
 }
 
+.no-data-cell {
+    text-align: center !important;
+    width: 100% !important;
+    display: table-cell !important;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+
 /* ==============================
    PRODUK (Mobile)
 ============================== */
@@ -255,6 +175,10 @@
         align-items: flex-start;
         gap: 16px;
     }
+    .no-data-cell {
+      text-align: center;
+      display: block !important;
+  }
 
     .produk-actions {
         width: 100%;
@@ -300,6 +224,7 @@
         border: none;
         border-bottom: 1px solid #eee;
         word-break: break-word;
+        text-align: left !important; /* pastikan konten rata kiri */
     }
 
     .produk-table td:last-child {
@@ -334,5 +259,13 @@
         width: 100%;
         font-size: 12px;
         padding: 8px 12px;
+    }
+
+    /* Fix untuk pesan "Tidak ada data produk" agar tetap center */
+    .produk-table td.text-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center !important;
     }
 }

@@ -25,7 +25,6 @@
                 @endif
             </div>
         </div>
-
         <div class="produk-table">
             <table>
                 <thead>

@@ -1,11 +1,17 @@
+/* ==============================
+   PEGAWAI INDEX (RESPONSIVE)
+============================== */
 .pegawai-container {
+    width: 100%;
     background-color: #f9fafb;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-top: 24px;
     overflow: hidden;
+    padding: 0;
 }
 
+/* Header */
 .pegawai-header {
     background-color: #ffffff;
     color: #000000;
@@ -29,11 +35,14 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
+/* Search input */
 .search-input-wrapper {
     position: relative;
     width: 250px;
+    flex-shrink: 0;
 }
 
 .search-input-wrapper input[type="text"] {
@@ -44,7 +53,7 @@
     outline: none;
     font-size: 14px;
     background-color: #fff;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .search-input-wrapper input[type="text"]:focus {
@@ -59,15 +68,14 @@
     transform: translateY(-50%);
     border: none;
     background: none;
-    padding: 0;
-    margin: 0;
     cursor: pointer;
     color: #888;
     font-size: 16px;
 }
 
+/* Tombol Tambah */
 .btn-tambah {
-   background-color: #16a34a;
+    background-color: #16a34a;
     color: #ffffff;
     border: 2px solid #16a34a;
     padding: 8px 16px;
@@ -76,36 +84,30 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .btn-tambah:hover {
-    background-color: #034525;
-    color: #ffffff;
+    background-color: #15803d;
+    border-color: #15803d;
 }
 
+/* Table */
 .pegawai-table {
     width: 100%;
-    overflow-x: auto;
     background-color: #ffffff;
+    overflow-x: auto;
 }
 
 .pegawai-table table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 768px;
+    min-width: auto;
 }
 
 .pegawai-table thead {
     background-color: #f3f4f6;
     color: #111827;
-}
-
-.pegawai-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-.pegawai-table tbody tr:hover {
-    background-color: #e5e7eb;
 }
 
 .pegawai-table th,
@@ -116,6 +118,26 @@
     border-bottom: 1px solid #e5e7eb;
 }
 
+.pegawai-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.pegawai-table tbody tr:hover {
+    background-color: #e5e7eb;
+}
+
+/* Tombol Action */
+.btn-action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action-group form {
+    margin: 0;
+}
+
 .btn-edit {
     background-color: #facc15;
     color: #000;
@@ -123,10 +145,9 @@
     font-size: 13px;
     border-radius: 8px;
     text-decoration: none;
-    transition: 0.2s;
-    margin-right: 6px;
-    border: none;
+    transition: 0.2s ease;
     font-weight: 500;
+    border: none;
 }
 
 .btn-edit:hover {
@@ -141,7 +162,7 @@
     font-size: 13px;
     border-radius: 8px;
     border: none;
-    transition: 0.2s;
+    transition: 0.2s ease;
     font-weight: 500;
 }
 
@@ -149,13 +170,96 @@
     background-color: #dc2626;
 }
 
-.btn-action-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
+/* ==============================
+   RESPONSIVE MOBILE
+============================== */
+@media (max-width: 768px) {
+    .pegawai-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.btn-action-group form {
-    margin: 0;
+    .pegawai-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .search-input-wrapper {
+        width: 100%;
+    }
+
+    .btn-tambah {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Table → block style mobile */
+    .pegawai-table table,
+    .pegawai-table thead,
+    .pegawai-table tbody,
+    .pegawai-table th,
+    .pegawai-table td,
+    .pegawai-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .pegawai-table thead {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .pegawai-table tbody tr {
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9fafb;
+        padding: 8px;
+    }
+
+    .pegawai-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+        word-break: break-word;
+        position: relative;
+        text-align: left;
+        padding-left: 55%;
+    }
+
+    .pegawai-table tbody td:last-child {
+        border-bottom: none;
+    }
+
+    .pegawai-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #0e7f49;
+        position: absolute;
+        left: 12px;
+        top: 14px;
+        width: 45%;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .btn-action-group {
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        flex: 1;
+        justify-content: center;
+        min-width: 0;
+    }
 }

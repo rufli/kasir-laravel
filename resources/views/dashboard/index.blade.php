@@ -17,7 +17,6 @@
             @endif
         </h2>
 
-
         <div class="card-grid">
             <div class="info-card info-card-blue">
                 <h3 class="card-title">Total Penjualan Bulan Ini</h3>
@@ -46,7 +45,7 @@
             </select>
 
             <div style="width:100%; max-width:900px;">
-                <canvas id="dailyChart" style="width:100%; max-height:300px;"></canvas>
+                <canvas id="dailyChart" style="width:100%; height:350px;"></canvas>
             </div>
         </div>
     </div>
@@ -57,7 +56,8 @@
         function renderChart(labels, dataPenjualan, dataPengeluaran, dataLaba) {
             const data = {
                 labels: labels,
-                datasets: [{
+                datasets: [
+                    {
                         label: 'Penjualan',
                         data: dataPenjualan,
                         borderColor: '#3498db',

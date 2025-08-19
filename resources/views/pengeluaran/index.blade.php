@@ -56,7 +56,7 @@
                     </tr>
                 @empty
                     <tr>
-                     <td colspan="7" class="text-center">Belum ada data pengeluaran.</td>
+                    <td colspan="7" class="empty-message">Belum ada data pengeluaran.</td>
                     </tr>
                 @endforelse
             </tbody>

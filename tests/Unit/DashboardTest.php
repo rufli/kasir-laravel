@@ -70,24 +70,37 @@ class DashboardTest extends TestCase
     #[Test]
     public function mengembalikan_json_data_7_hari_terakhir()
     {
-        // generate data penjualan dan pengeluaran 7 hari ke belakang
-        for ($i = 0; $i < 7; $i++) {
-            TransaksiPenjualan::factory()->create([
-                'tanggal' => Carbon::now()->subDays($i),
+        // Buat data dummy 7 hari terakhir
+        for ($i = 6; $i >= 0; $i--) {
+            $tanggal = Carbon::today()->subDays($i)->format('Y-m-d');
+
+            TransaksiPenjualan::create([
+                'users_id' => $this->user->id,
+                'tanggal' => $tanggal,
+                'total_harga' => 100000,
+                'metode_pembayaran' => 'tunai',
+                'jumlah_dibayar' => 100000,
+                'jumlah_kembalian' => 0,
             ]);
 
-            Pengeluaran::factory()->create([
-                'tanggal' => Carbon::now()->subDays($i),
+            Pengeluaran::create([
+                'tanggal' => $tanggal,
+                'nama' => 'Pengeluaran ' . $i,
+                'jumlah' => 40000,
+                'catatan' => 'Catatan ' . $i,
+                'user_id' => $this->user->id,
+                'kategori_pengeluaran_id' => $this->kategori->id,
             ]);
         }
 
-        $response = $this->getJson('/dashboard/data?range=7')
-            ->assertStatus(200)
-            ->json();
+        $response = $this->getJson(route('dashboard.data', ['periode' => 7]));
 
-        $this->assertArrayHasKey('labels', $response);
-        $this->assertArrayHasKey('penjualan', $response);
-        $this->assertArrayHasKey('pengeluaran', $response);
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'labels',
+                'penjualan',
+                'pengeluaran'
+            ]);
 
         $this->assertCount(7, $response['labels']);
         $this->assertCount(7, $response['penjualan']);
@@ -97,24 +110,37 @@ class DashboardTest extends TestCase
     #[Test]
     public function mengembalikan_json_data_30_hari_terakhir()
     {
-        // generate data penjualan dan pengeluaran 30 hari ke belakang
-        for ($i = 0; $i < 30; $i++) {
-            TransaksiPenjualan::factory()->create([
-                'tanggal' => Carbon::now()->subDays($i),
+        // Buat data dummy 30 hari terakhir
+        for ($i = 29; $i >= 0; $i--) {
+            $tanggal = Carbon::today()->subDays($i)->format('Y-m-d');
+
+            TransaksiPenjualan::create([
+                'users_id' => $this->user->id,
+                'tanggal' => $tanggal,
+                'total_harga' => 50000,
+                'metode_pembayaran' => 'tunai',
+                'jumlah_dibayar' => 50000,
+                'jumlah_kembalian' => 0,
             ]);
 
-            Pengeluaran::factory()->create([
-                'tanggal' => Carbon::now()->subDays($i),
+            Pengeluaran::create([
+                'tanggal' => $tanggal,
+                'nama' => 'Pengeluaran ' . $i,
+                'jumlah' => 20000,
+                'catatan' => 'Catatan ' . $i,
+                'user_id' => $this->user->id,
+                'kategori_pengeluaran_id' => $this->kategori->id,
             ]);
         }
 
-        $response = $this->getJson('/dashboard/data?range=30')
-            ->assertStatus(200)
-            ->json();
+        $response = $this->getJson(route('dashboard.data', ['periode' => 30]));
 
-        $this->assertArrayHasKey('labels', $response);
-        $this->assertArrayHasKey('penjualan', $response);
-        $this->assertArrayHasKey('pengeluaran', $response);
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'labels',
+                'penjualan',
+                'pengeluaran'
+            ]);
 
         $this->assertCount(30, $response['labels']);
         $this->assertCount(30, $response['penjualan']);

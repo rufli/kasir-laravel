@@ -37,15 +37,17 @@
         <div class="chart-section mt-4">
             <h3>Penjualan, Pengeluaran & Laba Bersih</h3>
 
-            <!-- Filter periode -->
-            <select id="periodeFilter" class="form-select w-auto mb-3">
-                <option value="7" selected>7 Hari Terakhir</option>
-                <option value="30">30 Hari Terakhir</option>
-                <option value="365">1 Tahun Terakhir</option>
-            </select>
+            <!-- Filter container dengan class yang sesuai -->
+            <div class="filter-container">
+                <select id="periodeFilter" class="dashboard-filter">
+                    <option value="7" selected>7 Hari Terakhir</option>
+                    <option value="30">30 Hari Terakhir</option>
+                    <option value="365">1 Tahun Terakhir</option>
+                </select>
+            </div>
 
-            <div style="width:100%; max-width:900px;">
-                <canvas id="dailyChart" style="width:100%; height:350px;"></canvas>
+            <div class="chart-canvas-container">
+                <canvas id="dailyChart"></canvas>
             </div>
         </div>
     </div>
@@ -61,31 +63,34 @@
                         label: 'Penjualan',
                         data: dataPenjualan,
                         borderColor: '#3498db',
-                        backgroundColor: 'transparent',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
                         borderWidth: 2,
                         tension: 0.3,
                         pointRadius: 3,
-                        pointHoverRadius: 5
+                        pointHoverRadius: 5,
+                        fill: true
                     },
                     {
                         label: 'Pengeluaran',
                         data: dataPengeluaran,
                         borderColor: '#e74c3c',
-                        backgroundColor: 'transparent',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
                         borderWidth: 2,
                         tension: 0.3,
                         pointRadius: 3,
-                        pointHoverRadius: 5
+                        pointHoverRadius: 5,
+                        fill: true
                     },
                     {
                         label: 'Laba Bersih',
                         data: dataLaba,
                         borderColor: '#2ecc71',
-                        backgroundColor: 'transparent',
+                        backgroundColor: 'rgba(46, 204, 113, 0.1)',
                         borderWidth: 2,
                         tension: 0.3,
                         pointRadius: 3,
-                        pointHoverRadius: 5
+                        pointHoverRadius: 5,
+                        fill: true
                     }
                 ]
             };
@@ -146,7 +151,7 @@
         }
 
         // Inisialisasi chart awal
-        const initialLabels = @json(array_map(fn($h) => \Carbon\Carbon::parse($h['tanggal'])->format('d-m'), $hariTerakhir));
+        const initialLabels = @json(array_map(fn($h) => \Carbon\Carbon::parse($h['tanggal'])->format('d M'), $hariTerakhir));
         const initialPenjualan = @json(array_map(fn($h) => $h['penjualan'], $hariTerakhir));
         const initialPengeluaran = @json(array_map(fn($h) => $h['pengeluaran'], $hariTerakhir));
         const initialLaba = initialPenjualan.map((v, i) => v - initialPengeluaran[i]);
@@ -162,8 +167,11 @@
                     const penjualan = res.data.penjualan;
                     const pengeluaran = res.data.pengeluaran;
                     const laba = penjualan.map((v, i) => v - pengeluaran[i]);
-
                     renderChart(labels, penjualan, pengeluaran, laba);
+                })
+                .catch(err => {
+                    console.error('Error fetching data:', err);
+                    alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
                 });
         });
     </script>

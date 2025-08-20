@@ -27,6 +27,8 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::post('/profile/password/change', [ProfileController::class, 'gantiPassword'])->name('profile.password.change');
+    Route::put('/profile/update-foto', [ProfileController::class, 'updateFoto'])->name('profile.updateFoto');
+    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::resource('produk', ProdukController::class);
@@ -41,17 +43,15 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
     Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');
 
     Route::prefix('laporan')->group(function () {
-    Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan.keuangan');
-    Route::get('/harian', [LaporanKeuanganController::class, 'harian'])->name('laporan.harian');
+        Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan.keuangan');
+        Route::get('/harian', [LaporanKeuanganController::class, 'harian'])->name('laporan.harian');
     });
-
-
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
-    
+
     Route::prefix('pegawai')->name('pegawai.')->group(function () {
         Route::get('/', [SignupController::class, 'index'])->name('index');
         Route::get('/create', [SignupController::class, 'create'])->name('create');
@@ -61,7 +61,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
         Route::delete('/{id}', [SignupController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/toggle-status', [SignupController::class, 'toggleStatus'])->name('toggle-status');
     });
-    Route::get('/dashboard/data', [DashboardController::class, 'data']);
+    Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
 
     Route::resource('pengeluaran', PengeluaranController::class);
     Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);

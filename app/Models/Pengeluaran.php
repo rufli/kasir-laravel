@@ -20,6 +20,10 @@ class Pengeluaran extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
     /**
      * Relasi ke kategori pengeluaran.
      */

@@ -20,6 +20,10 @@ class TransaksiPenjualan extends Model
         'users_id',
     ];
 
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
     // Relasi ke User
     public function user()
     {

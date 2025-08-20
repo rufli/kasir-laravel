@@ -80,7 +80,7 @@
                     </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}" class="text-center">
+                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}"class="empty-message">
                                 Belum ada data transaksi.
                             </td>
                         </tr>

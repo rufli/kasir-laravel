@@ -30,7 +30,20 @@ class KategoriPengeluaranController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:45|unique:kategori_pengeluaran,nama',
+            'nama' => [
+                'required',
+                'string',
+                'min:3',
+                'max:45',
+                'regex:/^[A-Za-z\s]+$/',
+                'unique:kategori_pengeluaran,nama',
+            ],
+        ], [
+            'nama.required' => 'Nama kategori wajib diisi.',
+            'nama.min' => 'Nama kategori minimal 3 karakter.',
+            'nama.max' => 'Nama kategori maksimal 45 karakter.',
+            'nama.regex' => 'Nama kategori hanya boleh berisi huruf dan spasi.',
+            'nama.unique' => 'Nama kategori sudah terdaftar.',
         ]);
 
         KategoriPengeluaran::create($validated);
@@ -53,7 +66,20 @@ class KategoriPengeluaranController extends Controller
     public function update(Request $request, KategoriPengeluaran $kategori_pengeluaran)
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:45|unique:kategori_pengeluaran,nama,' . $kategori_pengeluaran->id,
+            'nama' => [
+                'required',
+                'string',
+                'min:3',
+                'max:45',
+                'regex:/^[A-Za-z\s]+$/',
+                'unique:kategori_pengeluaran,nama,' . $kategori_pengeluaran->id,
+            ],
+        ], [
+            'nama.required' => 'Nama kategori wajib diisi.',
+            'nama.min' => 'Nama kategori minimal 3 karakter.',
+            'nama.max' => 'Nama kategori maksimal 45 karakter.',
+            'nama.regex' => 'Nama kategori hanya boleh berisi huruf dan spasi.',
+            'nama.unique' => 'Nama kategori sudah terdaftar.',
         ]);
 
         $kategori_pengeluaran->update($validated);

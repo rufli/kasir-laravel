@@ -26,8 +26,8 @@
             </div>
         </div>
 
-        <div class="produk-table">
-            <table>
+        <div class="produk-table table-responsive">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -48,10 +48,8 @@
                             <td data-label="No">{{ $produks->firstItem() + $key }}</td>
                             <td data-label="Gambar">
                                 @if ($produk->gambar)
-                                    <img src="{{ Storage::url($produk->gambar) }}" 
-                                         alt="{{ $produk->nama }}" 
-                                         class="rounded"
-                                         style="width:60px; height:60px; object-fit:cover;">
+                                    <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="rounded"
+                                        style="width:60px; height:60px; object-fit:cover;">
                                 @else
                                     <span class="text-muted">Belum ada gambar</span>
                                 @endif
@@ -81,14 +79,16 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ Auth::user()->role === 'admin' ? 8 : 7 }}" class="text-center">
+                            <td colspan="{{ Auth::user()->role === 'admin' ? 8 : 7 }}" class="no-data-cell">
                                 Tidak ada data produk
                             </td>
+
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
+
 
         @if ($produks->hasPages())
             <div class="d-flex justify-content-center mt-4">

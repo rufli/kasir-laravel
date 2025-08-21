@@ -54,57 +54,58 @@ class DashboardController extends Controller
     {
         $periode = $request->periode ?? 7; // default 7 hari
         $today = Carbon::today();
+        $startDate = null;
+        $interval = 'day';
 
-        // Tentukan start date
+        // Tentukan start date berdasarkan periode
         if ($periode == 365) {
-            $startDate = $today->copy()->subYear()->addDay();
-            $interval = 'month'; // chart per bulan
+            // 12 bulan terakhir dari bulan saat ini
+            $startDate = $today->copy()->subMonths(11)->startOfMonth();
+            $interval = 'month';
         } elseif ($periode == 30) {
-            $startDate = $today->copy()->subDays(29);
-            $interval = 'day';
+            $startDate = $today->copy()->subDays(29); // 30 hari termasuk hari ini
         } else {
-            $startDate = $today->copy()->subDays(6);
-            $interval = 'day';
-        }
-
-        $periodeData = [];
-        $dates = [];
-
-        if ($interval == 'day') {
-            $days = $today->diffInDays($startDate) + 1;
-            for ($i = 0; $i < $days; $i++) {
-                $date = $startDate->copy()->addDays($i);
-                $dates[] = $date->format('Y-m-d');
-            }
-        } else { // per bulan
-            $months = $today->diffInMonths($startDate) + 1;
-            for ($i = 0; $i < $months; $i++) {
-                $date = $startDate->copy()->addMonths($i);
-                $dates[] = $date->format('Y-m');
-            }
+            // Default 7 hari
+            $startDate = $today->copy()->subDays(6); // 7 hari termasuk hari ini
         }
 
         $labels = [];
         $penjualan = [];
         $pengeluaran = [];
 
-        foreach ($dates as $date) {
-            if ($interval == 'day') {
-                $sumPenjualan = TransaksiPenjualan::whereDate('tanggal', $date)->sum('total_harga');
-                $sumPengeluaran = Pengeluaran::whereDate('tanggal', $date)->sum('jumlah');
-                $labels[] = Carbon::parse($date)->format('d-m');
-            } else { // month
-                $sumPenjualan = TransaksiPenjualan::whereYear('tanggal', explode('-', $date)[0])
-                    ->whereMonth('tanggal', explode('-', $date)[1])
+        if ($interval == 'month') {
+            // Data per bulan untuk 12 bulan terakhir
+            for ($i = 0; $i < 12; $i++) {
+                $currentDate = $startDate->copy()->addMonths($i);
+                $year = $currentDate->year;
+                $month = $currentDate->month;
+                
+                $sumPenjualan = TransaksiPenjualan::whereYear('tanggal', $year)
+                    ->whereMonth('tanggal', $month)
                     ->sum('total_harga');
-                $sumPengeluaran = Pengeluaran::whereYear('tanggal', explode('-', $date)[0])
-                    ->whereMonth('tanggal', explode('-', $date)[1])
+                    
+                $sumPengeluaran = Pengeluaran::whereYear('tanggal', $year)
+                    ->whereMonth('tanggal', $month)
                     ->sum('jumlah');
-                $labels[] = Carbon::parse($date . '-01')->format('M-Y');
+                
+                $labels[] = $currentDate->format('M Y');
+                $penjualan[] = $sumPenjualan;
+                $pengeluaran[] = $sumPengeluaran;
             }
-
-            $penjualan[] = $sumPenjualan;
-            $pengeluaran[] = $sumPengeluaran;
+        } else {
+            // Data per hari
+            $days = $periode;
+            for ($i = 0; $i < $days; $i++) {
+                $currentDate = $startDate->copy()->addDays($i);
+                $dateString = $currentDate->format('Y-m-d');
+                
+                $sumPenjualan = TransaksiPenjualan::whereDate('tanggal', $dateString)->sum('total_harga');
+                $sumPengeluaran = Pengeluaran::whereDate('tanggal', $dateString)->sum('jumlah');
+                
+                $labels[] = $currentDate->format('d M');
+                $penjualan[] = $sumPenjualan;
+                $pengeluaran[] = $sumPengeluaran;
+            }
         }
 
         return response()->json([

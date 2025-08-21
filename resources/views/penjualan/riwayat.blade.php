@@ -16,7 +16,7 @@
                     style="display: flex; align-items:flex-start; gap: 10px;">
 
                     @if (auth()->user()->role === 'admin')
-                        <div style="display: flex; align-items: center; gap: 4px; min-width: 160px;">
+                        <div style="display: flex; align-items: center; gap: 4px; min-width: 180px;">
                             <label for="user_id"
                                 style="color: #333; font-weight: 600; font-size: 14px; margin: 0;">Pengguna:</label>
                             <select name="user_id" id="user_id"
@@ -50,7 +50,7 @@
                         <th>Tanggal</th>
 
                         @if (auth()->user()->role === 'admin')
-                            <th>Pengguna</th>
+                            <th>Pegawai</th>
                         @endif
 
                         <th>Id Transaksi</th>
@@ -61,28 +61,26 @@
                 </thead>
                 <tbody>
                     @forelse($riwayat as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
-
-                            @if (auth()->user()->role === 'admin')
-                                <td>{{ $item->user->nama ?? '-' }}</td>
-                            @endif
-
-                            <td>{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</td>
-                            <td>{{ ucfirst($item->metode_pembayaran) }}</td>
-                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                            <td>
-                                <div class="btn-action-group">
-                                    <a href="{{ route('penjualan.detail', $item->id) }}" class="btn-detail" title="Detail">
-                                        <i class="fas fa-info-circle"></i> Detail
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td data-label="No">{{ $loop->iteration }}</td>
+                        <td data-label="Tanggal">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
+                        @if (auth()->user()->role === 'admin')
+                            <td data-label="Pengguna">{{ $item->user->nama ?? '-' }}</td>
+                        @endif
+                        <td data-label="Id Transaksi">{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</td>
+                        <td data-label="Metode Pembayaran">{{ ucfirst($item->metode_pembayaran) }}</td>
+                        <td data-label="Total Harga">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
+                        <td data-label="Aksi">
+                            <div class="btn-action-group">
+                                <a href="{{ route('penjualan.detail', $item->id) }}" class="btn-detail">
+                                    <i class="fas fa-info-circle"></i> Detail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}" class="text-center">
+                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}"class="empty-message">
                                 Belum ada data transaksi.
                             </td>
                         </tr>

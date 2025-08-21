@@ -1,149 +1,197 @@
-/* resources/css/laporankeuangan.css */
+/* ==============================
+   resources/css/laporankeuangan.css
+   FINAL CSS
+============================== */
 
 /* Base Styles */
-.container {
-   padding: 20px;
-    max-width: 1200px;
-    margin: -5px auto 0 auto;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
+.container {
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* ==============================
+   CARD
+============================== */
 .card {
     border: none;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .card-header {
     background-color: #f8f9fa;
     border-bottom: 1px solid #eaeaea;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
 }
 
 .card-body {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
-/* Typography */
+/* ==============================
+   TYPOGRAPHY
+============================== */
 h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
     color: #333;
     font-weight: 700;
 }
 
 h4 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
     color: #444;
 }
 
 h5 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 0.5rem;
     opacity: 0.9;
 }
 
-/* Form Elements */
+/* ==============================
+   FORM ELEMENTS
+============================== */
 .form-control {
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.kategori-form label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    color: #555;
+}
+
+/* ==============================
+   BUTTON
+============================== */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
     background-color: #0e7f49;
-    border: none;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    color: white;
+    color: #fff;
 }
+
 .btn-primary:hover {
     background-color: #12b466;
-
-    transform: translateY(-1px);
 }
 
-/* Summary Cards */
-.card.text-white {
-    border-radius: 6px;
+.btn-danger {
+    background-color: #dc2626;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* Print Button */
+.btn-print {
+    background-color: #0e7f49;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    float: right;
     margin-bottom: 1rem;
+    text-decoration: none;
+    height: 38px;
+    box-sizing: border-box;
 }
 
-.card.text-white .card-body {
-    padding: 1.25rem;
+.btn-print:hover {
+    background-color: #12b466;
+    text-decoration: none;
 }
 
-.card.bg-success {
-    background-color: #1cc88a !important;
-}
-
-.card.bg-danger {
-    background-color: #e74a3b !important;
-}
-
-.card.bg-info {
-    background-color: #36b9cc !important;
-}
-
-/* Tables */
-.table {
-    width: 100%;
+/* ==============================
+   ALERT
+============================== */
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
     margin-bottom: 1rem;
-    color: #333;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 15px;
 }
 
-.table thead th {
-    border-bottom: 2px solid #eaeaea;
-    font-weight: 600;
-    padding: 0.75rem;
-    background-color: #f8f9fa;
+.alert-danger {
+    background-color: #fee2e2;
+    border-color: #fecaca;
+    color: #b91c1c;
 }
 
-.table tbody tr {
-    border-bottom: 1px solid #f0f0f0;
+.alert-success {
+    background-color: #dcfce7;
+    border-color: #bbf7d0;
+    color: #166534;
 }
 
-.table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.table tbody td {
-    padding: 0.75rem;
-    vertical-align: middle;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .card-header .row > div {
-        margin-bottom: 1rem;
-    }
-
-    .card-header .row > div:last-child {
-        margin-bottom: 0;
-    }
-
-    .d-flex.align-items-end {
-        align-items: flex-start !important;
-    }
-}
-
-
-/* ... (kode CSS sebelumnya tetap sama) ... */
-
-/* Stats Grid Container */
+/* ==============================
+   STATS GRID
+============================== */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Stat Cards */
 .stat-card {
     border-radius: 8px;
     padding: 1rem;
@@ -159,123 +207,167 @@ h5 {
 }
 
 .stat-card h5 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
-    opacity: 0.9;
     font-weight: 500;
 }
 
 .stat-card h4 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0;
     font-weight: 600;
 }
 
-/* Warna Border Top */
-.stat-card.sales {
-    border-top: 4px solid #3b82f6; /* Biru */
+.stat-card.sales { border-top: 4px solid #3b82f6; }
+.stat-card.expenses { border-top: 4px solid #f59e0b; }
+.stat-card.balance { border-top: 4px solid #10b981; }
+
+/* ==============================
+   TABLE
+============================== */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 0.9rem;
+    border-collapse: collapse;
 }
 
-.stat-card.expenses {
-    border-top: 4px solid #f59e0b; /* Kuning */
+.table th,
+.table td {
+    padding: 0.6rem;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.stat-card.balance {
-    border-top: 4px solid #10b981; /* Hijau  */
+.table thead th {
+    border-bottom: 2px solid #eaeaea;
+    font-weight: 600;
+    background-color: #f8f9fa;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-card {
-        padding: 0.8rem;
-    }
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
-
-/* resources/css/laporankeuangan.css */
-
-/* Form Filter Styles */
+/* ==============================
+   FILTER FORM
+============================== */
 .filter-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     align-items: flex-end;
-    flex-wrap: wrap;
 }
 
 .filter-group {
-    flex: 1;
-    min-width: 180px;
+    flex: 1 0 200px;
+    margin-bottom: 0.5rem;
 }
 
 .filter-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
     color: #555;
 }
 
-.filter-group input {
+.filter-group input[type="date"] {
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 0.9rem;
+    height: 38px;
 }
 
-.filter-button {
-    flex: 0 0 auto;
+.filter-button button {
     background-color: #0e7f49;
-    border-radius: 4px;
-    margin-bottom: 1px; /* Untuk alignment dengan input */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .filter-form {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-    }
-
-    .filter-group {
-        min-width: 100%;
-    }
-
-    .filter-button {
-        align-self: flex-start;
-        margin-top: 0.5rem;
-    }
-}
-/* Print Button Styles */
-.btn-print {
-    background-color: #0e7f49;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     color: white;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
+    font-size: 0.9rem;
+    height: 38px;
+    line-height: 1.2;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    transition: all 0.3s;
-    border: none;
+    justify-content: center;
     cursor: pointer;
-    margin-left: auto;
-    float: right;
+    transition: background-color 0.3s ease;
 }
 
-.btn-print:hover {
+.filter-button button:hover {
     background-color: #12b466;
-    transform: translateY(-1px);
 }
 
-/* Print-specific hiding */
+/* ==============================
+   PRINT STYLES
+============================== */
 @media print {
-    .card-header, .stats-grid, .no-print {
+    .card-header, .no-print {
         display: none !important;
+    }
+    .table {
+        font-size: 0.8rem;
+    }
+    .table th, .table td {
+        padding: 0.4rem;
+    }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    h2 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .filter-form {
+        flex-direction: row;
+        gap: 0.8rem;
+    }
+
+    .filter-group { flex: 1 0 calc(50% - 0.5rem); }
+
+    .btn-print {
+        float: none;
+        margin-bottom: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    h2 { font-size: 1.2rem; }
+    h4 { font-size: 1rem; }
+
+    .stat-card h5 { font-size: 0.8rem; }
+    .stat-card h4 { font-size: 1rem; }
+
+    .table { font-size: 0.8rem; }
+    .filter-group { flex: 1 0 100%; }
+}
+
+@media (max-width: 320px) {
+    .stat-card { padding: 0.6rem; }
+    .stat-card h4 { font-size: 0.9rem; }
+    .table { font-size: 0.75rem; }
+    .filter-group input { padding: 0.4rem; }
+    .btn-primary, .btn-print {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
 }

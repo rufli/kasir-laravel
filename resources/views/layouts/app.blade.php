@@ -22,14 +22,21 @@
     <!-- Header -->
     <header class="main-header">
         <div class="container header-content">
+            <button class="sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="app-logo">
-                <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" height="40">
+                <img src="{{ asset('images/logo-poskasir.png') }}" alt="POSKasir Logo" class="logo-img">
             </div>
             <div class="user-profile">
-                <span class="username">Admin</span>
-                <a href="{{ route('profile') }}" class="username-link" style="text-decoration: none; color: inherit;">
+                <span class="username">{{ Auth::user()->nama }}</span>
+                <a href="{{ route('profile') }}" class="username-link" aria-label="User profile">
                     <div class="avatar">
-                        <i class="fas fa-user-circle"></i>
+                        @if (Auth::user()->img_profile && Storage::disk('public')->exists(Auth::user()->img_profile))
+                            <img src="{{ asset('storage/' . Auth::user()->img_profile) }}" alt="Avatar" class="avatar-img">
+                        @else
+                            <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Avatar" class="avatar-img">
+                        @endif
                     </div>
                 </a>
             </div>
@@ -42,7 +49,8 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    {{-- Menu untuk semua role --}}
+
+                    @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('dashboard.index') }}"
                             class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
@@ -50,6 +58,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="nav-item">
                         <a href="{{ route('produk.index') }}"
@@ -58,17 +67,16 @@
                             <span>Produk</span>
                         </a>
                     </li>
+                    
                     {{-- Kategori hanya admin --}}
                     @if (Auth::user()->role == 'admin')
-                        <li
-                            class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
+                        <li class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
                             <a href="#" class="sidebar-link js-submenu-toggle">
                                 <i class="fas fa-tags"></i>
                                 <span>Kategori</span>
                                 <i class="fas fa-chevron-down submenu-toggle-icon"></i>
                             </a>
                             <ul class="submenu">
-
                                 <li>
                                     <a href="{{ route('kategori_produk.index') }}"
                                         class="{{ request()->routeIs('kategori_produk.*') ? 'active' : '' }}">
@@ -81,19 +89,20 @@
                                         Kategori Pengeluaran
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
                     @endif
+                    
                     @if (Auth::user()->role == 'pegawai')
-                    <li class="nav-item">
-                        <a href="{{ route('penjualan.daftar_produk') }}"
-                            class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Transaksi Penjualan</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{{ route('penjualan.daftar_produk') }}"
+                                class="sidebar-link {{ request()->routeIs('penjualan.daftar_produk*') ? 'active' : '' }}">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Transaksi Penjualan</span>
+                            </a>
+                        </li>
                     @endif
+                    
                     <li class="nav-item">
                         <a href="{{ route('penjualan.riwayat') }}"
                             class="sidebar-link {{ request()->routeIs('penjualan.riwayat*') ? 'active' : '' }}">
@@ -115,7 +124,6 @@
                         <li class="nav-item">
                             <a href="{{ route('laporan.keuangan') }}"
                                 class="sidebar-link {{ request()->routeIs('laporan.keuangan') ? 'active' : '' }}">
-
                                 <i class="fas fa-file-invoice-dollar"></i>
                                 <span>Laporan Keuangan</span>
                             </a>
@@ -130,7 +138,6 @@
                         </li>
                     @endif
                 </ul>
-
             </nav>
 
             <!-- Logout -->
@@ -191,15 +198,39 @@
         </div>
     </footer>
 
-    <!-- Toggle Submenu Sidebar -->
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Toggle submenu
             document.querySelectorAll('.js-submenu-toggle').forEach(function(el) {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
                     const parent = this.closest('.has-submenu');
                     parent.classList.toggle('open');
+                    
+                    // Rotate chevron icon
+                    const icon = this.querySelector('.submenu-toggle-icon');
+                    icon.classList.toggle('rotate');
                 });
+            });
+            
+            // Toggle sidebar on mobile
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                        sidebar.classList.remove('active');
+                    }
+                }
             });
         });
     </script>
@@ -207,5 +238,4 @@
     <!-- JS Halaman Khusus -->
     @stack('scripts')
 </body>
-
 </html>

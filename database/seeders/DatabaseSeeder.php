@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'username' => 'admin',
-            'password' => Hash::make('123456'),
+            'password' => Hash::make('admin123'),
             'nama_usaha' => 'Usaha Kasir',
             'alamat_usaha' => 'Jl. Raya No. 1, Banyuwangi',
             'nama' => 'Administrator',

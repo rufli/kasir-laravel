@@ -20,7 +20,7 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ route('pegawai.create') }}" class="btn-tambah">Tambah </a>
+                <a href="{{ route('pegawai.create') }}" class="btn-tambah">Tambah</a>
             </div>
         </div>
 
@@ -40,19 +40,19 @@
                 <tbody>
                     @forelse ($daftarPegawai as $pegawai)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pegawai->nama }}</td>
-                            <td>{{ $pegawai->username }}</td>
-                            <td>{{ $pegawai->no_telepon }}</td>
-                            <td>{{ $pegawai->alamat }}</td>
-                            <td>
+                            <td data-label="No">{{ $loop->iteration }}</td>
+                            <td data-label="Nama">{{ $pegawai->nama }}</td>
+                            <td data-label="Username">{{ $pegawai->username }}</td>
+                            <td data-label="No. Telepon">{{ $pegawai->no_telepon }}</td>
+                            <td data-label="Alamat">{{ $pegawai->alamat }}</td>
+                            <td data-label="Status">
                                 @if ($pegawai->is_active)
                                     <span class="status-active">Aktif</span>
                                 @else
                                     <span class="status-non-aktif">Non-aktif</span>
                                 @endif
                             </td>
-                            <td>
+                            <td data-label="Aksi">
                                 <div class="btn-action-group">
                                     <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn-edit" title="Edit">
                                         <i class="fas fa-edit"></i>
@@ -91,31 +91,4 @@
             </table>
         </div>
     </div>
-
-    <style>
-        .status-active {
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-non-aktif {
-            color: red;
-            font-weight: bold;
-        }
-
-        .btn-toggle-status {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
-        .btn-toggle-status .fa-toggle-on {
-            color: #4CAF50;
-        }
-
-        .btn-toggle-status .fa-toggle-off {
-            color: #f44336;
-        }
-    </style>
 @endsection

@@ -18,11 +18,9 @@ return new class extends Migration
             $table->decimal("harga", 10, 2);
             $table->integer("stok");
             $table->string("gambar")->nullable(); // Kolom untuk menyimpan nama file gambar
-            $table->foreignId('kategori_produk_id')->constrained('kategori_produks')->onDelete('cascade');
-            // foreignId adalah shortcut untuk unsignedBigInteger,
-            // constrained('kategori_produks') otomatis membuat foreign key ke tabel kategori_produks
-            // onDelete('cascade') berarti jika kategori dihapus, produk yang terkait juga dihapus.
-            // Anda bisa mengubahnya menjadi 'set null' atau 'restrict' sesuai kebutuhan.
+            $table->foreignId('kategori_produk_id')
+                ->constrained('kategori_produks')
+                ->onDelete('cascade');
 
 
             $table->timestamps();

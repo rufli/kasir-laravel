@@ -170,6 +170,33 @@
     background-color: #dc2626;
 }
 
+/* Status */
+.status-active {
+    color: green;
+    font-weight: bold;
+}
+
+.status-non-aktif {
+    color: red;
+    font-weight: bold;
+}
+
+/* Toggle */
+.btn-toggle-status {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.btn-toggle-status .fa-toggle-on {
+    color: #4CAF50;
+}
+
+.btn-toggle-status .fa-toggle-off {
+    color: #f44336;
+}
+
 /* ==============================
    RESPONSIVE MOBILE
 ============================== */
@@ -240,7 +267,7 @@
     .pegawai-table tbody td::before {
         content: attr(data-label);
         font-weight: 600;
-        color: #0e7f49;
+        color: #000000;
         position: absolute;
         left: 12px;
         top: 14px;

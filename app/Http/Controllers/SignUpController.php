@@ -10,9 +10,6 @@ class SignupController extends Controller
 {
     /**
      * Menampilkan daftar pegawai dengan fitur pencarian.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -23,7 +20,6 @@ class SignupController extends Controller
             $query->where('nama', 'like', '%' . $search . '%');
         }
 
-        // Tambahkan kolom 'is_active' dan hitung jumlah transaksi
         $daftarPegawai = $query->withCount('transaksiPenjualans')
                               ->select('id', 'nama', 'username', 'no_telepon', 'alamat', 'is_active')
                               ->get();
@@ -32,9 +28,7 @@ class SignupController extends Controller
     }
 
     /**
-     * Menampilkan formulir untuk membuat pegawai baru.
-     *
-     * @return \Illuminate\View\View
+     * Menampilkan form tambah pegawai.
      */
     public function create()
     {
@@ -42,19 +36,35 @@ class SignupController extends Controller
     }
 
     /**
-     * Menyimpan pegawai baru.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Simpan pegawai baru.
      */
     public function store(Request $request)
     {
         $validate = $request->validate([
             "nama"        => "required|string|min:2|max:60",
-            "username"    => "required|string|min:3|max:45|unique:users",
-            "no_telepon"  => "nullable|string|min:8|max:20",
+            "username"    => "required|string|min:4|max:20|unique:users",
+            "no_telepon"  => "nullable|string|min:10|max:13",
             "password"    => "required|string|min:8|max:16",
-            "alamat"      => "nullable|string|min:4|max:60",
+            "alamat"      => "nullable|string|min:5|max:60",
+        ], [
+            "nama.required"       => "Nama wajib diisi.",
+            "nama.min"            => "Nama minimal 2 karakter.",
+            "nama.max"            => "Nama maksimal 60 karakter.",
+
+            "username.required"   => "Username wajib diisi.",
+            "username.min"        => "Username minimal 4 karakter.",
+            "username.max"        => "Username maksimal 20 karakter.",
+            "username.unique"     => "Username sudah digunakan.",
+
+            "no_telepon.min"      => "Nomor telepon minimal 10 digit.",
+            "no_telepon.max"      => "Nomor telepon maksimal 13 digit.",
+
+            "password.required"   => "Password wajib diisi.",
+            "password.min"        => "Password minimal 8 karakter.",
+            "password.max"        => "Password maksimal 16 karakter.",
+
+            "alamat.min"          => "Alamat minimal 5 karakter.",
+            "alamat.max"          => "Alamat maksimal 60 karakter.",
         ]);
 
         $validate['password'] = bcrypt($validate['password']);
@@ -67,10 +77,7 @@ class SignupController extends Controller
     }
 
     /**
-     * Menampilkan formulir untuk mengedit pegawai.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * Edit pegawai.
      */
     public function edit($id)
     {
@@ -79,11 +86,7 @@ class SignupController extends Controller
     }
 
     /**
-     * Memperbarui data pegawai.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * Update pegawai.
      */
     public function update(Request $request, $id)
     {
@@ -91,11 +94,30 @@ class SignupController extends Controller
 
         $validate = $request->validate([
             "nama"        => "required|string|min:2|max:60",
-            "username"    => "required|string|min:3|max:45|unique:users,username,$id",
-            "no_telepon"  => "nullable|string|min:8|max:20|unique:users,no_telepon,$id",
+            "username"    => "required|string|min:4|max:20|unique:users,username,$id",
+            "no_telepon"  => "nullable|string|min:10|max:13|unique:users,no_telepon,$id",
             "password"    => "nullable|string|min:8|max:16",
-            "alamat"      => "nullable|string|min:4|max:60",
+            "alamat"      => "nullable|string|min:5|max:60",
             "is_active"   => "nullable|boolean",
+        ], [
+            "nama.required"       => "Nama wajib diisi.",
+            "nama.min"            => "Nama minimal 2 karakter.",
+            "nama.max"            => "Nama maksimal 60 karakter.",
+
+            "username.required"   => "Username wajib diisi.",
+            "username.min"        => "Username minimal 4 karakter.",
+            "username.max"        => "Username maksimal 20 karakter.",
+            "username.unique"     => "Username sudah digunakan.",
+
+            "no_telepon.min"      => "Nomor telepon minimal 10 digit.",
+            "no_telepon.max"      => "Nomor telepon maksimal 13 digit.",
+            "no_telepon.unique"   => "Nomor telepon sudah digunakan.",
+
+            "password.min"        => "Password minimal 8 karakter.",
+            "password.max"        => "Password maksimal 16 karakter.",
+
+            "alamat.min"          => "Alamat minimal 5 karakter.",
+            "alamat.max"          => "Alamat maksimal 60 karakter.",
         ]);
 
         if (!empty($validate['password'])) {
@@ -110,10 +132,7 @@ class SignupController extends Controller
     }
 
     /**
-     * Mengubah status aktif/non-aktif pegawai.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * Toggle status aktif pegawai.
      */
     public function toggleStatus($id)
     {
@@ -126,16 +145,12 @@ class SignupController extends Controller
     }
 
     /**
-     * Menghapus pegawai, hanya jika tidak ada transaksi.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * Hapus pegawai.
      */
     public function destroy($id)
     {
         $pegawai = User::findOrFail($id);
 
-        // Pengecekan server-side
         if ($pegawai->transaksiPenjualans()->exists()) {
             return redirect()->route('pegawai.index')->with('error', 'Akun pegawai tidak dapat dihapus karena sudah memiliki riwayat transaksi.');
         }

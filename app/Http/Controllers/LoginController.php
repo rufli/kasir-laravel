@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -36,36 +38,33 @@ class LoginController extends Controller
                 ->withInput();
         }
 
-        // Ambil data username & password saja
-        $credentials = $request->only('username', 'password');
-        $remember = $request->filled('remember');
+        // ✅ Cari user berdasarkan username
+        $user = User::where('username', $request->username)->first();
 
-        // Proses login
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            // Pastikan user aktif
-            if (!$user->is_active) {
-                Auth::logout();
-                return redirect()->back()
-                    ->withErrors(['username' => 'Akun tidak aktif'])
-                    ->withInput();
-            }
-
-            // Redirect berdasarkan role
-            return match ($user->role) {
-                'admin'   => redirect()->intended('/dashboard'),
-                'pegawai' => redirect()->intended('/produk'),
-                default   => redirect()->intended('/'),
-            };
+        if (!$user) {
+            return back()->withErrors(['username' => 'Username tidak ditemukan'])->withInput();
         }
 
-        // Jika login gagal
-        return redirect()->back()
-            ->withErrors(['username' => 'Username atau password salah'])
-            ->withInput();
+        // ✅ Cek apakah user aktif
+        if (!$user->is_active) {
+            return back()->withErrors(['username' => 'Akun tidak aktif'])->withInput();
+        }
+
+        // ✅ Cek password manual
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['username' => 'Password salah'])->withInput();
+        }
+
+        // ✅ Login user
+        Auth::login($user, $request->filled('remember'));
+        $request->session()->regenerate();
+
+        // ✅ Redirect sesuai role
+        return match ($user->role) {
+            'admin'   => redirect()->intended('/dashboard'),
+            'pegawai' => redirect()->intended('/produk'),
+            default   => redirect()->intended('/'),
+        };
     }
 
     // Logout

@@ -43,13 +43,14 @@ class SignupController extends Controller
         $validate = $request->validate([
             "nama"        => "required|string|min:2|max:60",
             "username"    => "required|string|min:4|max:20|unique:users",
-            "no_telepon"  => "nullable|string|min:10|max:13",
+            "no_telepon"  => "nullable|string|min:10|max:13|unique:users,no_telepon",
             "password"    => "required|string|min:8|max:16",
             "alamat"      => "nullable|string|min:5|max:60",
         ], [
             "nama.required"       => "Nama wajib diisi.",
             "nama.min"            => "Nama minimal 2 karakter.",
             "nama.max"            => "Nama maksimal 60 karakter.",
+            
 
             "username.required"   => "Username wajib diisi.",
             "username.min"        => "Username minimal 4 karakter.",
@@ -58,6 +59,7 @@ class SignupController extends Controller
 
             "no_telepon.min"      => "Nomor telepon minimal 10 digit.",
             "no_telepon.max"      => "Nomor telepon maksimal 13 digit.",
+            "no_telepon.unique"   => "Nomor telepon sudah digunakan.",
 
             "password.required"   => "Password wajib diisi.",
             "password.min"        => "Password minimal 8 karakter.",
@@ -108,6 +110,7 @@ class SignupController extends Controller
             "username.min"        => "Username minimal 4 karakter.",
             "username.max"        => "Username maksimal 20 karakter.",
             "username.unique"     => "Username sudah digunakan.",
+
 
             "no_telepon.min"      => "Nomor telepon minimal 10 digit.",
             "no_telepon.max"      => "Nomor telepon maksimal 13 digit.",

@@ -269,3 +269,85 @@
         text-align: center !important;
     }
 }
+
+/*== paginasi ==*/
+/* Container untuk link paginasi */
+.d-flex.justify-content-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem; /* Memberikan jarak di atas paginasi */
+    margin-bottom: 2rem; /* Memberikan jarak di bawah paginasi */
+}
+
+/* Styling keseluruhan untuk navigasi paginasi */
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+/* Styling untuk daftar paginasi (ul) */
+.pagination {
+    display: flex;
+    list-style: none; /* Menghilangkan bullet points */
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Styling untuk setiap item halaman (li) */
+.page-item {
+    margin: 0;
+}
+
+/* Styling untuk setiap link halaman (a) */
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    min-width: 2.5rem; /* Memastikan lebar tombol minimum */
+    color: #4B5563; /* Warna teks */
+    background-color: #fff; /* Warna latar belakang */
+    border: 1px solid #E5E7EB; /* Warna border */
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Menghapus border kiri untuk link berikutnya agar terlihat menyatu */
+.page-item:not(:first-child) .page-link {
+    border-left: none;
+}
+
+/* Efek hover dan focus untuk link halaman */
+.page-link:hover,
+.page-link:focus {
+    background-color: #F3F4F6;
+    border-color: #D1D5DB;
+    z-index: 1; /* Dibawa ke depan saat hover untuk menghindari masalah border tumpang tindih */
+}
+
+/* Styling untuk link halaman yang aktif (sedang dibuka) */
+.page-item.active .page-link {
+    background-color: #1a73e8; /* Latar belakang biru untuk halaman aktif */
+    color: #fff; /* Teks putih untuk halaman aktif */
+    border-color: #1a73e8; /* Warna border yang cocok */
+    z-index: 2;
+}
+
+/* Styling untuk link yang dinonaktifkan (Previous/Next) */
+.page-item.disabled .page-link {
+    color: #9CA3AF;
+    pointer-events: none; /* Mencegah klik pada link yang dinonaktifkan */
+    background-color: #F9FAFB;
+    border-color: #E5E7EB;
+}
+
+/* Styling untuk ikon di dalam link */
+.page-link i {
+    font-size: 1rem;
+    color: inherit; /* Mewarisi warna teks dari parent */
+}
+

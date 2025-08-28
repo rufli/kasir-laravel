@@ -45,7 +45,7 @@
                 <tbody>
                     @forelse($produks as $key => $produk)
                         <tr>
-                            <td data-label="No">{{ $produks->firstItem() + $key }}</td>
+                            <td data-label="No">{{ ($page - 1) * $perPage + $key + 1 }}</td>
                             <td data-label="Gambar">
                                 @if ($produk->gambar)
                                     <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="rounded"
@@ -90,10 +90,37 @@
         </div>
 
 
-        @if ($produks->hasPages())
-            <div class="d-flex justify-content-center mt-4">
-                {{ $produks->links() }}
-            </div>
-        @endif
+        @php
+            $totalPages = ceil($totalProduks / $perPage);
+            $searchQuery = request('search') ? ['search' => request('search')] : [];
+        @endphp
+
+        <div class="d-flex justify-content-center mt-4">
+            <nav>
+                <ul class="pagination">
+                    {{-- Previous Page Link --}}
+                    <li class="page-item @if($page <= 1) disabled @endif">
+                        <a class="page-link" href="{{ route('produk.index', array_merge($searchQuery, ['page' => $page - 1])) }}" aria-label="Previous">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+
+                    {{-- Page Number Links --}}
+                    @for ($i = 1; $i <= $totalPages; $i++)
+                        <li class="page-item @if($page == $i) active @endif">
+                            <a class="page-link" href="{{ route('produk.index', array_merge($searchQuery, ['page' => $i])) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+
+                    {{-- Next Page Link --}}
+                    <li class="page-item @if($page >= $totalPages) disabled @endif">
+                        <a class="page-link" href="{{ route('produk.index', array_merge($searchQuery, ['page' => $page + 1])) }}" aria-label="Next">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
     </div>
 @endsection

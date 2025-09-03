@@ -19,12 +19,20 @@ class LaporanKeuanganController extends Controller
         $startDate = $request->input('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
         $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
 
-        // Ambil data penjualan
+        // === KOREKSI: Validasi Tanggal ===
+        // Memastikan tanggal mulai tidak lebih besar dari tanggal selesai
+        if (Carbon::parse($startDate)->greaterThan(Carbon::parse($endDate))) {
+            // Mengarahkan kembali ke halaman sebelumnya dengan pesan error.
+            // Setelah 'return' ini, kode di bawahnya tidak akan dieksekusi.
+            return redirect()->back()->with('error', 'Tanggal mulai tidak boleh lebih baru dari tanggal selesai.');
+        }
+
+        // Ambil data penjualan berdasarkan rentang tanggal
         $penjualan = TransaksiPenjualan::whereBetween('tanggal', [$startDate, $endDate])
             ->orderBy('tanggal')
             ->get();
 
-        // Ambil data pengeluaran
+        // Ambil data pengeluaran berdasarkan rentang tanggal
         $pengeluaran = Pengeluaran::with('kategori')
             ->whereBetween('tanggal', [$startDate, $endDate])
             ->orderBy('tanggal')
@@ -35,6 +43,7 @@ class LaporanKeuanganController extends Controller
         $totalPengeluaran = $pengeluaran->sum('jumlah');
         $labaBersih = $totalPenjualan - $totalPengeluaran;
 
+        // Kirim data ke tampilan
         return view('laporan_keuangan.index', compact(
             'penjualan',
             'pengeluaran',
@@ -122,5 +131,5 @@ class LaporanKeuanganController extends Controller
         //
     }
 
-    
+
 }

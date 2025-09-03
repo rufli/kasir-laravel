@@ -12,18 +12,34 @@ class ProdukController extends Controller
     /* ---------- INDEX ---------- */
     public function index(Request $request)
     {
-        $query = Produk::with('kategoriProduk')->latest();
+       // Tentukan jumlah data per halaman
+        $perPage = 10;
+        // Dapatkan nomor halaman dari request, default-nya adalah 1
+        $page = $request->input('page', 1);
+
+        // Ubah query untuk menyertakan join ke tabel kategori_produks
+        // agar kita bisa mencari berdasarkan nama kategori
+        $query = Produk::with('kategoriProduk')
+            ->join('kategori_produks', 'produks.kategori_produk_id', '=', 'kategori_produks.id')
+            ->select('produks.*', 'kategori_produks.nama as kategori_nama') // Pilih semua kolom produk dan beri alias untuk nama kategori
+            ->latest('produks.created_at'); // Menggunakan `latest()` dengan kolom yang jelas untuk menghindari ambiguitas
 
         if ($request->filled('search')) {
             $search = $request->search;
+            // Tambahkan kondisi pencarian yang sekarang juga memeriksa nama kategori
             $query->where(function ($q) use ($search) {
-                $q->where('nama', 'like', "%{$search}%");
+                $q->where('produks.nama', 'like', "%{$search}%")
+                  ->orWhere('kategori_produks.nama', 'like', "%{$search}%");
             });
         }
 
-        $produks = $query->paginate(10)->withQueryString();
+        // Hitung total produk yang cocok dengan query
+        $totalProduks = $query->count();
+        // Ambil produk untuk halaman saat ini secara manual menggunakan skip dan take
+        $produks = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
 
-        return view('produk.index', compact('produks'));
+        // Kirimkan variabel baru ke view
+        return view('produk.index', compact('produks', 'totalProduks', 'page', 'perPage'));
     }
 
 
@@ -55,20 +71,25 @@ class ProdukController extends Controller
             'tanggal.required' => 'Tanggal wajib diisi.',
             'tanggal.date' => 'Tanggal tidak valid.',
             'tanggal.before_or_equal' => 'Tanggal tidak boleh di masa depan.',
+
             'nama.required' => 'Nama produk wajib diisi.',
             'nama.min' => 'Nama produk minimal 3 karakter.',
             'nama.max' => 'Nama produk maksimal 45 karakter.',
             'nama.regex' => 'Nama produk hanya boleh berisi huruf, angka, dan spasi.',
+
             'harga.required' => 'Harga wajib diisi.',
             'harga.numeric' => 'Harga harus berupa angka.',
             'harga.min' => 'Harga minimal 0.',
             'harga.max' => 'Harga maksimal 99.999.999,99.',
+
             'stok.required' => 'Stok wajib diisi.',
             'stok.integer' => 'Stok harus berupa angka.',
             'stok.min' => 'Stok minimal 0.',
             'stok.max' => 'Stok maksimal 100.000.',
+            
             'gambar.mimes' => 'Format gambar harus jpeg, png,atau jpg.',
             'gambar.max' => 'Ukuran gambar maksimal 5MB.',
+
             'kategori_produk_id.required' => 'Kategori produk wajib dipilih.',
             'kategori_produk_id.exists' => 'Kategori produk tidak valid.',
         ]);
@@ -116,21 +137,26 @@ class ProdukController extends Controller
             'tanggal.required' => 'Tanggal wajib diisi.',
             'tanggal.date' => 'Tanggal tidak valid.',
             'tanggal.before_or_equal' => 'Tanggal tidak boleh di masa depan.',
+
             'nama.required' => 'Nama produk wajib diisi.',
             'nama.min' => 'Nama produk minimal 3 karakter.',
             'nama.max' => 'Nama produk maksimal 45 karakter.',
             'nama.regex' => 'Nama produk hanya boleh berisi huruf, angka, dan spasi.',
+
             'harga.required' => 'Harga wajib diisi.',
             'harga.numeric' => 'Harga harus berupa angka.',
             'harga.min' => 'Harga minimal 0.',
             'harga.max' => 'Harga maksimal 99.999.999,99.',
+
             'stok.required' => 'Stok wajib diisi.',
             'stok.integer' => 'Stok harus berupa angka bulat.',
             'stok.min' => 'Stok minimal 0.',
             'stok.max' => 'Stok maksimal 100.000.',
+
             'gambar.image' => 'File harus berupa gambar.',
             'gambar.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif.',
             'gambar.max' => 'Ukuran gambar maksimal 2MB.',
+
             'kategori_produk_id.required' => 'Kategori produk wajib dipilih.',
             'kategori_produk_id.exists' => 'Kategori produk tidak valid.',
         ]);

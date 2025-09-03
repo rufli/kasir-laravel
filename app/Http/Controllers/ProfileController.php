@@ -26,9 +26,8 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $request->validate([
-            'img_profile' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+            'img_profile' => 'nullable|mimes:jpg,jpeg,png|max:5120',
         ], [
-            'img_profile.image' => 'File yang diunggah harus berupa gambar.',
             'img_profile.mimes' => 'Format gambar harus jpg, jpeg, atau png.',
             'img_profile.max'   => 'Ukuran gambar maksimal 5MB.',
         ]);

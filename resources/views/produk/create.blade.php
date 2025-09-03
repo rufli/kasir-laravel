@@ -8,16 +8,6 @@
 <div class="container">
     <h2>Tambah Produk Baru</h2>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -25,31 +15,31 @@
             <!-- Tanggal -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Tanggal</label>
-                <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}" required>
+                <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}" >
             </div>
 
             <!-- Nama -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Nama Produk</label>
-                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}" maxlength="45" required>
+                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}" >
             </div>
 
             <!-- Harga -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Harga (Rp)</label>
-                <input type="number" name="harga" class="form-control" step="0.01" min="0" value="{{ old('harga') }}" required>
+                <input type="number" name="harga" class="form-control" step="0.01" min="0" value="{{ old('harga') }}" >
             </div>
 
             <!-- Stok -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Stok</label>
-                <input type="number" name="stok" class="form-control" min="0" value="{{ old('stok') }}" required>
+                <input type="text" name="stok" class="form-control" min="0" value="{{ old('stok') }}" d>
             </div>
 
             <!-- Kategori -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Kategori</label>
-                <select name="kategori_produk_id" class="form-select" required>
+                <select name="kategori_produk_id" class="form-select" d>
                     <option value="" disabled selected>Pilih Kategori</option>
                     @foreach($kategoris as $k)
                         <option value="{{ $k->id }}" {{ old('kategori_produk_id') == $k->id ? 'selected' : '' }}>

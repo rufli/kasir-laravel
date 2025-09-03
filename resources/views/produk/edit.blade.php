@@ -24,31 +24,31 @@
             <!-- Tanggal -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Tanggal</label>
-                <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal', $produk->tanggal->format('Y-m-d')) }}" required>
+                <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal', $produk->tanggal->format('Y-m-d')) }}" >
             </div>
 
             <!-- Nama -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Nama Produk</label>
-                <input type="text" name="nama" class="form-control" value="{{ old('nama', $produk->nama) }}" maxlength="45" required>
+                <input type="text" name="nama" class="form-control" value="{{ old('nama', $produk->nama) }}" maxlength="45" >
             </div>
 
             <!-- Harga -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Harga (Rp)</label>
-                <input type="number" name="harga" class="form-control" step="0.01" min="0" value="{{ old('harga', $produk->harga) }}" required>
+                <input type="number" name="harga" class="form-control" step="0.01" min="0" value="{{ old('harga', $produk->harga) }}" >
             </div>
 
             <!-- Stok -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Stok</label>
-                <input type="number" name="stok" class="form-control" min="0" value="{{ old('stok', $produk->stok) }}" required>
+                <input type="number" name="stok" class="form-control" min="0" value="{{ old('stok', $produk->stok) }}" >
             </div>
 
             <!-- Kategori -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Kategori</label>
-                <select name="kategori_produk_id" class="form-select" required>
+                <select name="kategori_produk_id" class="form-select" >
                     @foreach($kategoris as $k)
                         <option value="{{ $k->id }}" {{ $k->id == old('kategori_produk_id', $produk->kategori_produk_id) ? 'selected' : '' }}>
                             {{ $k->nama }}

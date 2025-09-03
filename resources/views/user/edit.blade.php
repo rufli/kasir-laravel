@@ -36,6 +36,11 @@
                         @endif
                     </div>
                     <small class="text-muted">Format: JPG, JPEG, PNG. Max 5MB</small>
+
+                    {{-- Error untuk foto --}}
+                    @error('img_profile')
+                        <small class="text-danger d-block mt-1">{{ $message }}</small>
+                    @enderror
                 </form>
 
                 {{-- Form Update Password --}}
@@ -57,6 +62,9 @@
                                 <i class="bi bi-lock"></i>
                                 <input type="password" name="password" id="password" placeholder="Masukkan password baru">
                             </div>
+                            @error('password')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Konfirmasi Password Baru</label>
@@ -82,29 +90,23 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Error Validation --}}
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Terjadi kesalahan!</strong>
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     {{-- Nama --}}
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" name="nama" id="nama" value="{{ old('nama', $user->nama) }}" required>
+                        <input type="text" name="nama" id="nama" value="{{ old('nama', $user->nama) }}" >
+                        @error('nama')
+                            <small class="text-danger d-block mt-1">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     {{-- Username --}}
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" value="{{ old('username', $user->username) }}"
-                            required>
+                            >
+                        @error('username')
+                            <small class="text-danger d-block mt-1">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     {{-- Admin Only --}}
@@ -113,10 +115,16 @@
                             <label for="nama_usaha">Nama Usaha</label>
                             <input type="text" name="nama_usaha" id="nama_usaha"
                                 value="{{ old('nama_usaha', $user->nama_usaha) }}">
+                            @error('nama_usaha')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="alamat_usaha">Alamat Usaha</label>
                             <textarea name="alamat_usaha" id="alamat_usaha">{{ old('alamat_usaha', $user->alamat_usaha) }}</textarea>
+                            @error('alamat_usaha')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
                         </div>
                     @endif
 
@@ -124,7 +132,10 @@
                     @if ($user->role === 'pegawai')
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <textarea name="alamat" id="alamat" required>{{ old('alamat', $user->alamat) }}</textarea>
+                            <textarea name="alamat" id="alamat" >{{ old('alamat', $user->alamat) }}</textarea>
+                            @error('alamat')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
                         </div>
                     @endif
 
@@ -132,7 +143,10 @@
                     <div class="form-group">
                         <label for="no_telepon">No Telepon</label>
                         <input type="text" name="no_telepon" id="no_telepon"
-                            value="{{ old('no_telepon', $user->no_telepon) }}" required>
+                            value="{{ old('no_telepon', $user->no_telepon) }}" >
+                        @error('no_telepon')
+                            <small class="text-danger d-block mt-1">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     {{-- Tombol Simpan/Batal --}}

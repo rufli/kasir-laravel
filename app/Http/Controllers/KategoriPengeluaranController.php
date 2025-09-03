@@ -70,16 +70,16 @@ class KategoriPengeluaranController extends Controller
                 'required',
                 'string',
                 'min:3',
-                'max:45',
+                'max:36',
                 'regex:/^[A-Za-z\s]+$/',
                 'unique:kategori_pengeluaran,nama,' . $kategori_pengeluaran->id,
             ],
         ], [
             'nama.required' => 'Nama kategori wajib diisi.',
             'nama.min' => 'Nama kategori minimal 3 karakter.',
-            'nama.max' => 'Nama kategori maksimal 45 karakter.',
+            'nama.max' => 'Nama kategori maksimal 36 karakter.',
             'nama.regex' => 'Nama kategori hanya boleh berisi huruf dan spasi.',
-            'nama.unique' => 'Nama kategori sudah terdaftar.',
+            'nama.unique' => 'Nama kategori sudah ada',
         ]);
 
         $kategori_pengeluaran->update($validated);

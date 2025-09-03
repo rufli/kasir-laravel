@@ -65,13 +65,13 @@ class ProdukController extends Controller
             ],
             'harga' => 'required|numeric|min:0|max:99999999.99',
             'stok' => 'required|integer|min:0|max:100000',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|mimes:jpeg,png,jpg,gif|max:5048',
             'kategori_produk_id' => 'required|exists:kategori_produks,id',
         ], [
             'tanggal.required' => 'Tanggal wajib diisi.',
             'tanggal.date' => 'Tanggal tidak valid.',
             'tanggal.before_or_equal' => 'Tanggal tidak boleh di masa depan.',
-            
+
             'nama.required' => 'Nama produk wajib diisi.',
             'nama.min' => 'Nama produk minimal 3 karakter.',
             'nama.max' => 'Nama produk maksimal 45 karakter.',
@@ -83,13 +83,12 @@ class ProdukController extends Controller
             'harga.max' => 'Harga maksimal 99.999.999,99.',
 
             'stok.required' => 'Stok wajib diisi.',
-            'stok.integer' => 'Stok harus berupa angka bulat.',
+            'stok.integer' => 'Stok harus berupa angka.',
             'stok.min' => 'Stok minimal 0.',
             'stok.max' => 'Stok maksimal 100.000.',
-
-            'gambar.image' => 'File harus berupa gambar.',
-            'gambar.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif.',
-            'gambar.max' => 'Ukuran gambar maksimal 2MB.',
+            
+            'gambar.mimes' => 'Format gambar harus jpeg, png,atau jpg.',
+            'gambar.max' => 'Ukuran gambar maksimal 5MB.',
 
             'kategori_produk_id.required' => 'Kategori produk wajib dipilih.',
             'kategori_produk_id.exists' => 'Kategori produk tidak valid.',

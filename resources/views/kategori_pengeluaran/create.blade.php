@@ -20,7 +20,7 @@
                            id="nama"
                            name="nama"
                            value="{{ old('nama') }}"
-                           required>
+                           >
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

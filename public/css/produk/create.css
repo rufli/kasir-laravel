@@ -9,6 +9,11 @@
 
 }
 
+.text-danger {
+    display: none;
+    color: transparent;
+}
+
 h2 {
     color: #333;
     margin-bottom: 1.5rem;

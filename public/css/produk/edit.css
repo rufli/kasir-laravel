@@ -6,7 +6,10 @@
     max-width: 1200px;
     margin: 0 auto;
 }
-
+.text-danger {
+    display: none;
+    color: transparent;
+}
 h2 {
     color: #333;
     margin-bottom: 1.5rem;
@@ -101,7 +104,7 @@ h2 {
 }
 
 .form-select {
-    
+
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;

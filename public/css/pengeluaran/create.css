@@ -203,3 +203,20 @@ h2 {
     border-bottom-color: #15803d;
 }
 
+/* =========================
+   FORM ERROR STYLES
+========================= */
+
+/* Pesan error di bawah input */
+.error-message {
+    color: #d32f2f;           /* merah */
+    font-size: 0.85rem;       /* agak kecil */
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* Border merah kalau input error */
+.is-invalid {
+    border-color: #d32f2f !important;
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}

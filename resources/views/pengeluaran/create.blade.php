@@ -29,14 +29,14 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="tanggal">Tanggal</label>
                     <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal') }}"
-                        required>
+                        >
                 </div>
 
                 <!-- Nama -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="nama">Nama</label>
                     <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}"
-                        required>
+                        >
                 </div>
 
                 <!-- Kategori -->
@@ -63,7 +63,7 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="jumlah">Jumlah</label>
                     <input type="number" name="jumlah" id="jumlah" class="form-control" value="{{ old('jumlah') }}"
-                        required>
+                        >
                 </div>
 
                 <!-- Catatan -->

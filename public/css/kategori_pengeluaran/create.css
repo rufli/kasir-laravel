@@ -7,6 +7,11 @@
     margin: 0 auto;
 }
 
+.text-danger {
+    display: none;
+    color: transparent;
+}
+
 .card {
     border: none;
     border-radius: 8px;
@@ -108,5 +113,5 @@
 .btn-secondary:hover {
     background-color: #dc2626; /* lebih gelap saat hover */
     border-color: #dc2626;
-    
+
 }

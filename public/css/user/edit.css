@@ -161,6 +161,10 @@
     resize: vertical;
     min-height: 100px;
 }
+.text-danger {
+    display: none;
+    color: transparent;
+}
 
 /* Password Section */
 .password-section {

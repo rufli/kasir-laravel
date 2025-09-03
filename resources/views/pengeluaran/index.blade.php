@@ -32,6 +32,7 @@
                         <th>Nama</th>
                         <th>Kategori</th>
                         <th>Catatan</th>
+                        <th>Satuan</th>
                         <th>Jumlah</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
@@ -44,6 +45,7 @@
                         <td data-label="Nama">{{ $item->nama }}</td>
                         <td data-label="Kategori">{{ $item->kategori->nama ?? '-' }}</td>
                         <td data-label="Catatan">{{ $item->catatan ?? '-' }}</td>
+                        <td data-label="Satuan">{{ $item->satuan }}</td>
                         <td data-label="Jumlah">Rp. {{ number_format($item->jumlah, 0, ',', '.') }}</td>
                         <td data-label="Tanggal">{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                         <td data-label="Aksi">

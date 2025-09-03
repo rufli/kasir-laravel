@@ -63,6 +63,21 @@
                     @enderror
                 </div>
 
+
+                <!-- Satuan -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="satuan">Satuan</label>
+                    <input type="text"
+                           name="satuan"
+                           id="satuan"
+                           class="form-control @error('satuan') is-invalid @enderror"
+                           value="{{ old('satuan') }}"
+                           placeholder="Contoh: kg, liter, pcs">
+                    @error('satuan')
+                        <div class="error-message text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- Jumlah -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="jumlah">Jumlah</label>

@@ -28,14 +28,14 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="tanggal">Tanggal</label>
                     <input type="date" name="tanggal" id="tanggal" class="form-control"
-                        value="{{ old('tanggal', $pengeluaran->tanggal) }}" required>
+                        value="{{ old('tanggal', $pengeluaran->tanggal) }}" >
                 </div>
 
                 <!-- Nama -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="nama">Nama</label>
                     <input type="text" name="nama" id="nama" class="form-control"
-                        value="{{ old('nama', $pengeluaran->nama) }}" required>
+                        value="{{ old('nama', $pengeluaran->nama) }}" >
                 </div>
 
                 <!-- Kategori -->
@@ -47,7 +47,7 @@
                         </a>
                     </small>
                     <select name="kategori_pengeluaran_id" id="kategori_pengeluaran_id" class="form-select custom-select"
-                        required>
+                        >
                         <option value="">-- Pilih Kategori --</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id }}"
@@ -58,11 +58,22 @@
                     </select>
                 </div>
 
+                <!-- Satuan -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="satuan">Satuan</label>
+                    <input type="text"
+                           name="satuan"
+                           id="satuan"
+                           class="form-control"
+                           value="{{ old('satuan', $pengeluaran->satuan) }}"
+                           placeholder="Contoh: kg, liter, pcs">
+                </div>
+                
                 <!-- Jumlah -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="jumlah">Jumlah</label>
                     <input type="number" name="jumlah" id="jumlah" class="form-control"
-                        value="{{ old('jumlah', $pengeluaran->jumlah) }}" required>
+                        value="{{ old('jumlah', $pengeluaran->jumlah) }}" >
                 </div>
 
                 <!-- Catatan -->

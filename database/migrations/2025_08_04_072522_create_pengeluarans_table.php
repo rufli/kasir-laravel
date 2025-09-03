@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->date('tanggal');
             $table->string('nama', 45);
+            $table->string('satuan', 10);
             $table->decimal('jumlah', 15, 2); // precision & scale
             $table->string('catatan', 60)->nullable();
 

@@ -11,19 +11,18 @@ class PengeluaranController extends Controller
 {
     // Tampilkan semua pengeluaran
     public function index(Request $request)
-{
-    $query = Pengeluaran::with('kategori');
+    {
+        $query = Pengeluaran::with('kategori');
 
-    if ($request->has('search') && $request->search !== null) {
-        $search = $request->search;
-        $query->where('nama', 'like', '%' . $search . '%');
+        if ($request->has('search') && $request->search !== null) {
+            $search = $request->search;
+            $query->where('nama', 'like', '%' . $search . '%');
+        }
+
+        $pengeluaran = $query->latest()->get();
+
+        return view('pengeluaran.index', compact('pengeluaran'));
     }
-
-    $pengeluaran = $query->latest()->get();
-
-    return view('pengeluaran.index', compact('pengeluaran'));
-}
-
 
     // Tampilkan form tambah pengeluaran
     public function create()
@@ -37,13 +36,27 @@ class PengeluaranController extends Controller
     {
         $validated = $request->validate([
             'tanggal' => 'required|date',
-            'nama' => 'required|string|max:45',
+            'nama' => 'required|string|min:3|max:20',
+            'satuan' => 'required|string|min:1|max:10',
             'jumlah' => 'required|numeric|min:0',
             'catatan' => 'nullable|string|max:60',
             'kategori_pengeluaran_id' => 'required|exists:kategori_pengeluaran,id',
+        ], [
+            'tanggal.required' => 'tanggal wajib di isi',
+            'nama.required' => 'nama tidak boleh kosong',
+            'nama.min' => 'nama harus lebih dari 2 karakter',
+            'nama.max' => 'nama tidak boleh lebih dari 20 karakter',
+            'satuan.required' => 'satuan wajib di isi',
+            'satuan.min' => 'satuan harus lebih dari 0 karakter',
+            'satuan.max' => 'satuan tidak boleh lebih dari 10 karakter',
+            'jumlah.required' => 'jumlah wajib di isi',
+            'jumlah.numeric' => 'jumlah harus berupa angka',
+            'jumlah.min' => 'jumlah tidak boleh kurang dari 0',
+            'kategori_pengeluaran_id.required' => 'kategori wajib di isi',
+            'kategori_pengeluaran_id.exists' => 'kategori tidak valid',
         ]);
 
-        $validated['user_id'] = 1; // Sementara jika tanpa login
+        $validated['user_id'] = 1; // sementara jika tanpa login
         Pengeluaran::create($validated);
 
         return redirect()->route('pengeluaran.index')->with('success', 'Pengeluaran berhasil ditambahkan.');
@@ -61,10 +74,24 @@ class PengeluaranController extends Controller
     {
         $validated = $request->validate([
             'tanggal' => 'required|date',
-            'nama' => 'required|string|max:45',
+            'nama' => 'required|string|min:3|max:20',
+            'satuan' => 'required|string|min:1|max:10',
             'jumlah' => 'required|numeric|min:0',
             'catatan' => 'nullable|string|max:60',
             'kategori_pengeluaran_id' => 'required|exists:kategori_pengeluaran,id',
+        ], [
+            'tanggal.required' => 'tanggal wajib di isi',
+            'nama.required' => 'nama tidak boleh kosong',
+            'nama.min' => 'nama harus lebih dari 2 karakter',
+            'nama.max' => 'nama tidak boleh lebih dari 20 karakter',
+            'satuan.required' => 'satuan wajib di isi',
+            'satuan.min' => 'satuan harus lebih dari 0 karakter',
+            'satuan.max' => 'satuan tidak boleh lebih dari 10 karakter',
+            'jumlah.required' => 'jumlah wajib di isi',
+            'jumlah.numeric' => 'jumlah harus berupa angka',
+            'jumlah.min' => 'jumlah tidak boleh kurang dari 0',
+            'kategori_pengeluaran_id.required' => 'kategori wajib di isi',
+            'kategori_pengeluaran_id.exists' => 'kategori tidak valid',
         ]);
 
         $pengeluaran->update($validated);

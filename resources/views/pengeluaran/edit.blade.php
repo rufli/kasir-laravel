@@ -9,17 +9,6 @@
 @section('content')
     <div class="container">
         <h2>Edit Pengeluaran</h2>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form action="{{ route('pengeluaran.update', $pengeluaran->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -27,15 +16,27 @@
                 <!-- Tanggal -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="tanggal">Tanggal</label>
-                    <input type="date" name="tanggal" id="tanggal" class="form-control"
-                        value="{{ old('tanggal', $pengeluaran->tanggal) }}" >
+                    <input type="date"
+                           name="tanggal"
+                           id="tanggal"
+                           class="form-control @error('tanggal') is-invalid @enderror"
+                           value="{{ old('tanggal', $pengeluaran->tanggal) }}">
+                    @error('tanggal')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Nama -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control"
-                        value="{{ old('nama', $pengeluaran->nama) }}" >
+                    <input type="text"
+                           name="nama"
+                           id="nama"
+                           class="form-control @error('nama') is-invalid @enderror"
+                           value="{{ old('nama', $pengeluaran->nama) }}">
+                    @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Kategori -->
@@ -46,8 +47,9 @@
                             Tambah Kategori +
                         </a>
                     </small>
-                    <select name="kategori_pengeluaran_id" id="kategori_pengeluaran_id" class="form-select custom-select"
-                        >
+                    <select name="kategori_pengeluaran_id"
+                            id="kategori_pengeluaran_id"
+                            class="form-select custom-select @error('kategori_pengeluaran_id') is-invalid @enderror">
                         <option value="">-- Pilih Kategori --</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id }}"
@@ -56,6 +58,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('kategori_pengeluaran_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Satuan -->
@@ -64,22 +69,37 @@
                     <input type="text"
                            name="satuan"
                            id="satuan"
-                           class="form-control"
+                           class="form-control @error('satuan') is-invalid @enderror"
                            value="{{ old('satuan', $pengeluaran->satuan) }}"
                            placeholder="Contoh: kg, liter, pcs">
+                    @error('satuan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 
                 <!-- Jumlah -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="jumlah">Jumlah</label>
-                    <input type="number" name="jumlah" id="jumlah" class="form-control"
-                        value="{{ old('jumlah', $pengeluaran->jumlah) }}" >
+                    <input type="number"
+                           name="jumlah"
+                           id="jumlah"
+                           class="form-control @error('jumlah') is-invalid @enderror"
+                           value="{{ old('jumlah', $pengeluaran->jumlah) }}">
+                    @error('jumlah')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Catatan -->
                 <div class="col-md-12 mb-3">
                     <label class="form-label" for="catatan">Catatan</label>
-                    <textarea name="catatan" id="catatan" class="form-control" rows="3">{{ old('catatan', $pengeluaran->catatan) }}</textarea>
+                    <textarea name="catatan"
+                              id="catatan"
+                              class="form-control @error('catatan') is-invalid @enderror"
+                              rows="3">{{ old('catatan', $pengeluaran->catatan) }}</textarea>
+                    @error('catatan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 

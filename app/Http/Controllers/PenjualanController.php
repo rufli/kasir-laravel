@@ -260,6 +260,11 @@ class PenjualanController extends Controller
             $query->whereDate('tanggal', $request->tanggal);
         }
 
+        // ✅ Filter metode pembayaran
+        if ($request->filled('metode_pembayaran')) {
+            $query->where('metode_pembayaran', $request->metode_pembayaran);
+        }
+
         $riwayat = $query->orderBy('tanggal', 'desc')->get();
 
         return view('penjualan.riwayat', compact('riwayat', 'users'));

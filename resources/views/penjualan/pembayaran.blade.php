@@ -11,45 +11,33 @@
         <div class="checkout-card">
             <h2 class="checkout-title">Konfirmasi Pembayaran</h2>
 
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
             <form action="{{ route('penjualan.checkout') }}" method="POST">
                 @csrf
 
                 {{-- Metode Pembayaran --}}
                 <div class="form-group">
                     <label for="metode_pembayaran">Metode Pembayaran</label>
-                    <select name="metode_pembayaran" id="metode_pembayaran" required>
+                    <select name="metode_pembayaran" id="metode_pembayaran">
                         <option value="">-- Pilih --</option>
-                        <option value="tunai">Tunai</option>
-                        <option value="transfer">Transfer</option>
-                        <option value="qris">QRIS</option>
+                        <option value="tunai" {{ old('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
+                        <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer
+                        </option>
+                        <option value="qris" {{ old('metode_pembayaran') == 'qris' ? 'selected' : '' }}>QRIS</option>
                     </select>
+                    @error('metode_pembayaran')
+                        <small class="text-danger">*{{ $message }}</small>
+                    @enderror
                 </div>
-                @if ($errors->any())
-                    <div style="color: red; margin-bottom: 20px;">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 {{-- Jumlah Dibayar --}}
                 <div class="form-group">
                     <label for="jumlah_dibayar">Jumlah Uang Dibayar</label>
                     <input type="number" name="jumlah_dibayar" id="jumlah_dibayar" min="0"
-                        placeholder="Masukkan jumlah uang yang dibayarkan" value="{{ old('jumlah_dibayar') }}" required>
+                        placeholder="Masukkan jumlah uang yang dibayarkan" value="{{ old('jumlah_dibayar') }}">
                     @error('jumlah_dibayar')
-                        <span class="text-danger" style="font-size: 14px; display: block; margin-top: 32px;">
-                            {{ $message }}
-                        </span>
+                        <small class="text-danger">*{{ $message }}</small>
                     @enderror
                 </div>
-
 
                 {{-- Total Pembayaran --}}
                 <div class="checkout-total">

@@ -53,7 +53,7 @@
                         <label for="password" class="form-label">Password</label>
                         <div class="position-relative">
                             <input id="password" name="password" type="password" required class="input-style pe-5"
-                                   placeholder="••••••••">
+                                   placeholder="Masukkan Password">
                             <span class="position-absolute top-50 end-0 translate-middle-y me-3 toggle-password"
                                   onclick="togglePassword()" style="cursor: pointer;">
                                 <i class="bi bi-eye"></i>

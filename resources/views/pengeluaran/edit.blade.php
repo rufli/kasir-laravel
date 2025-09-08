@@ -22,7 +22,7 @@
                            class="form-control @error('tanggal') is-invalid @enderror"
                            value="{{ old('tanggal', $pengeluaran->tanggal) }}">
                     @error('tanggal')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -35,7 +35,7 @@
                            class="form-control @error('nama') is-invalid @enderror"
                            value="{{ old('nama', $pengeluaran->nama) }}">
                     @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -59,7 +59,7 @@
                         @endforeach
                     </select>
                     @error('kategori_pengeluaran_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -73,7 +73,7 @@
                            value="{{ old('satuan', $pengeluaran->satuan) }}"
                            placeholder="Contoh: kg, liter, pcs">
                     @error('satuan')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -86,7 +86,7 @@
                            class="form-control @error('jumlah') is-invalid @enderror"
                            value="{{ old('jumlah', $pengeluaran->jumlah) }}">
                     @error('jumlah')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -98,7 +98,7 @@
                               class="form-control @error('catatan') is-invalid @enderror"
                               rows="3">{{ old('catatan', $pengeluaran->catatan) }}</textarea>
                     @error('catatan')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
             </div>

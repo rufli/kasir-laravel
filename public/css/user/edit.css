@@ -342,3 +342,15 @@
 #passwordFields.active {
     animation: fadeIn 0.3s ease-out forwards;
 }
+
+/* Border merah kalau input error */
+.is-invalid {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}
+.invalid-feedback {
+    color: #dc3545; /* merah Bootstrap */
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-top: 4px;
+}

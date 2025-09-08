@@ -17,25 +17,31 @@
                 {{-- Metode Pembayaran --}}
                 <div class="form-group">
                     <label for="metode_pembayaran">Metode Pembayaran</label>
-                    <select name="metode_pembayaran" id="metode_pembayaran">
+                    <select name="metode_pembayaran"
+                            id="metode_pembayaran"
+                            class="@error('metode_pembayaran') is-invalid @enderror">
                         <option value="">-- Pilih --</option>
                         <option value="tunai" {{ old('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
-                        <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer
-                        </option>
+                        <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
                         <option value="qris" {{ old('metode_pembayaran') == 'qris' ? 'selected' : '' }}>QRIS</option>
                     </select>
                     @error('metode_pembayaran')
-                        <small class="text-danger">*{{ $message }}</small>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
                 {{-- Jumlah Dibayar --}}
                 <div class="form-group">
                     <label for="jumlah_dibayar">Jumlah Uang Dibayar</label>
-                    <input type="number" name="jumlah_dibayar" id="jumlah_dibayar" min="0"
-                        placeholder="Masukkan jumlah uang yang dibayarkan" value="{{ old('jumlah_dibayar') }}">
+                    <input type="number"
+                           name="jumlah_dibayar"
+                           id="jumlah_dibayar"
+                           min="0"
+                           placeholder="Masukkan jumlah uang yang dibayarkan"
+                           value="{{ old('jumlah_dibayar') }}"
+                           class="@error('jumlah_dibayar') is-invalid @enderror">
                     @error('jumlah_dibayar')
-                        <small class="text-danger">*{{ $message }}</small>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -55,15 +61,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const metodePembayaran = document.getElementById('metode_pembayaran');
             const jumlahDibayar = document.getElementById('jumlah_dibayar');
-            const total = {{ $total }}; // Total dari server
+            const total = {{ $total }};
 
             metodePembayaran.addEventListener('change', function() {
                 if (['transfer', 'qris'].includes(this.value)) {
-                    jumlahDibayar.value = total; // otomatis isi total
-                    jumlahDibayar.readOnly = true; // tidak bisa diubah
+                    jumlahDibayar.value = total;
+                    jumlahDibayar.readOnly = true;
                 } else {
-                    jumlahDibayar.value = ''; // kosongkan kalau tunai
-                    jumlahDibayar.readOnly = false; // bisa diubah manual
+                    jumlahDibayar.value = '';
+                    jumlahDibayar.readOnly = false;
                 }
             });
         });

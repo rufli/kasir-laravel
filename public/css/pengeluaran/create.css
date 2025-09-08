@@ -223,6 +223,6 @@ h2 {
 .invalid-feedback {
     color: #dc3545; /* merah Bootstrap */
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 400;
     margin-top: 4px;
 }

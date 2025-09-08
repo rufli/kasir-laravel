@@ -17,21 +17,23 @@
                 @csrf
                 @method('PUT')
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="nama">Nama Kategori</label>
                     <input type="text"
+                           id="nama"
+                           name="nama"
                            class="form-control @error('nama') is-invalid @enderror"
-                           id="nama" name="nama"
                            value="{{ old('nama', $kategoriProduk->nama) }}"
-                           required>
+                           maxlength="45"
+                           >
                     @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">Simpan</button>
-                    <button type="button" class="btn-secondary" onclick="window.location='{{ route('kategori_produk.index') }}'">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="{{ route('kategori_produk.index') }}" class="btn btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

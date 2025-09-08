@@ -6,7 +6,7 @@
     <title>POSKasir - @yield('title')</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
     <!-- CSS Global -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -67,7 +67,7 @@
                             <span>Produk</span>
                         </a>
                     </li>
-                    
+
                     {{-- Kategori hanya admin --}}
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item has-submenu {{ request()->routeIs('kategori_produk.*') || request()->routeIs('kategori_pengeluaran.*') ? 'open' : '' }}">
@@ -92,7 +92,7 @@
                             </ul>
                         </li>
                     @endif
-                    
+
                     @if (Auth::user()->role == 'pegawai')
                         <li class="nav-item">
                             <a href="{{ route('penjualan.daftar_produk') }}"
@@ -102,7 +102,7 @@
                             </a>
                         </li>
                     @endif
-                    
+
                     <li class="nav-item">
                         <a href="{{ route('penjualan.riwayat') }}"
                             class="sidebar-link {{ request()->routeIs('penjualan.riwayat*') ? 'active' : '' }}">
@@ -196,23 +196,23 @@
                     e.preventDefault();
                     const parent = this.closest('.has-submenu');
                     parent.classList.toggle('open');
-                    
+
                     // Rotate chevron icon
                     const icon = this.querySelector('.submenu-toggle-icon');
                     icon.classList.toggle('rotate');
                 });
             });
-            
+
             // Toggle sidebar on mobile
             const sidebarToggle = document.querySelector('.sidebar-toggle');
             const sidebar = document.querySelector('.sidebar');
-            
+
             if (sidebarToggle && sidebar) {
                 sidebarToggle.addEventListener('click', function() {
                     sidebar.classList.toggle('active');
                 });
             }
-            
+
             // Close sidebar when clicking outside on mobile
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {

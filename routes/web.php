@@ -33,6 +33,9 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::resource('produk', ProdukController::class);
 
+    Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
+    Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
+
     Route::prefix('laporan')->group(function () {
         Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan.keuangan');
         Route::get('/harian', [LaporanKeuanganController::class, 'harian'])->name('laporan.harian');
@@ -64,8 +67,7 @@ Route::middleware(['auth:sanctum', 'role:pegawai'])->group(function () {
     Route::get('/penjualan/keranjang', [PenjualanController::class, 'keranjang'])->name('penjualan.keranjang');
     Route::get('/penjualan/checkout', [PenjualanController::class, 'checkoutPage'])->name('penjualan.checkout.page');
     Route::post('/penjualan/checkout', [PenjualanController::class, 'checkout'])->name('penjualan.checkout');
-    Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
-    Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
+
     Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');
 });
 

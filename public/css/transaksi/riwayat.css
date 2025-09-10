@@ -520,3 +520,38 @@
         min-width: auto;
     }
 }
+th .filter-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+th .filter-inline select {
+    min-width: 110px;
+}
+th .filter-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+th .filter-inline span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+th .filter-inline select {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 3px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    min-width: 100px;
+    transition: all 0.2s ease;
+}
+
+th .filter-inline select:hover {
+    border-color: #888;
+}

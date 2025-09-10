@@ -22,9 +22,9 @@
                     <label for="nama" class="form-label">Nama</label>
                     <input type="text" name="nama" id="nama"
                            value="{{ old('nama', $kategori_pengeluaran->nama) }}"
-                           class="form-control @error('nama') is-invalid @enderror" required>
+                           class="form-control @error('nama') is-invalid @enderror" >
                     @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 

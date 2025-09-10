@@ -21,7 +21,7 @@
                            class="form-control @error('tanggal') is-invalid @enderror"
                            value="{{ old('tanggal') }}">
                     @error('tanggal')
-                   {{--<div class="error-message">{{ $message }}</div>--}}
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -34,7 +34,7 @@
                            class="form-control @error('nama') is-invalid @enderror"
                            value="{{ old('nama') }}">
                     @error('nama')
-                   {{--<div class="error-message">{{ $message }}</div>--}}
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -49,7 +49,7 @@
 
                     <select name="kategori_pengeluaran_id"
                             id="kategori_pengeluaran_id"
-                            class="form-select custom-select @error('kategori_pengeluaran_id') is-invalid @enderror">
+                            class="form-select @error('kategori_pengeluaran_id') is-invalid @enderror">
                         <option value="">-- Pilih Kategori --</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id }}"
@@ -59,10 +59,9 @@
                         @endforeach
                     </select>
                     @error('kategori_pengeluaran_id')
-                    {{--<div class="error-message">{{ $message }}</div>--}}
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
-
 
                 <!-- Satuan -->
                 <div class="col-md-6 mb-3">
@@ -74,7 +73,7 @@
                            value="{{ old('satuan') }}"
                            placeholder="Contoh: kg, liter, pcs">
                     @error('satuan')
-                        <div class="error-message text-danger">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -87,7 +86,7 @@
                            class="form-control @error('jumlah') is-invalid @enderror"
                            value="{{ old('jumlah') }}">
                     @error('jumlah')
-                    {{--<div class="error-message">{{ $message }}</div>--}}
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -99,7 +98,7 @@
                               class="form-control @error('catatan') is-invalid @enderror"
                               rows="3">{{ old('catatan') }}</textarea>
                     @error('catatan')
-                    {{--<div class="error-message">{{ $message }}</div>--}}
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
             </div>

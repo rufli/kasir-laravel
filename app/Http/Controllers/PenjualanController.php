@@ -38,18 +38,35 @@ class PenjualanController extends Controller
     {
         $request->validate([
             'produk_id' => 'required|exists:produks,id',
-            'jumlah' => 'required|integer|min:1',
+            'jumlah'    => 'required|integer|min:1',
         ]);
 
         $keranjang = session()->get('keranjang', []);
         $produkId = $request->produk_id;
+        $jumlahBaru = $request->jumlah;
 
-        $keranjang[$produkId] = ($keranjang[$produkId] ?? 0) + $request->jumlah;
+        $produk = Produk::findOrFail($produkId);
 
+        // Hitung total jumlah di keranjang jika produk ini sudah ada
+        $jumlahDiKeranjang = $keranjang[$produkId] ?? 0;
+        $totalJumlah = $jumlahDiKeranjang + $jumlahBaru;
+
+        // Validasi stok
+        if ($produk->stok < $totalJumlah) {
+            return redirect()->back()
+                ->with('error_produk', [
+                    'id' => $produk->id,
+                    'pesan' => 'Stok produk tidak mencukupi.'
+                ]);
+        }
+
+        // Jika stok cukup, tambahkan ke keranjang
+        $keranjang[$produkId] = $totalJumlah;
         session()->put('keranjang', $keranjang);
 
         return redirect()->back();
     }
+
 
     // 3. Tampilkan halaman keranjang
     public function keranjang()
@@ -117,6 +134,11 @@ class PenjualanController extends Controller
         $request->validate([
             'metode_pembayaran' => 'required|in:tunai,transfer,qris',
             'jumlah_dibayar'    => 'required|numeric|min:0'
+        ], [
+            'metode_pembayaran.required' => 'Metode Pembayaran wajib di isi',
+            'metode_pembayaran.in'       => 'Metode Pembayaran tidak valid',
+            'jumlah_dibayar.required'    => 'Jumlah uang wajib di isi',
+            'jumlah_dibayar.numeric'     => 'Jumlah uang harus berupa angka',
         ]);
 
         $keranjang = session()->get('keranjang', []);
@@ -157,9 +179,12 @@ class PenjualanController extends Controller
 
             // Validasi jumlah dibayar harus >= total harga
             if ($jumlahDibayar < $totalHarga) {
+                DB::rollback(); // tambahkan rollback agar stok yang sudah dikurangi tidak tersimpan
                 return redirect()->back()
                     ->withInput()
-                    ->withErrors(['jumlah_dibayar' => 'Jumlah uang yang dibayar kurang dari total harga.']);
+                    ->withErrors([
+                        'jumlah_dibayar' => 'Jumlah yang dibayar kurang dari total harga. Silakan masukkan nominal yang sesuai.'
+                    ]);
             }
 
             $jumlahKembalian = $jumlahDibayar - $totalHarga;
@@ -233,6 +258,11 @@ class PenjualanController extends Controller
         // Filter tanggal
         if ($request->filled('tanggal')) {
             $query->whereDate('tanggal', $request->tanggal);
+        }
+
+        // ✅ Filter metode pembayaran
+        if ($request->filled('metode_pembayaran')) {
+            $query->where('metode_pembayaran', $request->metode_pembayaran);
         }
 
         $riwayat = $query->orderBy('tanggal', 'desc')->get();

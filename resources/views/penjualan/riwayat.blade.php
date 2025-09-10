@@ -5,6 +5,7 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/transaksi/riwayat.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 @endpush
 
 @section('content')
@@ -20,12 +21,11 @@
                             <label for="user_id"
                                 style="color: #333; font-weight: 600; font-size: 14px; margin: 0;">Pengguna:</label>
                             <select name="user_id" id="user_id"
-                                style="border: 1px solid #ccc; border-radius: 12px; padding: 6px 12px; font-size: 14px; cursor: pointer; transition: all 0.2s ease; text-align: left;"
-                                onchange="document.getElementById('filterTanggalForm').submit()">
+                                style="border: 1px solid #ccc; border-radius: 12px; padding: 6px 12px; font-size: 14px; cursor: pointer;"
+                                onchange="this.form.submit()">
                                 <option value="">Semua</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ request('user_id') == $user->id ? 'selected' : '' }}>
+                                    <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>
                                         {{ $user->nama }}
                                     </option>
                                 @endforeach
@@ -36,8 +36,7 @@
                     {{-- Filter Tanggal --}}
                     <input type="date" name="tanggal" id="tanggal" value="{{ request('tanggal') }}"
                         style="border-radius: 20px; border: none; padding: 6px 12px; font-size: 14px; cursor: pointer;"
-                        onchange="document.getElementById('filterTanggalForm').submit()">
-
+                        onchange="this.form.submit()">
                 </form>
             </div>
         </div>
@@ -54,33 +53,45 @@
                         @endif
 
                         <th>Id Transaksi</th>
-                        <th>Metode Pembayaran</th>
+                        <th>
+                            <div class="filter-inline">
+                                <span>Metode Pembayaran</span>
+                                <form action="{{ route('penjualan.riwayat') }}" method="GET" id="filterMetodeForm">
+                                    <select name="metode_pembayaran" onchange="this.form.submit()">
+                                        <option value="">Semua</option>
+                                        <option value="tunai" {{ request('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
+                                        <option value="qris" {{ request('metode_pembayaran') == 'qris' ? 'selected' : '' }}>QRIS</option>
+                                        <option value="transfer" {{ request('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </th>
                         <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($riwayat as $item)
-                    <tr>
-                        <td data-label="No">{{ $loop->iteration }}</td>
-                        <td data-label="Tanggal">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
-                        @if (auth()->user()->role === 'admin')
-                            <td data-label="Pengguna">{{ $item->user->nama ?? '-' }}</td>
-                        @endif
-                        <td data-label="Id Transaksi">{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</td>
-                        <td data-label="Metode Pembayaran">{{ ucfirst($item->metode_pembayaran) }}</td>
-                        <td data-label="Total Harga">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                        <td data-label="Aksi">
-                            <div class="btn-action-group">
-                                <a href="{{ route('penjualan.detail', $item->id) }}" class="btn-detail">
-                                    <i class="fas fa-info-circle"></i> Detail
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td data-label="No">{{ $loop->iteration }}</td>
+                            <td data-label="Tanggal">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d/m/Y') }}</td>
+                            @if (auth()->user()->role === 'admin')
+                                <td data-label="Pengguna">{{ $item->user->nama ?? '-' }}</td>
+                            @endif
+                            <td data-label="Id Transaksi">{{ str_pad($item->id, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td data-label="Metode Pembayaran">{{ ucfirst($item->metode_pembayaran) }}</td>
+                            <td data-label="Total Harga">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
+                            <td data-label="Aksi">
+                                <div class="btn-action-group">
+                                    <a href="{{ route('penjualan.detail', $item->id) }}" class="btn-detail">
+                                        <i class="fas fa-info-circle"></i> Detail
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}"class="empty-message">
+                            <td colspan="{{ auth()->user()->role === 'admin' ? '7' : '6' }}" class="empty-message">
                                 Belum ada data transaksi.
                             </td>
                         </tr>

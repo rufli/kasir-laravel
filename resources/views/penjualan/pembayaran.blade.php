@@ -11,45 +11,39 @@
         <div class="checkout-card">
             <h2 class="checkout-title">Konfirmasi Pembayaran</h2>
 
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
             <form action="{{ route('penjualan.checkout') }}" method="POST">
                 @csrf
 
                 {{-- Metode Pembayaran --}}
                 <div class="form-group">
                     <label for="metode_pembayaran">Metode Pembayaran</label>
-                    <select name="metode_pembayaran" id="metode_pembayaran" required>
+                    <select name="metode_pembayaran"
+                            id="metode_pembayaran"
+                            class="@error('metode_pembayaran') is-invalid @enderror">
                         <option value="">-- Pilih --</option>
-                        <option value="tunai">Tunai</option>
-                        <option value="transfer">Transfer</option>
-                        <option value="qris">QRIS</option>
+                        <option value="tunai" {{ old('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
+                        <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                        <option value="qris" {{ old('metode_pembayaran') == 'qris' ? 'selected' : '' }}>QRIS</option>
                     </select>
+                    @error('metode_pembayaran')
+                        <div class="invalid-feedback">*{{ $message }}</div>
+                    @enderror
                 </div>
-                @if ($errors->any())
-                    <div style="color: red; margin-bottom: 20px;">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 {{-- Jumlah Dibayar --}}
                 <div class="form-group">
                     <label for="jumlah_dibayar">Jumlah Uang Dibayar</label>
-                    <input type="number" name="jumlah_dibayar" id="jumlah_dibayar" min="0"
-                        placeholder="Masukkan jumlah uang yang dibayarkan" value="{{ old('jumlah_dibayar') }}" required>
+                    <input type="number"
+                           name="jumlah_dibayar"
+                           id="jumlah_dibayar"
+                           min="0"
+                           placeholder="Masukkan jumlah uang yang dibayarkan"
+                           value="{{ old('jumlah_dibayar') }}"
+                           class="@error('jumlah_dibayar') is-invalid @enderror">
                     @error('jumlah_dibayar')
-                        <span class="text-danger" style="font-size: 14px; display: block; margin-top: 32px;">
-                            {{ $message }}
-                        </span>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
-
 
                 {{-- Total Pembayaran --}}
                 <div class="checkout-total">
@@ -67,15 +61,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const metodePembayaran = document.getElementById('metode_pembayaran');
             const jumlahDibayar = document.getElementById('jumlah_dibayar');
-            const total = {{ $total }}; // Total dari server
+            const total = {{ $total }};
 
             metodePembayaran.addEventListener('change', function() {
                 if (['transfer', 'qris'].includes(this.value)) {
-                    jumlahDibayar.value = total; // otomatis isi total
-                    jumlahDibayar.readOnly = true; // tidak bisa diubah
+                    jumlahDibayar.value = total;
+                    jumlahDibayar.readOnly = true;
                 } else {
-                    jumlahDibayar.value = ''; // kosongkan kalau tunai
-                    jumlahDibayar.readOnly = false; // bisa diubah manual
+                    jumlahDibayar.value = '';
+                    jumlahDibayar.readOnly = false;
                 }
             });
         });

@@ -20,9 +20,9 @@
                            id="nama"
                            name="nama"
                            value="{{ old('nama') }}"
-                           >
+                           placeholder="Masukkan Nama Kategori">
                     @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-actions">

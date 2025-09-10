@@ -18,9 +18,10 @@
                 <div class="form-group">
                     <label for="nama">Nama Kategori</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                           id="nama" name="nama" value="{{ old('nama') }}" required>
+                           id="nama" name="nama" value="{{ old('nama') }}"
+                           placeholder="Masukkan Nama Kategori">
                     @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">*{{ $message }}</div>
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Simpan</button>

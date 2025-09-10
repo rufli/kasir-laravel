@@ -20,7 +20,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nama">Nama Pegawai</label>
-                    <input type="text" name="nama" id="nama" value="{{ old('nama', $pegawai->nama) }}" class="@error('nama') is-invalid @enderror" required>
+                    <input type="text" name="nama" id="nama" value="{{ old('nama', $pegawai->nama) }}" class="@error('nama') is-invalid @enderror" >
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" value="{{ old('username', $pegawai->username) }}" class="@error('username') is-invalid @enderror" required>
+                    <input type="text" name="username" id="username" value="{{ old('username', $pegawai->username) }}" class="@error('username') is-invalid @enderror" >
                     @error('username')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

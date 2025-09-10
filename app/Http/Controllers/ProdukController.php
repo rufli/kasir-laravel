@@ -6,6 +6,7 @@ use App\Models\Produk;
 use App\Models\KategoriProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
@@ -20,6 +21,7 @@ class ProdukController extends Controller
         // Ubah query untuk menyertakan join ke tabel kategori_produks
         // agar kita bisa mencari berdasarkan nama kategori
         $query = Produk::with('kategoriProduk')
+            ->where('produks.is_active', true) // Filter hanya produk aktif
             ->join('kategori_produks', 'produks.kategori_produk_id', '=', 'kategori_produks.id')
             ->select('produks.*', 'kategori_produks.nama as kategori_nama') // Pilih semua kolom produk dan beri alias untuk nama kategori
             ->latest('produks.created_at'); // Menggunakan `latest()` dengan kolom yang jelas untuk menghindari ambiguitas
@@ -42,7 +44,31 @@ class ProdukController extends Controller
         return view('produk.index', compact('produks', 'totalProduks', 'page', 'perPage'));
     }
 
+/* ---------- INDEX PRODUK NONAKTIF ---------- */
+    public function inactiveIndex(Request $request)
+    {
+       $perPage = 10;
+       $page = $request->input('page', 1);
 
+       $query = Produk::with('kategoriProduk')
+           ->where('produks.is_active', false) // Filter hanya produk nonaktif
+           ->join('kategori_produks', 'produks.kategori_produk_id', '=', 'kategori_produks.id')
+           ->select('produks.*', 'kategori_produks.nama as kategori_nama')
+           ->latest('produks.created_at');
+
+       if ($request->filled('search')) {
+           $search = $request->search;
+           $query->where(function ($q) use ($search) {
+               $q->where('produks.nama', 'like', "%{$search}%")
+                 ->orWhere('kategori_produks.nama', 'like', "%{$search}%");
+           });
+       }
+
+       $totalProduks = $query->count();
+       $produks = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
+
+       return view('produk.inactive-index', compact('produks', 'totalProduks', 'page', 'perPage'));
+    }
 
     /* ---------- CREATE ---------- */
     public function create()
@@ -86,7 +112,7 @@ class ProdukController extends Controller
             'stok.integer' => 'Stok harus berupa angka.',
             'stok.min' => 'Stok minimal 0.',
             'stok.max' => 'Stok maksimal 100.000.',
-            
+
             'gambar.mimes' => 'Format gambar harus jpeg, png,atau jpg.',
             'gambar.max' => 'Ukuran gambar maksimal 5MB.',
 
@@ -174,12 +200,42 @@ class ProdukController extends Controller
             ->with('success', 'Produk berhasil diperbarui!');
     }
 
+    /* ---------- TOGGLE STATUS ---------- */
+    public function toggleStatus($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Menggunakan findOrFail karena route menggunakan {id}
+            $produk = Produk::findOrFail($id);
+            $newStatus = !$produk->is_active; // Mengubah status (true -> false atau sebaliknya)
+            $produk->update(['is_active' => $newStatus]);
+
+            DB::commit();
+
+            return redirect()->back()
+                ->with('success', 'Status produk berhasil diubah.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()
+                ->with('error', 'Gagal mengubah status produk: ' . $e->getMessage());
+        }
+    }
+
     /* ---------- DESTROY ---------- */
     public function destroy(Produk $produk)
     {
+        // Periksa apakah ada transaksi penjualan yang terkait dengan produk ini
+        if ($produk->detailTransaksiPenjualan()->exists()) {
+            return redirect()->route('produk.index')
+                ->with('error', 'Produk tidak dapat dihapus karena sudah ada di riwayat transaksi.');
+        }
+
+        // Jika tidak ada transaksi terkait, lanjutkan proses penghapusan
         if ($produk->gambar) {
             Storage::disk('public')->delete($produk->gambar);
         }
+
         $produk->delete();
 
         return redirect()->route('produk.index')

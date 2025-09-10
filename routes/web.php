@@ -31,7 +31,12 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
     Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
     Route::resource('kategori_produk', KategoriProdukController::class);
+
+    // Rute yang diperbarui untuk produk
+    Route::get('/produk/nonaktif', [ProdukController::class, 'inactiveIndex'])->name('produk.inactive-index');
+    Route::post('/produk/{id}/toggle-status', [ProdukController::class, 'toggleStatus'])->name('produk.toggle-status');
     Route::resource('produk', ProdukController::class);
+    // Akhir rute yang diperbarui
 
     Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
     Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatTransaksi'])->name('penjualan.riwayat');
@@ -70,5 +75,3 @@ Route::middleware(['auth:sanctum', 'role:pegawai'])->group(function () {
 
     Route::delete('/penjualan/keranjang/{id}', [PenjualanController::class, 'hapusDariKeranjang'])->name('penjualan.hapus');
 });
-
-// routes/web.php

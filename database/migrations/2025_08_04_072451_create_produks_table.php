@@ -18,9 +18,12 @@ return new class extends Migration
             $table->decimal("harga", 10, 2);
             $table->integer("stok");
             $table->string("gambar")->nullable(); // Kolom untuk menyimpan nama file gambar
+            $table->boolean('is_active')->default(true); // Kolom baru untuk status aktif/non-aktif
             $table->foreignId('kategori_produk_id')
                 ->constrained('kategori_produks')
                 ->onDelete('cascade');
+
+
 
 
             $table->timestamps();

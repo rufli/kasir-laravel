@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Dhasboard')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

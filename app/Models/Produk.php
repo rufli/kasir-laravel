@@ -19,6 +19,7 @@ class Produk extends Model
         'stok',
         'gambar', // Kolom untuk menyimpan nama file gambar
         'kategori_produk_id',
+        'is_active', // Kolom untuk status aktif/non-aktif
     ];
 
     // Definisikan relasi dengan KategoriProduk
@@ -33,8 +34,9 @@ class Produk extends Model
         }
         return null; // atau return URL gambar default
     }
-    public function transaksiPenjualan()
+    // Relasi yang diperbaiki, menghubungkan Produk ke DetailTransaksiPenjualan
+    public function detailTransaksiPenjualan()
     {
-        return $this->hasMany(TransaksiPenjualan::class, 'produk_id');
+        return $this->hasMany(DetailTransaksiPenjualan::class, 'produk_id');
     }
 }

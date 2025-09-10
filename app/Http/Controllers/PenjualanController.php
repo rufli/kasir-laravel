@@ -19,6 +19,9 @@ class PenjualanController extends Controller
     {
         $query = Produk::query();
 
+        // Filter hanya produk yang aktif
+        $query->where('is_active', true);
+
         if ($request->filled('search')) {
             $query->where('nama', 'like', '%' . $request->search . '%');
         }
@@ -190,12 +193,12 @@ class PenjualanController extends Controller
             $jumlahKembalian = $jumlahDibayar - $totalHarga;
 
             $transaksi = TransaksiPenjualan::create([
-                'tanggal'           => Carbon::now()->toDateString(),
-                'total_harga'       => $totalHarga,
-                'jumlah_dibayar'    => $jumlahDibayar,
-                'jumlah_kembalian'  => $jumlahKembalian,
+                'tanggal'            => Carbon::now()->toDateString(),
+                'total_harga'        => $totalHarga,
+                'jumlah_dibayar'     => $jumlahDibayar,
+                'jumlah_kembalian'   => $jumlahKembalian,
                 'metode_pembayaran' => $request->metode_pembayaran,
-                'users_id'          => Auth::id(),
+                'users_id'           => Auth::id(),
             ]);
 
             foreach ($produkData as $item) {

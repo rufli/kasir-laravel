@@ -22,6 +22,18 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin'
         ]);
 
+        // Akun Pegawai
+        User::create([
+            'username' => 'pegawai',
+            'password' => Hash::make('pegawai123'),
+            'nama_usaha' => 'Usaha Kasir',
+            'alamat_usaha' => 'Jl. Raya No. 1, Banyuwangi',
+            'nama' => 'Pegawai Kasir',
+            'alamat' => 'Banyuwangi',
+            'no_telepon' => '081298765432',
+            'role' => 'pegawai'
+        ]);
+
          $this->call([
             KategoriPengeluaranSeeder::class,
             KategoriProdukSeeder::class,

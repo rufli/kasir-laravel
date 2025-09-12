@@ -7,22 +7,28 @@
 @endpush
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterToggle = document.querySelector('.filter-toggle');
-            const filterMenu = document.querySelector('.filter-menu');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterDropdown = document.querySelector('.filter-dropdown');
+        const filterToggle = document.querySelector('.filter-toggle');
+        const filterMenu = document.querySelector('.filter-menu');
 
-            filterToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // supaya klik tombol tidak ditangkap oleh document
-                filterMenu.classList.toggle('active');
-            });
-
-            document.addEventListener('click', function() {
-                filterMenu.classList.remove('active');
-            });
+        filterToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            filterMenu.classList.toggle('active');
         });
-    </script>
+
+        // Klik di luar .filter-dropdown → tutup
+        document.addEventListener('click', function(e) {
+            if (!filterDropdown.contains(e.target)) {
+                filterMenu.classList.remove('active');
+            }
+        });
+    });
+</script>
 @endpush
+
+
 
 @section('content')
     <div class="container">
@@ -53,7 +59,7 @@
                 <button type="button" class="filter-toggle" aria-label="Toggle filter menu">
                     <i class="fas fa-filter"></i>
                 </button>
-                <div class="filter-menu">
+                <div class="filter-menu {{ request('kategori') ? 'active' : '' }}">
                     <select name="kategori" class="kategori-select" onchange="this.form.submit()">
                         <option value="">-- Semua Kategori --</option>
                         @foreach ($kategoriProduks as $kategori)
@@ -65,48 +71,54 @@
                     </select>
                 </div>
             </div>
+
         </form>
 
         <div class="products-grid">
-    @foreach ($produks as $produk)
-        <div class="product-card">
-            {{-- Gambar produk --}}
-            @if ($produk->gambar)
-                <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
+            @if ($produks->isEmpty())
+                <div class="no-product-message">
+                    <i class="fas fa-box-open icon"></i>
+                    <h4>Produk tidak ditemukan</h4>
+                    <p>Coba gunakan kata kunci lain atau pilih kategori berbeda.</p>
+                </div>
             @else
-                <img src="{{ asset('default.jpg') }}" alt="{{ $produk->nama }}" class="product-image">
-            @endif
+                @foreach ($produks as $produk)
+                    <div class="product-card">
+                        {{-- Gambar produk --}}
+                        @if ($produk->gambar)
+                            <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
+                        @else
+                            <img src="{{ asset('default.jpg') }}" alt="{{ $produk->nama }}" class="product-image">
+                        @endif
 
-            <div class="product-info">
-                <h3>{{ $produk->nama }}</h3>
-                <p class="product-category">Kategori {{ $produk->kategoriProduk->nama ?? 'Lainnya' }}</p>
+                        <div class="product-info">
+                            <h3>{{ $produk->nama }}</h3>
+                            <p class="product-category">Kategori {{ $produk->kategoriProduk->nama ?? 'Lainnya' }}</p>
 
-                <div class="product-footer">
-                    <span class="stock-info">Stok: {{ $produk->stok }}</span>
+                            <div class="product-footer">
+                                <span class="stock-info">Stok: {{ $produk->stok }}</span>
 
-                    {{-- Form tambah ke keranjang --}}
-                    <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
-                        @csrf
-                        <input type="hidden" name="produk_id" value="{{ $produk->id }}">
-                        <input type="hidden" name="jumlah" value="1">
-                        <button type="submit" class="add-btn"
-                            aria-label="Tambah {{ $produk->nama }} ke keranjang">+</button>
-                    </form>
-                </div>
-            </div>
+                                {{-- Form tambah ke keranjang --}}
+                                <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
+                                    @csrf
+                                    <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                                    <input type="hidden" name="jumlah" value="1">
+                                    <button type="submit" class="add-btn"
+                                        aria-label="Tambah {{ $produk->nama }} ke keranjang">+</button>
+                                </form>
+                            </div>
+                        </div>
 
-            {{-- Pesan error khusus di bawah card --}}
-            @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
-                <div class="error-message">
-                    ⚠️ {{ data_get(session('error_produk'), 'pesan') }}
-                </div>
+                        {{-- Pesan error khusus di bawah card --}}
+                        @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
+                            <div class="error-message">
+                                ⚠️ {{ data_get(session('error_produk'), 'pesan') }}
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
             @endif
         </div>
-    @endforeach
-</div>
-
-
-
         <!-- Floating Cart Button -->
         <a href="{{ route('penjualan.keranjang') }}" class="cart-floating" aria-label="Lihat keranjang belanja">
             🛒

@@ -207,6 +207,9 @@ class PenjualanController extends Controller
                     'produk_id'              => $item['produk']->id,
                     'jumlah'                 => $item['jumlah'],
                     'subtotal'               => $item['subtotal'],
+                    // Simpan snapshot data produk
+                    'nama_produk'            => $item['produk']->nama,
+                     'harga_produk'           => $item['produk']->harga,
                 ]);
             }
 

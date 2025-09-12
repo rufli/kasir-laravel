@@ -16,6 +16,8 @@ class DetailTransaksiPenjualan extends Model
         'subtotal',
         'transaksi_penjualan_id',
         'produk_id',
+        'nama_produk', // <-- Tambahkan ini
+        'harga_produk', // <-- Tambahkan ini
     ];
 
     // Relasi ke TransaksiPenjualan

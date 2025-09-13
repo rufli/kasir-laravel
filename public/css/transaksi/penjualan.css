@@ -10,22 +10,11 @@ body {
     color: #333;
 }
 
-.page-title h1 {
-    font-size: 14px;
-    font-weight: 500;
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2e7d32;
 }
-.error-message {
-    font-size: 13px;
-    color: #842029;
-    text-align: center;
-    background: #f8d7da;
-    padding: 8px 10px;
-    border-radius: 0 0 12px 12px; /* nempel ke bawah card */
-    width: 100%; /* selebar card */
-    margin: 0; /* jangan ada jarak sama bawah card */
-    box-sizing: border-box; /* biar rapi */
-}
-
 
 .container {
     max-width: 1200px;

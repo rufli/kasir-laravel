@@ -101,9 +101,16 @@ class KategoriProdukController extends Controller
      */
     public function destroy(KategoriProduk $kategoriProduk)
     {
+       // Periksa apakah ada produk yang terhubung dengan kategori ini
+        if ($kategoriProduk->produks()->exists()) {
+            return redirect()->route('kategori_produk.index')
+                             ->with('error', 'Kategori tidak dapat dihapus karena masih ada produk yang terkait.');
+        }
+
+        // Jika tidak ada produk yang terhubung, lanjutkan proses penghapusan
         $kategoriProduk->delete();
 
         return redirect()->route('kategori_produk.index')
-            ->with('success', 'Kategori berhasil dihapus');
+                         ->with('success', 'Kategori berhasil dihapus');
     }
 }

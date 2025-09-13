@@ -7,22 +7,28 @@
 @endpush
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterToggle = document.querySelector('.filter-toggle');
-            const filterMenu = document.querySelector('.filter-menu');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterDropdown = document.querySelector('.filter-dropdown');
+        const filterToggle = document.querySelector('.filter-toggle');
+        const filterMenu = document.querySelector('.filter-menu');
 
-            filterToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // supaya klik tombol tidak ditangkap oleh document
-                filterMenu.classList.toggle('active');
-            });
-
-            document.addEventListener('click', function() {
-                filterMenu.classList.remove('active');
-            });
+        filterToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            filterMenu.classList.toggle('active');
         });
-    </script>
+
+        // Klik di luar .filter-dropdown → tutup
+        document.addEventListener('click', function(e) {
+            if (!filterDropdown.contains(e.target)) {
+                filterMenu.classList.remove('active');
+            }
+        });
+    });
+</script>
 @endpush
+
+
 
 @section('content')
     <div class="container">
@@ -53,7 +59,7 @@
                 <button type="button" class="filter-toggle" aria-label="Toggle filter menu">
                     <i class="fas fa-filter"></i>
                 </button>
-                <div class="filter-menu">
+                <div class="filter-menu {{ request('kategori') ? 'active' : '' }}">
                     <select name="kategori" class="kategori-select" onchange="this.form.submit()">
                         <option value="">-- Semua Kategori --</option>
                         @foreach ($kategoriProduks as $kategori)
@@ -65,9 +71,11 @@
                     </select>
                 </div>
             </div>
+
         </form>
 
         <div class="products-grid">
+<<<<<<< HEAD
             @foreach ($produks as $produk)
                 <div>
                     <div class="product-card">
@@ -85,7 +93,6 @@
 
                             <div class="product-details">
                                 <span class="stock-info">Stok: {{ $produk->stok }}</span>
-
                                 {{-- Form tambah ke keranjang --}}
                                 <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
                                     @csrf
@@ -110,7 +117,6 @@
                  
             @endforeach
         </div>
-
         <!-- Floating Cart Button -->
         <a href="{{ route('penjualan.keranjang') }}" class="cart-floating" aria-label="Lihat keranjang belanja">
             🛒

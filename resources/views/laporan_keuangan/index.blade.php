@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Laporan Keuangan')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/laporan_keuangan/index.css') }}">

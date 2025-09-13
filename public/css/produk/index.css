@@ -355,3 +355,46 @@ nav {
     color: inherit; /* Mewarisi warna teks dari parent */
 }
 
+
+/* aktif non aktif*/
+.status-badge {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.status-aktif {
+    color: #28a745; /* Green for "Aktif" */
+}
+
+.status-nonaktif {
+    color: #dc3545; /* Red for "Nonaktif" */
+}
+
+td[data-label="Status"] {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* tombol aktif non aktif */
+.btn-toggle-status.btn-deactivate {
+    color: #28a745; /* Warna hijau untuk tombol saat aktif */
+    background-color: transparent; /* Hapus background jika ada */
+    border: none; /* Hapus border jika ada */
+    padding: 0; /* Hapus padding jika ada */
+    font-size: 1.5rem; /* Sesuaikan ukuran ikon jika perlu */
+}
+
+.btn-toggle-status.btn-activate {
+    color: #dc3545; /* Warna abu-abu untuk tombol saat nonaktif */
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+/* Jika Anda menggunakan Font Awesome, pastikan ikonnya terlihat jelas */
+.fas {
+    vertical-align: middle; /* Menyelaraskan ikon secara vertikal */
+}

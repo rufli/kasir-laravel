@@ -49,8 +49,8 @@
         @foreach ($transaksi->detailTransaksi as $detail)
             <div class="receipt-item">
                 <div>
-                    <strong>{{ $detail->produks->nama }}</strong>
-                    {{ $detail->jumlah }} X {{ number_format($detail->produks->harga, 0, ',', '.') }}
+                    <strong>{{ $detail->nama_produk }}</strong>
+                    {{ $detail->jumlah }} X {{ number_format($detail->harga_produk, 0, ',', '.') }}
                 </div>
                 <div>Rp. {{ number_format($detail->subtotal, 0, ',', '.') }}</div>
             </div>

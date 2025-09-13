@@ -70,7 +70,7 @@ class KategoriPengeluaranController extends Controller
                 'required',
                 'string',
                 'min:3',
-                'max:36',
+                'max:45',
                 'regex:/^[A-Za-z\s]+$/',
                 'unique:kategori_pengeluaran,nama,' . $kategori_pengeluaran->id,
             ],
@@ -93,6 +93,12 @@ class KategoriPengeluaranController extends Controller
      */
     public function destroy(KategoriPengeluaran $kategori_pengeluaran)
     {
+        // Cek apakah kategori digunakan di pengeluaran
+        if ($kategori_pengeluaran->pengeluaran()->exists()) {
+            return redirect()->route('kategori_pengeluaran.index')
+                ->with('error', 'Kategori tidak dapat dihapus karena sudah digunakan di pengeluaran.');
+        }
+
         $kategori_pengeluaran->delete();
 
         return redirect()->route('kategori_pengeluaran.index')

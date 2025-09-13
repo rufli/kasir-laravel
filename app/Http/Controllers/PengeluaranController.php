@@ -16,7 +16,15 @@ class PengeluaranController extends Controller
 
         if ($request->has('search') && $request->search !== null) {
             $search = $request->search;
-            $query->where('nama', 'like', '%' . $search . '%');
+
+            $query->where(function ($q) use ($search) {
+                // cari berdasarkan nama pengeluaran
+                $q->where('nama', 'like', '%' . $search . '%')
+                    // cari juga berdasarkan nama kategori (relasi)
+                    ->orWhereHas('kategori', function ($q2) use ($search) {
+                        $q2->where('nama', 'like', '%' . $search . '%');
+                    });
+            });
         }
 
         $pengeluaran = $query->latest()->get();

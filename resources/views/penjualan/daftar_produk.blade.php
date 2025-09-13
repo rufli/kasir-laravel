@@ -68,48 +68,48 @@
         </form>
 
         <div class="products-grid">
-    @foreach ($produks as $produk)
+            @foreach ($produks as $produk)
                 <div>
-        <div class="product-card">
+                    <div class="product-card">
 
-            {{-- Gambar produk --}}
-            @if ($produk->gambar)
-                <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
-            @else
-                <img src="{{ asset('default.jpg') }}" alt="{{ $produk->nama }}" class="product-image">
-            @endif
+                        {{-- Gambar produk --}}
+                        @if ($produk->gambar)
+                            <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
+                        @else
+                            <img src="{{ asset('default.jpg') }}" alt="{{ $produk->nama }}" class="product-image">
+                        @endif
 
-            <div class="product-info">
-                <h3>{{ $produk->nama }}</h3>
+                        <div class="product-info">
+                            <h3>{{ $produk->nama }}</h3>
                             <p class="product-category">Kategori: {{ $produk->kategoriProduk->nama ?? 'Lainnya' }}</p>
 
                             <div class="product-details">
-                    <span class="stock-info">Stok: {{ $produk->stok }}</span>
+                                <span class="stock-info">Stok: {{ $produk->stok }}</span>
 
-                    {{-- Form tambah ke keranjang --}}
-                    <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
-                        @csrf
-                        <input type="hidden" name="produk_id" value="{{ $produk->id }}">
-                        <input type="hidden" name="jumlah" value="1">
-                        <button type="submit" class="add-btn"
+                                {{-- Form tambah ke keranjang --}}
+                                <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
+                                    @csrf
+                                    <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                                    <input type="hidden" name="jumlah" value="1">
+                                    <button type="submit" class="add-btn"
                                         aria-label="Tambah {{ $produk->nama }} ke keranjang"
                                         {{ $produk->stok < 1 ? 'disabled' : '' }}>+</button>
-                    </form>
-                </div>
+                                </form>
+                            </div>
                             {{-- Pesan error khusus untuk produk ini --}}
-            @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
-                <div class="error-message">
+                        @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
+                            <div class="error-message">
                                 <i class="fas fa-exclamation-circle"></i>
                                 <span>{{ data_get(session('error_produk'), 'pesan') }}</span>
-                </div>
-            @endif
-        </div>
+                            </div>
+                        @endif
+                        </div>
                     
                     </div>
                 </div>
                  
-    @endforeach
-</div>
+            @endforeach
+        </div>
 
         <!-- Floating Cart Button -->
         <a href="{{ route('penjualan.keranjang') }}" class="cart-floating" aria-label="Lihat keranjang belanja">

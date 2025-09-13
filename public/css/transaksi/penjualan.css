@@ -130,8 +130,8 @@ body {
 
 .product-card {
     display: flex;
-    flex-direction: row; /* agar konten berjajar horizontal */
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start; /* Diubah dari center ke flex-start */
     background: white;
     border-radius: 16px;
     padding: 15px 20px;
@@ -139,12 +139,13 @@ body {
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
     gap: 20px;
-    max-width: 480px; /* supaya card gak terlalu lebar */
+    max-width: 480px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .product-image {
-    width: 120px; /* ukuran gambar lebih kecil dan tetap proporsional */
+    width: 120px;
     height: 120px;
     border-radius: 12px;
     object-fit: cover;
@@ -152,11 +153,11 @@ body {
 }
 
 .product-info {
-    flex: 1; /* agar bagian teks mengisi ruang yang tersisa */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 120px;
+    min-height: 120px;
+    position: relative;
 }
 
 .product-info h3 {
@@ -169,13 +170,15 @@ body {
 .product-category {
     color: #666;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-.product-footer {
+/* PERUBAHAN PENTING: Tata letak stok dan tombol */
+.product-details {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .stock-info {
@@ -197,6 +200,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 18px;
+    flex-shrink: 0;
 }
 
 .add-btn:hover {
@@ -204,6 +208,44 @@ body {
     transform: scale(1.1);
 }
 
+.add-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* PERUBAHAN PENTING: Error message satu baris */
+.error-message {
+    display: flex;
+    align-items: center;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+    margin-top: 10px;
+    white-space: nowrap; /* Mencegah teks wrap ke baris baru */
+    overflow: hidden; /* Menyembunyikan teks yang overflow */
+    text-overflow: ellipsis; /* Menambahkan ellipsis jika teks terlalu panjang */
+}
+
+.error-message i {
+    font-size: 14px;
+    flex-shrink: 0;
+    color: #dc3545;
+}
+
+.error-message span {
+    line-height: 1.3;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .cart-floating {
     position: fixed;
@@ -222,6 +264,7 @@ body {
     box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
     transition: all 0.3s ease;
     z-index: 100;
+    text-decoration: none;
 }
 
 .cart-floating:hover {
@@ -262,21 +305,54 @@ body {
     .header h1 {
         font-size: 20px;
     }
+    
+    .product-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+        align-items: center;
+    }
+    
+    .product-info {
+        min-height: auto;
+        width: 100%;
+    }
+
+    .product-details {
+        justify-content: space-around;
+    }
+
+    .error-message {
+        white-space: normal; /* Di mobile, biarkan wrap */
+        text-overflow: clip;
+    }
 }
 
 @media (max-width: 480px) {
     .products-grid {
         grid-template-columns: 1fr;
     }
+    
+    .search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-dropdown {
+        align-self: flex-end;
+    }
+
+    .error-message {
+        font-size: 12px; /* Ukuran font lebih kecil di mobile */
+        padding: 6px 8px;
+    }
 }
+
 /* Filter Dropdown */
 .filter-dropdown {
     position: relative;
     margin-left: 10px;
-}
-
-.filter-dropdown:hover .filter-menu {
-    display: block;
 }
 
 .filter-toggle {
@@ -314,18 +390,21 @@ body {
     z-index: 10;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     min-width: 220px;
+}
 
-/* Dropdown select */
+.filter-menu.active {
+    display: block;
+}
 
 .kategori-select {
     width: 100%;
-    padding: 10px 16px; /* lebih lega */
-    border: 2px solid #4caf50; /* hijau yang konsisten */
+    padding: 10px 16px;
+    border: 2px solid #4caf50;
     border-radius: 8px;
     font-size: 16px;
     color: #333;
     background-color: #fff;
-    appearance: none; /* hilangkan default arrow agar bisa diatur sendiri */
+    appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='black'%20d='M2%200L0%202h4z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
@@ -339,11 +418,8 @@ body {
     border-color: #388e3c;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
 }
-}
 
-
-/* //details// */
-
+/* Styling lainnya yang tidak terkait dengan product card */
 .receipt-container {
     max-width: 320px;
     margin: 30px auto;
@@ -371,18 +447,10 @@ body {
     font-size: 14px;
 }
 
-.receipt-id {
-    text-align: right;
-}
-
 .receipt-item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
-}
-
-.receipt-item strong {
-    display: block;
 }
 
 .btn-print {
@@ -397,11 +465,6 @@ body {
     margin-top: 15px;
 }
 
-.btn-print:hover {
-    background: #006e3c;
-}
-
-/* //riwayat */
 .filter-container {
     margin-bottom: 1rem;
     display: flex;
@@ -422,19 +485,19 @@ body {
 .card-content {
     display: flex;
     align-items: center;
-    gap: 15px; /* jarak antara gambar dan teks */
+    gap: 15px;
 }
 
 .card-image {
-    width: 80px; /* ukuran gambar kecil */
+    width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
-    flex-shrink: 0; /* agar gambar tidak mengecil */
+    flex-shrink: 0;
 }
 
 .card-text {
-    flex: 1; /* supaya teks memenuhi sisa ruang */
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -461,9 +524,49 @@ body {
     text-decoration: none;
     font-size: 14px;
     width: fit-content;
-    align-self: flex-start; /* agar tombol tidak melebar penuh */
+    align-self: flex-start;
 }
 
-.btn-detail:hover {
-    background-color: #066041;
+/* HAPUS deklarasi error-message yang pertama dan simpan yang ini saja */
+
+/* PERBAIKAN: Error message di bawah tombol dan rata kiri */
+.error-message {
+    display: flex;
+    align-items: center;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+    margin-top: 8px;
+    justify-content: flex-start; /* Rata kiri */
+}
+
+.error-message i {
+    font-size: 14px;
+    flex-shrink: 0;
+    color: #dc3545;
+}
+
+.error-message span {
+    line-height: 1.3;
+}
+/* Untuk tampilan mobile, pertahankan styling yang ada */
+@media (max-width: 768px) {
+    .error-message {
+        white-space: normal;
+        text-overflow: clip;
+        padding: 8px 12px 8px 16px; /* Padding yang sedikit berbeda untuk mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .error-message {
+        font-size: 12px;
+        padding: 6px 10px 6px 14px; /* Padding mobile yang disesuaikan */
+    }
 }

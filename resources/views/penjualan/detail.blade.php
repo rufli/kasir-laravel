@@ -50,7 +50,7 @@
             <div class="receipt-item">
                 <div>
                     <strong>{{ $detail->nama_produk }}</strong>
-                    {{ $detail->jumlah }} X {{ number_format($detail->harga_produk, 0, ',', '.') }}
+                    <div>{{ $detail->jumlah }} X {{ number_format($detail->harga_produk, 0, ',', '.') }}</div>
                 </div>
                 <div>Rp. {{ number_format($detail->subtotal, 0, ',', '.') }}</div>
             </div>

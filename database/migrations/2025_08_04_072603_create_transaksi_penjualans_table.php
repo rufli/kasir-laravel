@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->enum('metode_pembayaran', ['tunai', 'transfer']);
+            $table->enum('metode_pembayaran', ['tunai', 'transfer','qris']);
             $table->decimal('total_harga', 15, 2);
             $table->decimal('jumlah_dibayar', 15, 2);
             $table->decimal('jumlah_kembalian', 15, 2);

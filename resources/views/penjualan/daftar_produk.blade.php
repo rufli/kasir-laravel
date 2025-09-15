@@ -75,7 +75,6 @@
         </form>
 
         <div class="products-grid">
-<<<<<<< HEAD
             @foreach ($produks as $produk)
                 <div>
                     <div class="product-card">

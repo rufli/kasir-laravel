@@ -75,15 +75,10 @@
         </form>
 
         <div class="products-grid">
-            @if ($produks->isEmpty())
-                <div class="no-product-message">
-                    <i class="fas fa-box-open icon"></i>
-                    <h4>Produk tidak ditemukan</h4>
-                    <p>Coba gunakan kata kunci lain atau pilih kategori berbeda.</p>
-                </div>
-            @else
-                @foreach ($produks as $produk)
+            @foreach ($produks as $produk)
+                <div>
                     <div class="product-card">
+
                         {{-- Gambar produk --}}
                         @if ($produk->gambar)
                             <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
@@ -93,31 +88,33 @@
 
                         <div class="product-info">
                             <h3>{{ $produk->nama }}</h3>
-                            <p class="product-category">Kategori {{ $produk->kategoriProduk->nama ?? 'Lainnya' }}</p>
+                            <p class="product-category">Kategori: {{ $produk->kategoriProduk->nama ?? 'Lainnya' }}</p>
 
-                            <div class="product-footer">
+                            <div class="product-details">
                                 <span class="stock-info">Stok: {{ $produk->stok }}</span>
-
                                 {{-- Form tambah ke keranjang --}}
                                 <form action="{{ route('penjualan.tambah') }}" method="POST" class="add-to-cart-form">
                                     @csrf
                                     <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                                     <input type="hidden" name="jumlah" value="1">
                                     <button type="submit" class="add-btn"
-                                        aria-label="Tambah {{ $produk->nama }} ke keranjang">+</button>
+                                        aria-label="Tambah {{ $produk->nama }} ke keranjang"
+                                        {{ $produk->stok < 1 ? 'disabled' : '' }}>+</button>
                                 </form>
                             </div>
-                        </div>
-
-                        {{-- Pesan error khusus di bawah card --}}
+                            {{-- Pesan error khusus untuk produk ini --}}
                         @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
                             <div class="error-message">
-                                ⚠️ {{ data_get(session('error_produk'), 'pesan') }}
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>{{ data_get(session('error_produk'), 'pesan') }}</span>
                             </div>
                         @endif
+                        </div>
+                    
                     </div>
-                @endforeach
-            @endif
+                </div>
+                 
+            @endforeach
         </div>
         <!-- Floating Cart Button -->
         <a href="{{ route('penjualan.keranjang') }}" class="cart-floating" aria-label="Lihat keranjang belanja">

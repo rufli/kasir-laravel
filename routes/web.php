@@ -32,9 +32,7 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
 
     Route::resource('kategori_produk', KategoriProdukController::class);
 
-    // Rute yang diperbarui untuk produk
-    Route::get('/produk/nonaktif', [ProdukController::class, 'inactiveIndex'])->name('produk.inactive-index');
-    Route::post('/produk/{id}/toggle-status', [ProdukController::class, 'toggleStatus'])->name('produk.toggle-status');
+
     Route::resource('produk', ProdukController::class);
     // Akhir rute yang diperbarui
 
@@ -62,6 +60,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     });
     Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
 
+    // Rute yang diperbarui untuk produk
+    Route::get('/produk/nonaktif', [ProdukController::class, 'inactiveIndex'])->name('produk.inactive-index');
+    Route::post('/produk/{id}/toggle-status', [ProdukController::class, 'toggleStatus'])->name('produk.toggle-status');
+    
     Route::resource('pengeluaran', PengeluaranController::class);
     Route::resource('kategori_pengeluaran', KategoriPengeluaranController::class);
 });

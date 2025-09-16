@@ -59,7 +59,7 @@ class PenjualanController extends Controller
             return redirect()->back()
                 ->with('error_produk', [
                     'id' => $produk->id,
-                    'pesan' => 'Stok produk tidak mencukupi.'
+                    'pesan' => 'Stok tidak mencukupi.'
                 ]);
         }
 

@@ -18,11 +18,7 @@
                     @csrf
                     @method('PUT')
 
-                    @if ($user->img_profile && file_exists(storage_path('app/public/' . $user->img_profile)))
-                        <img src="{{ asset('storage/' . $user->img_profile) }}" alt="Profile Picture" class="profile-img">
-                    @else
-                        <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Profile" class="profile-img">
-                    @endif
+                    <img src="{{ asset($user->img_profile ? 'storage/' . $user->img_profile : 'images/default profile.jpg') }}" alt="Profile Picture" class="profile-img">
 
                     <div class="profile-btn-group">
                         <label class="btn-change">

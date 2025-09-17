@@ -32,11 +32,7 @@
                 <span class="username">{{ Auth::user()->nama }}</span>
                 <a href="{{ route('profile') }}" class="username-link" aria-label="User profile">
                     <div class="avatar">
-                        @if (Auth::user()->img_profile && Storage::disk('public')->exists(Auth::user()->img_profile))
-                            <img src="{{ asset('storage/' . Auth::user()->img_profile) }}" alt="Avatar" class="avatar-img">
-                        @else
-                            <img src="{{ asset('storage/images/profile.jpg') }}" alt="Default Avatar" class="avatar-img">
-                        @endif
+                        <img src="{{ asset(Auth::user()->img_profile ? 'storage/' . Auth::user()->img_profile : 'images/default profile.jpg') }}" alt="Avatar" class="avatar-img">
                     </div>
                 </a>
             </div>

@@ -1,20 +1,18 @@
-/* ===== Tambah Pegawai Form Styling (Versi Gabungan) ===== */
-
 /* =========================
    FORM CONTAINER & TITLE
 ========================= */
-.container { /* Digunakan untuk form produk, bisa dipakai di pegawai juga */
+.container {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.pegawai-form-container { /* Styling spesifik untuk container pegawai */
+.pegawai-form-container {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     padding: 28px;
-    max-width: 800px; /* Diperlebar agar layout 2 kolom terlihat baik */
+    max-width: 800px;
     margin: 30px auto;
     border: 1px solid #e0e0e0;
 }
@@ -27,7 +25,7 @@
 }
 
 /* =========================
-   FORM GRID & SPACING (Diambil dari CSS produk)
+   FORM GRID & SPACING
 ========================= */
 .row {
     display: flex;
@@ -81,6 +79,7 @@
     font-size: 14px;
     background-color: #fafafa;
     transition: border 0.2s;
+    box-sizing: border-box; /* Menambahkan ini untuk konsistensi box model */
 }
 
 .form-control:focus,
@@ -93,6 +92,38 @@
 }
 
 /* =========================
+   PASSWORD FIELD WITH EYE - PERBAIKAN UTAMA
+========================= */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input.form-control {
+    padding-right: 42px; /* ruang untuk ikon mata */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 18px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    z-index: 2; /* Memastikan ikon berada di atas input */
+}
+.password-toggle:hover {
+    color: #4a90e2;
+}
+
+/* =========================
    BUTTONS
 ========================= */
 .form-actions {
@@ -101,8 +132,6 @@
     gap: 10px;
     margin-top: 24px;
 }
-
-/* ===== Button Styling (shared) ===== */
 
 .btn-submit {
     background-color: #2e7d32;
@@ -137,13 +166,11 @@
     background-color: #b71c1c;
 }
 
-
 .form-note {
     display: block;
     font-size: 13px;
     color: #d32f2f;
     margin-top: 4px;
-
 }
 
 /* Border merah kalau input error */
@@ -151,8 +178,9 @@
     border-color: #d32f2f;
     box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
 }
+
 .invalid-feedback {
-    color: #dc3545; /* merah Bootstrap */
+    color: #dc3545;
     font-size: 0.9rem;
     font-weight: 400;
     margin-top: 4px;

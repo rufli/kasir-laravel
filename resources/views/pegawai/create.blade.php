@@ -39,7 +39,7 @@
                                   id="alamat"
                                   rows="2"
                                   class="form-control @error('alamat') is-invalid @enderror"
-                            placeholder="Masukkan Alamat">{{ old('alamat') }}</textarea>
+                                  placeholder="Masukkan Alamat">{{ old('alamat') }}</textarea>
                         @error('alamat')
                             <div class="invalid-feedback">*{{ $message }}</div>
                         @enderror
@@ -56,8 +56,8 @@
                                name="no_telepon"
                                id="no_telepon"
                                value="{{ old('no_telepon') }}"
-                            class="form-control @error('no_telepon') is-invalid @enderror"
-                            placeholder="Masukkan No Telepon">
+                               class="form-control @error('no_telepon') is-invalid @enderror"
+                               placeholder="Masukkan No Telepon">
                         @error('no_telepon')
                             <div class="invalid-feedback">*{{ $message }}</div>
                         @enderror
@@ -90,7 +90,7 @@
                                    name="password"
                                    id="password"
                                    class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Masukkan Password">
+                                   placeholder="Masukkan Password">
                             <span class="password-toggle" onclick="togglePassword()">
                                 <i class="bi bi-eye"></i>
                             </span>

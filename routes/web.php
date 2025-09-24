@@ -27,9 +27,7 @@ Route::middleware(['auth:sanctum', 'role:admin,pegawai'])->group(function () {
     Route::put('/profile/update-foto', [ProfileController::class, 'updateFoto'])->name('profile.updateFoto');
     Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
-    // Rute Produk yang bisa diakses semua (read-only)
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-    Route::get('/produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
 
     // Rute Penjualan & Riwayat (dapat diakses oleh admin & pegawai)
     Route::get('/penjualan/detail/{id}', [PenjualanController::class, 'detailTransaksi'])->name('penjualan.detail');
@@ -48,10 +46,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index_alt');
     Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
 
-    // Rute Produk (yang dapat memodifikasi data)
-    Route::resource('produk', ProdukController::class)->except(['index', 'show']);
-    Route::get('/produk/nonaktif', [ProdukController::class, 'inactiveIndex'])->name('produk.inactive-index');
+    Route::get('/produk-nonaktif', [ProdukController::class, 'inactiveIndex'])->name('produk.inactive-index');
     Route::post('/produk/{id}/toggle-status', [ProdukController::class, 'toggleStatus'])->name('produk.toggle-status');
+    Route::resource('produk', ProdukController::class)->except(['index']);
 
     // Rute Manajemen Kategori & Pegawai
     Route::resource('kategori_produk', KategoriProdukController::class);

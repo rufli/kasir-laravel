@@ -7,25 +7,25 @@
 @endpush
 
 @push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterDropdown = document.querySelector('.filter-dropdown');
-        const filterToggle = document.querySelector('.filter-toggle');
-        const filterMenu = document.querySelector('.filter-menu');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterDropdown = document.querySelector('.filter-dropdown');
+            const filterToggle = document.querySelector('.filter-toggle');
+            const filterMenu = document.querySelector('.filter-menu');
 
-        filterToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            filterMenu.classList.toggle('active');
-        });
+            filterToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                filterMenu.classList.toggle('active');
+            });
 
-        // Klik di luar .filter-dropdown → tutup
-        document.addEventListener('click', function(e) {
-            if (!filterDropdown.contains(e.target)) {
-                filterMenu.classList.remove('active');
-            }
+            // Klik di luar .filter-dropdown → tutup
+            document.addEventListener('click', function(e) {
+                if (!filterDropdown.contains(e.target)) {
+                    filterMenu.classList.remove('active');
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endpush
 
 
@@ -83,7 +83,13 @@
                         @if ($produk->gambar)
                             <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="product-image">
                         @else
-                            <img src="{{ asset('default.jpg') }}" alt="{{ $produk->nama }}" class="product-image">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ asset('images/default.jpg') }}" alt="Default Gambar"
+                                    style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; margin-left: 7px;">
+                                <div>
+                                    <small class="text-muted mt-1">Belum ada gambar</small>
+                                </div>
+                            </div>
                         @endif
 
                         <div class="product-info">
@@ -103,17 +109,16 @@
                                 </form>
                             </div>
                             {{-- Pesan error khusus untuk produk ini --}}
-                        @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
-                            <div class="error-message">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <span>{{ data_get(session('error_produk'), 'pesan') }}</span>
-                            </div>
-                        @endif
+                            @if (session('error_produk') && data_get(session('error_produk'), 'id') == $produk->id)
+                                <div class="error-message">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>{{ data_get(session('error_produk'), 'pesan') }}</span>
+                                </div>
+                            @endif
                         </div>
-                    
+
                     </div>
                 </div>
-                 
             @endforeach
         </div>
         <!-- Floating Cart Button -->

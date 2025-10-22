@@ -29,7 +29,7 @@
             </div>
 
             <div class="info-card info-card-yellow">
-                <h3 class="card-title">Laba Bersih Bulan Ini</h3>
+                <h3 class="card-title">Keunguntan Bersih Bulan Ini</h3>
                 <p class="card-value">Rp {{ number_format($labaBulan, 0, ',', '.') }}</p>
             </div>
         </div>

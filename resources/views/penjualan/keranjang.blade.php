@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <h1 class="page-title">Keranjang Produk</h1>
-       
+
 
         @if (count($items) > 0)
             <div class="cart-items-grid" id="cartItemsGrid">
@@ -20,7 +20,13 @@
                             <img src="{{ Storage::url($item['produk']->gambar) }}" alt="{{ $item['produk']->nama }}"
                                 class="product-image">
                         @else
-                            <img src="{{ asset('default.jpg') }}" alt="{{ $item['produk']->nama }}" class="product-image">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ asset('images/default.jpg') }}" alt="Default Gambar"
+                                    style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; margin-left: 7px;">
+                                <div>
+                                    <small class="text-muted mt-1">Belum ada gambar</small>
+                                </div>
+                            </div>
                         @endif
 
                         <div class="card-body">

@@ -65,7 +65,7 @@
 
                 <!-- Satuan -->
                 <div class="col-md-6 mb-3">
-                    <label class="form-label" for="satuan">Satuan</label>
+                    <label class="form-label" for="satuan">Satuan </label>
                     <input type="text"
                            name="satuan"
                            id="satuan"

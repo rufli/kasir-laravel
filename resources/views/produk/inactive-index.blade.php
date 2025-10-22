@@ -52,7 +52,13 @@
                                     <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="rounded"
                                         style="width:60px; height:60px; object-fit:cover;">
                                 @else
-                                    <span class="text-muted">Belum ada gambar</span>
+                                     <div class="d-flex flex-column align-items-center text-center">
+                                        <img src="{{ asset('images/default.jpg') }}" alt="Default Gambar"
+                                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-left: 7px;">
+                                        <div>
+                                            <small class="text-muted mt-1">Belum ada gambar</small>
+                                        </div>
+                                    </div>
                                 @endif
                             </td>
                             <td data-label="Tanggal">{{ $produk->tanggal->format('d/m/Y') }}</td>
